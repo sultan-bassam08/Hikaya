@@ -8,9 +8,12 @@ import Features from "./components/landing_page/Features";
 import Pricing from "./components/landing_page/Pricing";
 import Footer from "./components/landing_page/Footer";
 import "./App.css"; // Global styles
+import WriteStory from "./components/story_components/writeStory"
+import ReadStory from "./components/readStory/readStory"
 
 function App() {
   return (
+
     <Router>
       <div className="app-container">
       <Header /> {/* Always visible */}
@@ -41,6 +44,15 @@ function Home() {
       <Pricing />
       <p>Welcome to the Storytelling App! Explore our features and sign up to get started.</p>
     </div>
+    // <div className="App">
+    //   <Header />
+    //   <Hero />
+    //   <Features />
+    //   <Pricing />
+    //   <Footer />
+    // </div>
+//  <WriteStory/>
+//<ReadStory></ReadStory>
   );
 }
 
