@@ -3,9 +3,11 @@
 import React from "react";
 import "./Features.css";
 
+import LiftLine from "../lines/liftLine";
 const Features = () => {
   return (
     <section id="features" className="features">
+      <LiftLine />
       <h2>Why Choose Hikaya?</h2>
       <div className="feature-cards">
         <div className="feature-card">
