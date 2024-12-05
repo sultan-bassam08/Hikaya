@@ -46,7 +46,11 @@ function Register() {
       });
 
       // On successful registration
-      Swal.fire("Success", "Registration successful! Please log in.", "success");
+      Swal.fire(
+        "Success",
+        "Registration successful! Please log in.",
+        "success"
+      );
       navigate("/login"); // Redirect to login page after successful registration
     } catch (error) {
       // Handle any error during registration
@@ -65,7 +69,9 @@ function Register() {
     <div className="auth-container">
       <div className="auth-card">
         <h2 className="auth-heading">Join the Storytellers' Guild</h2>
-        <p className="auth-subheading">Start crafting your magical tales today.</p>
+        <p className="auth-subheading">
+          Start crafting your magical tales today.
+        </p>
         <form onSubmit={handleSubmit} className="auth-form">
           <input
             type="text"
@@ -95,10 +101,11 @@ function Register() {
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
-
-          {error && <p className="auth-error">{error}</p>} {/* Display error message */}
-
-          <button type="submit" className="auth-button">Register</button>
+          {error && <p className="auth-error">{error}</p>}{" "}
+          {/* Display error message */}
+          <button type="submit" className="auth-button">
+            Register
+          </button>
         </form>
         <p className="auth-switch">
           Already have an account? <a href="/login">Log in here!</a>
