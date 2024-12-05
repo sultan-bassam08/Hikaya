@@ -1,0 +1,25 @@
+.write-story-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .story-input {
+    margin-top: 20px;
+  }
+  
+  .magic-ideas-btn,
+  .save-draft-btn,
+  .publish-story-btn {
+    margin-top: 10px;
+    margin-right: 10px;
+  }
+  
+  .ideas-list ul {
+    margin-top: 20px;
+  }
+  
+  .generated-description {
+    margin-top: 20px;
+  }
+  

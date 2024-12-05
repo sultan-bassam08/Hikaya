@@ -1,0 +1,57 @@
+.read-story-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .story-header {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .story-title {
+    font-size: 32px;
+    font-weight: bold;
+  }
+  
+  .author-info {
+    margin-top: 10px;
+    font-style: italic;
+  }
+  
+  .story-description {
+    margin-top: 10px;
+    font-size: 18px;
+    color: gray;
+  }
+  
+  .story-content {
+    margin-top: 20px;
+    font-size: 18px;
+    line-height: 1.6;
+  }
+  
+  .interactions {
+    margin-top: 30px;
+  }
+  
+  .like-btn,
+  .comment-btn {
+    margin-right: 10px;
+  }
+  
+  .comments-section {
+    margin-top: 40px;
+  }
+  
+  .comment {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+  }
+  
+  .related-stories {
+    margin-top: 40px;
+    font-size: 18px;
+  }
+  
