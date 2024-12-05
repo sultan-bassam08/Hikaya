@@ -1,0 +1,112 @@
+/* General Styles */
+.edit-profile-container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.edit-profile-container h1 {
+  font-size: 26px;
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Profile Picture Section */
+.profile-pic-section {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.profile-pic {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #a0c2fa;
+  margin-bottom: 10px;
+}
+
+.upload-label {
+  display: inline-block;
+  background-color: #a0c2fa;
+  color: white;
+  padding: 8px 15px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.upload-label input[type="file"] {
+  display: none;
+}
+
+/* Form Styles */
+.edit-profile-form label {
+  display: block;
+  font-size: 16px;
+  color: #444;
+  margin-bottom: 10px;
+}
+
+.edit-profile-form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.edit-profile-form input:focus {
+  border-color: #a0c2fa;
+  outline: none;
+  box-shadow: 0 0 4px rgba(160, 194, 250, 0.8);
+}
+
+/* Buttons */
+.form-actions {
+  text-align: center;
+}
+
+.save-button,
+.cancel-button {
+  background-color: #a0c2fa;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0 5px;
+  transition: background-color 0.3s ease;
+}
+
+.save-button:hover {
+  background-color: #8cb6e8;
+}
+
+.cancel-button {
+  background-color: #f44336;
+}
+
+.cancel-button:hover {
+  background-color: #e53935;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .edit-profile-container {
+    padding: 15px;
+  }
+
+  .save-button,
+  .cancel-button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
