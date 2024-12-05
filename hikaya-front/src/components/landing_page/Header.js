@@ -42,7 +42,7 @@ const Header = () => {
               </a>
             </li>
             <li className="nav-item">
-              <a className="btn btn-primary nav-link text-white" href="#login">
+              <a className="btn btn-primary nav-link text-white" href="login">
                 Login
               </a>
             </li>
