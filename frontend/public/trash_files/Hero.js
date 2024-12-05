@@ -1,4 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
+import Hikaya3d from "../../src/components/landing_page/hikaya3d";
+import Features from "./Features";
 import "./Hero.css";
 
 const Hero = () => {
@@ -64,7 +66,25 @@ const Hero = () => {
       const scrollTop = window.scrollY || window.pageYOffset;
       const windowHeight =
         window.innerHeight || document.documentElement.clientHeight;
-      const imageIndex = Math.floor(scrollTop / (imageHeight / numImages));
+
+      // Only start the sequence after scrolling 500px
+      if (scrollTop < 500) {
+        // Show the first image (index 0)
+        const img = preloadedImages[0];
+        if (img && img.complete && img.naturalWidth > 0) {
+          console.log(`Drawing first image at index 0: ${img.src}`);
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        } else {
+          console.error(`Image at index 0 is not ready or failed to load`);
+        }
+        return;
+      }
+
+      // Start the sequence after 500px scroll
+      const imageIndex = Math.floor(
+        (scrollTop - 500) / (imageHeight / numImages)
+      );
 
       if (imageIndex >= numImages) {
         return;
@@ -82,6 +102,7 @@ const Hero = () => {
         );
       }
     };
+
     handleScroll();
     window.addEventListener("scroll", handleScroll);
     return () => {
@@ -91,20 +112,32 @@ const Hero = () => {
 
   return (
     <>
+      <Hikaya3d />
+      <Features />
+      <section
+        style={{
+          position: "absolute",
+          top: "92.5vh",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          zIndex: 5,
+          height: "20vh",
+        }}
+        id="hero"
+        className="hero"
+      >
+        <div className="hero-content">
+          <p id="qoute">Your story, your voice, your impact.</p>
+          <button className="btn-primary">Get Started</button>
+        </div>
+      </section>
+
       <div id="canvas-bg">
         <div className="image-container-pv1">
           <canvas id="image-sequence-pv1" ref={canvasRef}></canvas>
           <div id="content-pv1" ref={contentDivRef}></div>
         </div>
       </div>
-
-      <section id="hero" className="hero">
-        <div className="hero-content">
-          <h1>Welcome to Hikaya</h1>
-          <p>Your platform for discovering amazing stories.</p>
-          <button className="btn-primary">Get Started</button>
-        </div>
-      </section>
     </>
   );
 };

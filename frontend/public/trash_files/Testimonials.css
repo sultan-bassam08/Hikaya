@@ -1,0 +1,63 @@
+.testimonials h2 {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .testimonial {
+    background: #fff;
+    border-radius: 8px;
+  }
+  
+  .testimonial h6 {
+    margin-top: 10px;
+    font-weight: bold;
+    color: #007bff;
+  }
+  
+
+  .svg {
+    position: absolute;
+  z-index: 0;
+    width: 100%;
+    height: 100%;
+  
+   
+  }
+
+
+  .dcls-1, .dcls-2 {
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill-rule: evenodd;
+    stroke-dasharray: 5000; /* large enough to cover the length of the path */
+    stroke-dashoffset: 5000; /* start hidden */
+    animation: draw 8s ease-in-out infinite; /* animate with ease-in-out, infinite loop */
+  }
+
+  .dcls-1 {
+    stroke-width: 12.5px;
+    stroke: url(#linear-gradient);
+  }
+
+  .dcls-2 {
+    stroke-width: 1.5px;
+    stroke: url(#linear-gradient-2);
+  }
+
+  /* Keyframes for the stroke animation */
+  @keyframes draw {
+    0% {
+      stroke-dashoffset: 5000;
+    }
+    50% {
+      stroke-dashoffset: 0;
+    }
+    100% {
+      stroke-dashoffset: 5000;
+    }
+  }
+
+  .col-md-4{
+    z-index: 3;
+  }

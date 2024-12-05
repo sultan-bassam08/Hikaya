@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1920" height="625" viewBox="0 0 1920 625">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        fill-rule: evenodd;
+      }
+
+      .cls-1 {
+        stroke-width: 35.84px;
+        stroke: url(#linear-gradient);
+      }
+
+      .cls-2 {
+        stroke-width: 4.34px;
+        stroke: url(#linear-gradient-2);
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="948.5" y1="689.469" x2="948.5" y2="-188" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0bbafb"/>
+      <stop offset="1" stop-color="#4285ec"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="948.5" y1="689.469" x2="948.5" y2="-188" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ecdfdf"/>
+      <stop offset="1" stop-color="#ecdfdf"/>
+    </linearGradient>
+  </defs>
+  <path class="cls-1" d="M-57,112s270.925-52.047,476,24c90.243,33.464,10.668,265.627,35,333,79.625,220.477,134.676,121.092,284,200,147.99,78.2,234.9-153.975,197-314-32-135.117-6.125-261.35,124-218,151.98,50.631,895-3,895-3S1905.87-23.557,1771-24,1600.87,83.515,1419,73,929.375,18.8,905-67s16-121,16-121"/>
+  <path id="Shape_2_copy_3" data-name="Shape 2 copy 3" class="cls-2" d="M-57,112s270.925-52.047,476,24c90.243,33.464,10.668,265.627,35,333,79.625,220.477,134.676,121.092,284,200,147.99,78.2,234.9-153.975,197-314-32-135.117-6.125-261.35,124-218,151.98,50.631,895-3,895-3S1905.87-23.557,1771-24,1600.87,83.515,1419,73,929.375,18.8,905-67s16-121,16-121"/>
+</svg>
