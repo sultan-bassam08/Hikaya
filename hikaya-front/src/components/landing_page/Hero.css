@@ -1,0 +1,57 @@
+/* src/components/landing_page/Hero.css */
+
+.hero {
+     height: 100vh;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .hero-content {
+    padding: 20px;
+  }
+  
+  h1 {
+    font-size: 3rem;
+    font-weight: 900;
+  }
+  #qoute {
+    font-size: 1.2rem;
+    font-weight: 900;
+
+    opacity: 0; 
+    transform: translateY(50px); 
+    animation: slide-up 1s ease-out forwards; 
+}
+
+@keyframes slide-up {
+    0% {
+        opacity: 0;
+        transform: translateY(50px); /* Start below */
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0); /* End at the normal position */
+    }
+}
+  
+  .btn-primary {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3;
+  }
+  
+
+
+
+
+  
