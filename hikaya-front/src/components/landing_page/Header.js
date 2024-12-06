@@ -50,34 +50,34 @@ const Header = () => {
         </button>
       </nav>
 
-      <div class="mobile-menu">
-        <div class="menu-header">
-          <div class="logo">
-            <span class="logo-text">Premium</span>
+      <div className="mobile-menu">
+        <div className="menu-header">
+          <div className="logo">
+            <span className="logo-text">Premium</span>
           </div>
-          <button class="close-menu">
-            <span class="close-icon"></span>
+          <button className="close-menu">
+            <span className="close-icon"></span>
           </button>
         </div>
-        <div class="menu-links">
-          <a href="#" class="menu-link active">
+        <div className="menu-links">
+          <a href="#" className="menu-link active">
             <span>Home</span>
           </a>
-          <a href="#" class="menu-link">
+          <a href="#" className="menu-link">
             <span>Products</span>
           </a>
-          <a href="#" class="menu-link">
+          <a href="#" className="menu-link">
             <span>Services</span>
           </a>
-          <a href="#" class="menu-link">
+          <a href="#" className="menu-link">
             <span>About</span>
           </a>
-          <a href="#" class="menu-link">
+          <a href="#" className="menu-link">
             <span>Contact</span>
           </a>
         </div>
-        <div class="menu-footer">
-          <button class="mobile-action-btn">
+        <div className="menu-footer">
+          <button className="mobile-action-btn">
             <span>Sign In</span>
           </button>
         </div>

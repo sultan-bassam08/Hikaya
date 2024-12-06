@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Login from "./components/Auth/Login";
 import Logout from "./components/Auth/Logout"; // esraa 
 import Register from "./components/Auth/Register";
-// import Header from "./components/landing_page/Header";
+import Header from "./components/landing_page/Header";
 import Hero from "./components/landing_page/Hero";
 import Features from "./components/landing_page/Features";
 
@@ -12,13 +12,15 @@ import Landing from "./components/landing_page/landingpage";
 // import "./App.css"; // Global styles
 import WriteStory from "./components/story_components/writeStory";
 import ReadStory from "./components/readStory/readStory";
-import AboutUs from "./components/About_Us/About_Us";
+import AboutUs from "./components/About_Us/About_us";
 import Contact from "./components/Contact_Us/Contact_us";
+
 import "./axiosSetup";
 
 
 function App() {
   return (
+
     <Router>
       <div className="app-container">
         <Header /> {/* Always visible */}
