@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1920" height="625" viewBox="0 0 1920 625">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        fill-rule: evenodd;
+      }
+
+      .cls-1 {
+        stroke-width: 35.84px;
+        stroke: url(#linear-gradient);
+      }
+
+      .cls-2 {
+        stroke-width: 4.34px;
+        stroke: url(#linear-gradient-2);
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="873.047" y1="442.75" x2="873.047" y2="40.281" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0bbafb"/>
+      <stop offset="1" stop-color="#4285ec"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="873.047" y1="442.75" x2="873.047" y2="40.281" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ecdfdf"/>
+      <stop offset="1" stop-color="#ecdfdf"/>
+    </linearGradient>
+  </defs>
+  <path id="line2-big" class="cls-1" d="M1928,299S1578.41-45.547,1444,127c-55.26,70.934-86.33,168.627-62,236,79.63,220.477-416.4-66.767-380-252,19.16-97.5-29.1,404.025-67,244C749.177-429.569-636.383,510.985-29,422c-168.165,24.637-24-280-24-280"/>
+  <path id="line2-big_copy" data-name="line2-big copy" class="cls-2" d="M1928,299S1578.41-45.547,1444,127c-55.26,70.934-86.33,168.627-62,236,79.63,220.477-416.4-66.767-380-252,19.16-97.5-29.1,404.025-67,244C749.177-429.569-636.383,510.985-29,422c-168.165,24.637-24-280-24-280"/>
+</svg>

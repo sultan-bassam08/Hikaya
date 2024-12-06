@@ -2,7 +2,7 @@
 
 .hero {
      height: 100vh;
-    color: white;
+    color: black;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -15,11 +15,27 @@
   
   h1 {
     font-size: 3rem;
+    font-weight: 900;
   }
-  
-  p {
+  #qoute {
     font-size: 1.2rem;
-  }
+    font-weight: 900;
+
+    opacity: 0; 
+    transform: translateY(50px); 
+    animation: slide-up 1s ease-out forwards; 
+}
+
+@keyframes slide-up {
+    0% {
+        opacity: 0;
+        transform: translateY(50px); /* Start below */
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0); /* End at the normal position */
+    }
+}
   
   .btn-primary {
     padding: 10px 20px;
@@ -39,23 +55,3 @@
 
 
   
-
-#canvas-bg {
-    width: 100%;
-    
-    top: 0;
-    z-index: -1;
-  }
-
-  .image-container-pv1 {
-    /*background-color: antiquewhite;*/
-    position: relative;
-  }
-  #image-sequence-pv1 {
-    position: sticky;
-    top: 0;
-    width: 100%;
-    height: 100vh;
-  }
-
-

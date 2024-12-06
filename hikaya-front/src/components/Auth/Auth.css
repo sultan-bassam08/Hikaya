@@ -1,0 +1,148 @@
+/* Base Styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+   color: #fff;
+  min-height: 100vh;
+}
+
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  /* background-image: url("../assets/images/hikaya.jpg"); */
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; /* Added for better mobile performance */
+}
+
+.auth-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  border-radius: 12px;
+  padding: 40px;
+  max-width: 400px;
+  width: 100%; /* Make sure the card is responsive */
+  text-align: center;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.auth-heading {
+  font-size: 2rem;
+  font-family: "Playfair Display", serif;
+  margin-bottom: 8px;
+  color: #f3f4f6;
+}
+
+.auth-subheading {
+  font-size: 1rem;
+  margin-bottom: 24px;
+  color: #e0e7ff;
+}
+
+.auth-form input {
+  width: 100%;
+  padding: 10px;
+  margin: 12px 0;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+}
+
+.auth-input {
+  background: #f0f4f8;
+  border: 1px solid #ddd;
+  padding: 12px;
+}
+
+.auth-button {
+  width: 100%;
+  padding: 12px;
+  margin: 16px 0;
+  border-radius: 8px;
+  background: #ff7f50;
+  color: white;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.auth-button:hover {
+  background: #ff4500;
+}
+
+.auth-switch {
+  margin-top: 16px;
+  font-size: 0.9rem;
+  color: #ddd;
+}
+
+.auth-switch a {
+  color: #ffd700;
+  text-decoration: none;
+}
+
+.auth-error {
+  color: red;
+  font-size: 0.9em;
+  margin-top: 10px;
+}
+
+/* Media Queries for Responsiveness */
+
+/* Mobile (Small screens) */
+@media (max-width: 600px) {
+  .auth-container {
+    padding: 20px; /* Add padding to prevent content from touching screen edges */
+  }
+
+  .auth-card {
+    padding: 20px;
+    max-width: 90%;
+  }
+
+  .auth-heading {
+    font-size: 1.5rem;
+  }
+
+  .auth-subheading {
+    font-size: 0.9rem;
+  }
+
+  .auth-button {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Tablet (Medium screens) */
+@media (max-width: 900px) {
+  .auth-card {
+    max-width: 80%;
+    padding: 30px;
+  }
+
+  .auth-heading {
+    font-size: 1.8rem;
+  }
+
+  .auth-subheading {
+    font-size: 1rem;
+  }
+
+  .auth-button {
+    padding: 12px;
+    font-size: 1rem;
+  }
+}
+
+/* Desktop (Large screens) */
+@media (min-width: 901px) {
+  .auth-card {
+    max-width: 400px;
+    padding: 40px;
+  }
+}
