@@ -21,9 +21,11 @@ const FAQ = () => {
 
   return (
     <>
-      <section id="FAQ" className="faq py-5 bg-light">
+      <section id="FAQ" className="faq py-5 ">
         <div className="container">
-          <h2 className="text-center mb-4">Frequently Asked Questions</h2>
+          <h2 className="text-center mb-4" style={{ color: "white" }}>
+            Frequently Asked Questions
+          </h2>
           <div
             className="accordion"
             id="faqAccordion"

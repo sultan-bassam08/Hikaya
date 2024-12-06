@@ -8,6 +8,7 @@ class StoryController extends Controller
 {
     public function saveDraft(Request $request)
     {
+
         $story = Story::create([
             'user_id'=>1,
             'title' => '$request->title',

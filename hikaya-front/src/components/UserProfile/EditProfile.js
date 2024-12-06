@@ -17,7 +17,6 @@ const EditProfile = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
   };
 
   return (
@@ -40,8 +39,7 @@ const EditProfile = () => {
           Last Name:
           <input type="text" defaultValue="Doe" />
         </label>
-        
-       
+
         <label>
           Old Password:
           <input

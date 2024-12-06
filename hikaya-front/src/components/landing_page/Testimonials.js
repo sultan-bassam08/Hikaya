@@ -5,10 +5,12 @@ import RightLine from "../lines/rightLine";
 const Testimonials = () => {
   return (
     <>
-      <section id="Testimonial" className="testimonials py-5 bg-light">
+      <section id="Testimonial" className="testimonials py-5 ">
         <RightLine />
         <div className="container">
-          <h2 className="text-center mb-4">What Our Customers Say</h2>
+          <h2 className="text-center mb-4" style={{ color: "white" }}>
+            What Our Customers Say
+          </h2>
           <div className="row">
             <div className="col-md-4">
               <div className="testimonial p-3 shadow-sm">

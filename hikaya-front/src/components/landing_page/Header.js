@@ -1,85 +1,106 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom"; // Import Link from react-router-dom
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "./Header.css";
+
 const Header = () => {
+  // State to manage the mobile menu open/close state
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  // Function to toggle the mobile menu
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
+  // Function to close the menu when a link is clicked
+  const closeMenu = () => {
+    setMenuOpen(false);
+  };
+
   return (
     <>
-      <nav class="navbar">
-        <div class="nav-brand">
-          <div class="logo">
-            <span class="logo-text">Hikaya</span>
-            <div class="logo-shine"></div>
+      <nav className="navbar">
+        <div className="nav-brand">
+          <div className="logo">
+            <span className="logo-text">Hikaya</span>
+            <div className="logo-shine"></div>
           </div>
         </div>
 
-        <div class="nav-links">
-          <a href="#" class="nav-link active">
+        <div className="nav-links">
+          <Link to="/" className="nav-link active" onClick={closeMenu}>
             <span>Home</span>
-            <div class="link-effect"></div>
-          </a>
-          <a href="#" class="nav-link">
+            <div className="link-effect"></div>
+          </Link>
+          <Link to="/products" className="nav-link" onClick={closeMenu}>
             <span>Products</span>
-            <div class="link-effect"></div>
-          </a>
-          <a href="#" class="nav-link">
+            <div className="link-effect"></div>
+          </Link>
+          <Link to="/services" className="nav-link" onClick={closeMenu}>
             <span>Services</span>
-            <div class="link-effect"></div>
-          </a>
-          <a href="#" class="nav-link">
+            <div className="link-effect"></div>
+          </Link>
+          <Link to="/aboutus" className="nav-link" onClick={closeMenu}>
             <span>About</span>
-            <div class="link-effect"></div>
-          </a>
-          <a href="#" class="nav-link">
+            <div className="link-effect"></div>
+          </Link>
+          <Link to="/contactus" className="nav-link" onClick={closeMenu}>
             <span>Contact</span>
-            <div class="link-effect"></div>
-          </a>
+            <div className="link-effect"></div>
+          </Link>
         </div>
 
-        <div class="nav-actions">
-          <button class="action-btn">
-            <div class="btn-text">Sign In</div>
-            <div class="btn-effect"></div>
-          </button>
+        <div className="nav-actions">
+          <Link to="/login">
+            <button className="action-btn">
+              <div className="btn-text">Sign In</div>
+              <div className="btn-effect"></div>
+            </button>
+          </Link>
         </div>
 
-        <button class="mobile-toggle">
+        {/* Mobile Toggle Button */}
+        <button className="mobile-toggle" onClick={toggleMenu}>
           <span></span>
           <span></span>
           <span></span>
         </button>
       </nav>
 
-      <div className="mobile-menu">
+      {/* Mobile Menu */}
+      <div className={`mobile-menu ${menuOpen ? "active" : ""}`}>
         <div className="menu-header">
           <div className="logo">
             <span className="logo-text">Premium</span>
           </div>
-          <button className="close-menu">
+          <button className="close-menu" onClick={toggleMenu}>
             <span className="close-icon"></span>
           </button>
         </div>
         <div className="menu-links">
-          <a href="#" className="menu-link active">
+          <Link to="/" className="menu-link active" onClick={closeMenu}>
             <span>Home</span>
-          </a>
-          <a href="#" className="menu-link">
+          </Link>
+          <Link to="/products" className="menu-link" onClick={closeMenu}>
             <span>Products</span>
-          </a>
-          <a href="#" className="menu-link">
+          </Link>
+          <Link to="/services" className="menu-link" onClick={closeMenu}>
             <span>Services</span>
-          </a>
-          <a href="#" className="menu-link">
+          </Link>
+          <Link to="/aboutus" className="menu-link" onClick={closeMenu}>
             <span>About</span>
-          </a>
-          <a href="#" className="menu-link">
+          </Link>
+          <Link to="/contactus" className="menu-link" onClick={closeMenu}>
             <span>Contact</span>
-          </a>
+          </Link>
         </div>
         <div className="menu-footer">
-          <button className="mobile-action-btn">
-            <span>Sign In</span>
-          </button>
+          <Link to="/login">
+            <button className="mobile-action-btn">
+              <span>Sign In</span>
+            </button>
+          </Link>
         </div>
       </div>
     </>

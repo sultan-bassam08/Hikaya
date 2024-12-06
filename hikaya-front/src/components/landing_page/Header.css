@@ -9,12 +9,12 @@ body {
     min-height: 100vh;
     background: linear-gradient(135deg, #0f172a, #1e293b);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: white;
+
 }
 
 /* Navbar Styles */
 .navbar {
-    position: fixed;
+  /*  position: fixed;*/
     top: 0;
     left: 0;
     right: 0;
