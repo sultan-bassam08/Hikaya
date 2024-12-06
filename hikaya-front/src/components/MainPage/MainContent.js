@@ -1,14 +1,12 @@
 import React from "react";
 import "./MainContent.css";
 
-const MainContent = () => {
+const MainContent = ({ content, title, desc }) => {
   return (
     <div className="main-content">
-      <h2>Main Content</h2>
-      <p>
-        This is the main content area. You can add posts, articles, or anything
-        you want here.
-      </p>
+      <h2>{title}</h2>
+      <p>{desc}</p>
+      {content}
     </div>
   );
 };

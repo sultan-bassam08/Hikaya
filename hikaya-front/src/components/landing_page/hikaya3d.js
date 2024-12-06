@@ -3,7 +3,7 @@ const Hikaya3d = () => {
   return (
     <iframe
       id="start"
-      src="https://my.spline.design/untitled-e0924eaa322bee67fb183cc77421294d/"
+      src="https://my.spline.design/untitledcopy-2b71a588a5932f1106bc63cf6144c359/"
       width="100%"
       style={{ height: "100vh" }}
     ></iframe>

@@ -8,7 +8,7 @@ const Features = () => {
   return (
     <section id="features" className="features">
       <LiftLine />
-      <h2>Why Choose Hikaya?</h2>
+      <h2 style={{ color: "white" }}>Why Choose Hikaya?</h2>
       <div className="feature-cards">
         <div className="feature-card">
           <h3>Easy to Use</h3>

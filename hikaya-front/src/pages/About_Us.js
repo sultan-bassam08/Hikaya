@@ -1,5 +1,5 @@
 import React from "react";
-import "./About_Us.css";
+import "../components/About_Us/About_Us.css";
 
 const AboutUs = () => {
   const projectMessage = `Hikaya is a powerful platform where writers can share their stories, 

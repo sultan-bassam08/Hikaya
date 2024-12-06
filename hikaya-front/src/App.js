@@ -2,36 +2,30 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";
-import Header from "./components/landing_page/Header";
-import Hero from "./components/landing_page/Hero";
-import Features from "./components/landing_page/Features";
 
-import Footer from "./components/landing_page/Footer";
-import Landing from "./components/landing_page/landingpage";
+import Landing from "./pages/landingpage";
 import "./App.css"; // Global styles
 import WriteStory from "./components/story_components/writeStory";
 import ReadStory from "./components/readStory/readStory";
-
+//omar
+import Header from "./components/landing_page/Header";
+import Contact from "./pages/Contact_us";
+import About from "./pages/About_Us";
+import MainPage from "./pages/MainPage";
+import Footer from "./components/landing_page/Footer";
 function App() {
   return (
     <Router>
       <div className="app-container">
-        <Header /> {/* Always visible */}
-        <nav className="nav-bar">
-          <Link to="/" className="nav-link">
-            Home
-          </Link>
-          <Link to="/login" className="nav-link">
-            Login
-          </Link>
-          <Link to="/register" className="nav-link">
-            Register
-          </Link>
-        </nav>
+        <Header />
+
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/dashboard" element={<MainPage />} />
+          <Route path="/contactus" element={<Contact />} />
+          <Route path="/aboutus" element={<About />} />
         </Routes>
         <Footer />
       </div>
