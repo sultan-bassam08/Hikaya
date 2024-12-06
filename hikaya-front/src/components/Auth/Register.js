@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Swal from "sweetalert2"; // Import SweetAlert2
+import Swal from "sweetalert2";
 import "./Auth.css";
 
 function Register() {
-  const [name, setName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [error, setError] = useState(""); // Error state for displaying messages
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false); // For loading state
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -24,40 +26,40 @@ function Register() {
       return;
     }
 
+    // Password length validation
+    if (password.length < 8) {
+      setError("Password must be at least 8 characters long.");
+      return;
+    }
+
     // Empty field validation
-    if (!name || !email || !password || !confirmPassword) {
+    if (!firstName || !lastName || !email || !password || !confirmPassword) {
       setError("Please fill all fields");
       return;
     }
 
-    try {
-      // Make POST request to register user
-      const response = await axios.post("http://localhost:8000/api/register", {
-        name,
-        email,
-        password,
-        password_confirmation: confirmPassword,
-      });
+    setLoading(true); // Show loading state
 
-      console.log({
-        name,
+    try {
+      const response = await axios.post("http://localhost:8000/api/register", {
+        first_name: firstName,
+        last_name: lastName,
         email,
         password,
-        password_confirmation: confirmPassword,
+        password_confirmation: confirmPassword, // Correctly match the field name
       });
 
       // On successful registration
       Swal.fire("Success", "Registration successful! Please log in.", "success");
       navigate("/login"); // Redirect to login page after successful registration
     } catch (error) {
-      // Handle any error during registration
+      setLoading(false); // Hide loading on error
+
       if (error.response) {
         if (error.response.status === 409) {
-          // If the email already exists, show a specific message
           setError(error.response.data.message);
           Swal.fire("Error", error.response.data.message, "error");
         } else if (error.response.data.errors) {
-          // Handle other validation errors
           setError(Object.values(error.response.data.errors).join(" "));
           Swal.fire("Error", "Registration failed. Please try again.", "error");
         } else {
@@ -65,10 +67,11 @@ function Register() {
           Swal.fire("Error", "Registration failed. Please try again.", "error");
         }
       } else {
-        // If the error doesn't have a response (network error, etc.)
         setError("Registration failed. Please try again.");
         Swal.fire("Error", "Registration failed. Please try again.", "error");
       }
+    } finally {
+      setLoading(false); // Hide loading after processing
     }
   };
 
@@ -80,10 +83,17 @@ function Register() {
         <form onSubmit={handleSubmit} className="auth-form">
           <input
             type="text"
-            placeholder="Name"
+            placeholder="First Name"
             className="auth-input"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Last Name"
+            className="auth-input"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
           />
           <input
             type="email"
@@ -107,17 +117,16 @@ function Register() {
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
           {error && <p className="auth-error">{error}</p>} {/* Display error message */}
-          <button type="submit" className="auth-button">
-            Register
+          <button type="submit" className="auth-button" disabled={loading}>
+            {loading ? "Registering..." : "Register"}
           </button>
         </form>
         <p className="auth-switch">
-  Already have an account?{" "}
-  <button className="auth-link" onClick={() => navigate("/login")}>
-    Log in
-  </button>
-</p>
-
+          Already have an account?{" "}
+          <button className="auth-link" onClick={() => navigate("/login")}>
+            Log in
+          </button>
+        </p>
       </div>
     </div>
   );
