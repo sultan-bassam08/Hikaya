@@ -1,73 +1,90 @@
 /* Base Styles */
-body {
+/* body {
   margin: 0;
   padding: 0;
   font-family: "Poppins", sans-serif;
-   color: #fff;
+  color: #fff;
   min-height: 100vh;
-}
+  background: #f1f5f8;
+} */
 
 .auth-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  /* background-image: url("../assets/images/hikaya.jpg"); */
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed; /* Added for better mobile performance */
+  height:auto;
+  padding: 30px;
+  background: linear-gradient(to bottom right, #6a11cb, #2575fc);
 }
 
 .auth-card {
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(8px);
-  border-radius: 12px;
-  padding: 40px;
-  max-width: 400px;
-  width: 100%; /* Make sure the card is responsive */
+  border-radius: 15px;
+  width: 100%;
+  max-width: 500px;
   text-align: center;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.auth-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 40px rgba(0, 0, 0, 0.4);
 }
 
 .auth-heading {
-  font-size: 2rem;
+  font-size: 2.5rem; /* Increased font size */
   font-family: "Playfair Display", serif;
-  margin-bottom: 8px;
-  color: #f3f4f6;
+  margin-bottom: 12px;
+  color: #fff;
+  font-weight: bold;
 }
 
 .auth-subheading {
-  font-size: 1rem;
-  margin-bottom: 24px;
+  font-size: 1.1rem;
+  margin-bottom: 28px;
   color: #e0e7ff;
+}
+
+.auth-form{
+  width: 100%;
 }
 
 .auth-form input {
   width: 100%;
-  padding: 10px;
+  padding: 14px;
   margin: 12px 0;
   border-radius: 8px;
-  border: none;
+  border: 1px solid #ddd;
   outline: none;
+  font-size: 1rem;
+  color: #333;
+  background: #f9fafb;
+  transition: border 0.3s, box-shadow 0.3s;
 }
 
-.auth-input {
-  background: #f0f4f8;
-  border: 1px solid #ddd;
-  padding: 12px;
+.auth-form input:focus {
+  border-color: #6a11cb;
+  box-shadow: 0 0 8px rgba(106, 17, 203, 0.5);
 }
 
 .auth-button {
   width: 100%;
-  padding: 12px;
-  margin: 16px 0;
+  padding: 16px;
+  margin: 20px 0;
   border-radius: 8px;
   background: #ff7f50;
   color: white;
-  font-size: 1rem;
+  font-size: 1.1rem;
   border: none;
   cursor: pointer;
   transition: background 0.3s ease;
+  font-weight: bold;
 }
 
 .auth-button:hover {
@@ -76,19 +93,47 @@ body {
 
 .auth-switch {
   margin-top: 16px;
-  font-size: 0.9rem;
+  font-size: 1rem;
   color: #ddd;
 }
 
-.auth-switch a {
-  color: #ffd700;
+.auth-link {
+  display: inline-block;
+  padding: 6px 12px;
+  border: 1px solid #6a11cb;
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 8px;
+  background-color: #6a11cb;
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
   text-decoration: none;
+  cursor: pointer;
+}
+
+.auth-link:hover {
+  background-color: #2575fc;
+  border-color: #2575fc;
+  box-shadow: 0 0 0 0.2rem rgba(38, 119, 252, 0.5);
+}
+
+.auth-link:active {
+  background-color: #005cbf;
+  border-color: #005cbf;
+  box-shadow: none;
+}
+
+.auth-link:focus {
+  outline: none; /* Remove default outline */
+  box-shadow: 0 0 0 0.2rem rgba(38, 119, 252, 0.5); /* Focus ring effect */
 }
 
 .auth-error {
   color: red;
-  font-size: 0.9em;
+  font-size: 1em;
   margin-top: 10px;
+  text-align: center;
+  font-weight: bold;
 }
 
 /* Media Queries for Responsiveness */
@@ -96,7 +141,7 @@ body {
 /* Mobile (Small screens) */
 @media (max-width: 600px) {
   .auth-container {
-    padding: 20px; /* Add padding to prevent content from touching screen edges */
+    padding: 20px;
   }
 
   .auth-card {
@@ -105,28 +150,7 @@ body {
   }
 
   .auth-heading {
-    font-size: 1.5rem;
-  }
-
-  .auth-subheading {
-    font-size: 0.9rem;
-  }
-
-  .auth-button {
-    padding: 10px;
-    font-size: 0.9rem;
-  }
-}
-
-/* Tablet (Medium screens) */
-@media (max-width: 900px) {
-  .auth-card {
-    max-width: 80%;
-    padding: 30px;
-  }
-
-  .auth-heading {
-    font-size: 1.8rem;
+    font-size: 2rem;
   }
 
   .auth-subheading {
@@ -139,10 +163,34 @@ body {
   }
 }
 
+/* Tablet (Medium screens) */
+@media (max-width: 900px) {
+  .auth-card {
+    max-width: 80%;
+    padding: 30px;
+  }
+
+  .auth-heading {
+    font-size: 2.2rem;
+  }
+
+  .auth-subheading {
+    font-size: 1.1rem;
+  }
+}
+
 /* Desktop (Large screens) */
 @media (min-width: 901px) {
   .auth-card {
-    max-width: 400px;
+    max-width: 500px;
     padding: 40px;
+  }
+
+  .auth-heading {
+    font-size: 2.5rem;
+  }
+
+  .auth-subheading {
+    font-size: 1.2rem;
   }
 }

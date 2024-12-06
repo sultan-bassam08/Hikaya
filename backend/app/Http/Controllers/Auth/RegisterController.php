@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
@@ -7,51 +8,67 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
+
 class RegisterController extends Controller
 {
-public function register(Request $request)
-{
+    public function register(Request $request)
+    {
+        // Check if the email already exists in the database
+        if (User::where('email', $request->email)->exists()) {
+            return response()->json([
+                'message' => 'The email is already registered. Please use a different email or log in.',
+            ], 409); // 409 Conflict status code
+        }
 
+        // Validation rules including password confirmation
+        $validator = Validator::make($request->all(), [
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
 
-  // Validation rules including password confirmation
-  $validator = Validator::make($request->all(), [
-      'name' => 'required|string|max:255',
-      'email' => 'required|string|email|max:255|unique:users',
-      'password' => 'required|string|min:8|confirmed', // `confirmed` ensures password_confirmation matches
-  ]);
+        if ($validator->fails()) {
+            Log::warning('Validation failed during registration.', [
+                'errors' => $validator->errors()->toArray(),
+                'input' => $request->except(['password', 'password_confirmation']),
+            ]);
 
-  // Check for validation failure
-  if ($validator->fails()) {
-      Log::error('Validation failed: ', $validator->errors()->toArray());
-      return response()->json(['errors' => $validator->errors()], 422);
-  }
+            return response()->json([
+                'message' => 'Validation errors occurred.',
+                'errors' => $validator->errors(),
+            ], 422);
+        }
 
-  try {
-      // Create user and hash password
-      $user = User::create([
-          'name' => $request->name,
-          'email' => $request->email,
-          'password' => Hash::make($request->password), // Hash the password for security
-      ]);
+        try {
+            // Create the user with hashed password
+            $user = User::create([
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'profile_picture' => null, // Default to null; update later if needed
+                'bio' => null, // Default to null; update later if needed
+            ]);
+            
+            Log::info('User registered successfully.', [
+                'user_id' => $user->id,
+                'email' => $user->email,
+            ]);
 
-      // Respond with success message and user details
-      return response()->json([
-          'message' => 'Registration successful. Welcome!',
-          'user' => $user,
-      ], 201);
+            return response()->json([
+                'message' => 'Registration successful. Welcome!',
+                'user' => $user,
+            ], 201);
+        } catch (\Exception $e) {
+            Log::error('User registration failed.', [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString(),
+            ]);
 
-  } catch (\Exception $e) {
-      // Log any unexpected errors that occur during user creation
-      Log::error('User creation failed: ' . $e->getMessage());
-
-      // Return a generic error message for unexpected errors
-      return response()->json([
-          'error' => 'Something went wrong. Please try again later.',
-          'details' => $e->getMessage(), // You can remove this in production for security reasons
-      ], 500);
-  }
-
-}
-
-
+            return response()->json([
+                'message' => 'Something went wrong during registration. Please try again later.',
+            ], 500);
+        }
+    }
 }

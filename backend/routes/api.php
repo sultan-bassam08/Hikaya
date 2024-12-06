@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\StoryController;
 
 
 /*
@@ -25,3 +26,8 @@ Route::post('register', [RegisterController::class, 'register']);
 
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth:sanctum');
+
+
+Route::post('/stories/draft', [StoryController::class, 'saveDraft']);
+Route::post('/stories/{id}/publish', [StoryController::class, 'publishStory']);
+Route::get('/stories/magic-ideas', [StoryController::class, 'getMagicIdea']);
