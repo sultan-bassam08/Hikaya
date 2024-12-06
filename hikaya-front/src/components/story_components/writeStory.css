@@ -1,25 +1,52 @@
-.write-story-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  .story-input {
-    margin-top: 20px;
-  }
-  
-  .magic-ideas-btn,
-  .save-draft-btn,
-  .publish-story-btn {
-    margin-top: 10px;
-    margin-right: 10px;
-  }
-  
-  .ideas-list ul {
-    margin-top: 20px;
-  }
-  
-  .generated-description {
-    margin-top: 20px;
-  }
-  
+/* Container adjustments */
+.container {
+  max-width: 900px;
+  margin: 0 auto; /* Center the content */
+  padding: 20px;
+  overflow: hidden; /* Prevent container overflow */
+}
+
+/* Make the Quill editor resizable and prevent overflow */
+.ql-container {
+  border: 1px solid #dee2e6;
+  border-radius: 0.25rem;
+  min-height: 400px;
+  background-color: #fff;
+  overflow-y: auto; /* Allow vertical scrolling within the editor */
+  max-height: 500px; /* Set a max height for the editor */
+  resize: vertical; /* Allow resizing vertically */
+  padding: 10px;
+}
+
+/* Magic Ideas Section */
+.ideas-list {
+  margin-top: 20px;
+  max-height: 300px; /* Prevent the ideas list from overflowing */
+  overflow-y: auto; /* Enable scrolling if the list grows too large */
+  padding-right: 10px; /* Prevent scrollbars from overlaying the content */
+}
+
+.ideas-list h4 {
+  font-size: 1.25rem;
+  margin-bottom: 10px;
+}
+
+.ideas-list ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+/* Prevent overall overflow in case of large content */
+body, html {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.overflow-auto {
+  overflow: auto;
+}
+
+/* Alert Styling for feedback messages */
+.alert {
+  margin-top: 20px;
+}

@@ -10,27 +10,20 @@ const WriteStory = () => {
   const [draftSaved, setDraftSaved] = useState(false);
   const [ideas, setIdeas] = useState([]);
   const [generatedDescription, setGeneratedDescription] = useState('');
+  const [storyId, setStoryId] = useState(null); // To store the story ID for publishing later
 
   // Quill modules and formats for text editor
   const quillModules = {
     toolbar: [
       [{ 'header': [1, 2, false] }],
-      ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+      ['bold', 'italic', 'underline', 'strike'],
       ['blockquote', 'code-block'],
-
       [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-      [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
-      [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
-      [{ 'direction': 'rtl' }],                         // text direction
-
-      [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
-      [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-
-      [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
-      [{ 'font': [] }],
+      [{ 'indent': '-1'}, { 'indent': '+1' }],
+      [{ 'size': ['small', false, 'large', 'huge'] }],
+      [{ 'color': [] }, { 'background': [] }],
       [{ 'align': [] }],
-
-      ['clean']                                         // remove formatting button
+      ['clean']
     ]
   };
 
@@ -44,29 +37,29 @@ const WriteStory = () => {
   // Handler for the "Magic Ideas" button
   const handleMagicIdeas = async () => {
     try {
-      // Simulate API call to fetch creative ideas
-      const response = await axios.get('/api/magic-ideas'); // Replace with real API
-      setIdeas(response.data.ideas);  // Assuming the API returns an array of ideas
+      const response = await axios.get('http://127.0.0.1:8000/api/stories/magic-ideas'); // Adjust the API route
+      setIdeas(response.data.idea);  // Assuming the API returns a single idea, update accordingly
     } catch (error) {
       console.error('Error fetching ideas', error);
     }
   };
 
   // Handler for saving a draft
-  const handleSaveDraft = () => {
-    // Mock saving draft (or send to backend)
-    setDraftSaved(true);
-    console.log('Draft saved:', story);
+  const handleSaveDraft = async () => {
+    try {
+      const response = await axios.post('http://127.0.0.1:8000/api/stories/draft', { title: 'My Story Title', content: story });
+      setDraftSaved(true);
+      console.log('Draft saved:', response.data);
+    } catch (error) {
+      console.error('Error saving draft', error);
+    }
   };
 
   // Handler for publishing the story
   const handlePublishStory = async () => {
     try {
-      // Submit story to backend
-      const response = await axios.post('/api/publish-story', { story });
-      
-      // Get the auto-generated description from the response
-      setGeneratedDescription(response.data.description);  // Replace with real data
+      const response = await axios.post(`http://127.0.0.1:8000/api/stories/${storyId}/publish`, { story });
+      setGeneratedDescription(response.data.description);  // Replace with real data from your API
       console.log('Story published!');
     } catch (error) {
       console.error('Error publishing story', error);
@@ -74,8 +67,8 @@ const WriteStory = () => {
   };
 
   return (
-    <div className="write-story-container">
-      <h2>Write Your Story</h2>
+    <div className="container my-5">
+      <h2 className="text-center mb-4">Write Your Story</h2>
 
       {/* Quill Story Input Section */}
       <ReactQuill 
@@ -84,12 +77,15 @@ const WriteStory = () => {
         modules={quillModules}
         formats={quillFormats}
         placeholder="Start writing your story..."
+        className="mb-4"
       />
 
       {/* Magic Ideas Button */}
-      <button onClick={handleMagicIdeas} className="magic-ideas-btn">
-        Magic Ideas
-      </button>
+      <div className="d-flex justify-content-center mb-4">
+        <button onClick={handleMagicIdeas} className="btn btn-info">
+          Magic Ideas
+        </button>
+      </div>
 
       {/* Display fetched ideas (if any) */}
       {ideas.length > 0 && (
@@ -104,21 +100,21 @@ const WriteStory = () => {
       )}
 
       {/* Action Buttons */}
-      <div className="story-actions">
-        <button onClick={handleSaveDraft} className="save-draft-btn">
+      <div className="d-flex justify-content-between mb-4">
+        <button onClick={handleSaveDraft} className="btn btn-warning">
           Save Draft
         </button>
-        <button onClick={handlePublishStory} className="publish-story-btn">
+        <button onClick={handlePublishStory} className="btn btn-success">
           Publish Story
         </button>
       </div>
 
       {/* Draft Saved Message */}
-      {draftSaved && <p>Your draft has been saved!</p>}
+      {draftSaved && <p className="alert alert-success">Your draft has been saved!</p>}
 
       {/* Auto-Generated Description */}
       {generatedDescription && (
-        <div className="generated-description">
+        <div className="alert alert-info">
           <h4>Generated Story Description:</h4>
           <p>{generatedDescription}</p>
         </div>
