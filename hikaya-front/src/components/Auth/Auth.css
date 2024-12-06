@@ -3,7 +3,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Poppins", sans-serif;
-   color: #fff;
+  color: #fff;
   min-height: 100vh;
 }
 
@@ -12,10 +12,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  /* background-image: url("../assets/images/hikaya.jpg"); */
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed; /* Added for better mobile performance */
+  background: linear-gradient(to bottom right, #6a11cb, #2575fc);
 }
 
 .auth-card {
@@ -24,16 +21,22 @@ body {
   border-radius: 12px;
   padding: 40px;
   max-width: 400px;
-  width: 100%; /* Make sure the card is responsive */
+  width: 100%;
   text-align: center;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.auth-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 40px rgba(0, 0, 0, 0.4);
 }
 
 .auth-heading {
   font-size: 2rem;
   font-family: "Playfair Display", serif;
   margin-bottom: 8px;
-  color: #f3f4f6;
+  color: #fff;
 }
 
 .auth-subheading {
@@ -44,7 +47,7 @@ body {
 
 .auth-form input {
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   margin: 12px 0;
   border-radius: 8px;
   border: none;
@@ -52,14 +55,21 @@ body {
 }
 
 .auth-input {
-  background: #f0f4f8;
+  background: #f9fafb;
   border: 1px solid #ddd;
   padding: 12px;
+  font-size: 1rem;
+  color: #333;
+}
+
+.auth-input:focus {
+  border-color: #6a11cb;
+  box-shadow: 0 0 5px rgba(106, 17, 203, 0.5);
 }
 
 .auth-button {
   width: 100%;
-  padding: 12px;
+  padding: 14px;
   margin: 16px 0;
   border-radius: 8px;
   background: #ff7f50;
@@ -80,10 +90,15 @@ body {
   color: #ddd;
 }
 
-.auth-switch a {
+.auth-link {
   color: #ffd700;
-  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
 }
+
+/* .auth-link:hover {
+  color: #fff;
+} */
 
 .auth-error {
   color: red;
@@ -96,7 +111,7 @@ body {
 /* Mobile (Small screens) */
 @media (max-width: 600px) {
   .auth-container {
-    padding: 20px; /* Add padding to prevent content from touching screen edges */
+    padding: 20px;
   }
 
   .auth-card {
@@ -130,11 +145,6 @@ body {
   }
 
   .auth-subheading {
-    font-size: 1rem;
-  }
-
-  .auth-button {
-    padding: 12px;
     font-size: 1rem;
   }
 }

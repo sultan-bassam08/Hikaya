@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Swal from "sweetalert2"; // Import SweetAlert2 for notifications
+import Swal from "sweetalert2";
 import "./Auth.css";
 
 function Login() {
@@ -22,7 +22,10 @@ function Login() {
 
       const { token, user } = response.data;
       localStorage.setItem("token", token); // Store the token
-      localStorage.setItem("user", JSON.stringify(user)); // Store the user info (optional)
+      localStorage.setItem("user", JSON.stringify(user)); // Store user info (optional)
+
+      // Set token as default header for future requests
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
       Swal.fire("Success", "Login successful", "success");
       navigate("/dashboard");
@@ -34,7 +37,6 @@ function Login() {
       }
     }
   };
-
 
   return (
     <div className="auth-container">
@@ -60,10 +62,11 @@ function Login() {
         </form>
         <p className="auth-switch">
           New to the world of stories?{" "}
-          <span className="auth-link" onClick={() => navigate("/register")}>
-            Register here!
-          </span>
+          <button className="auth-link" onClick={() => navigate("/register")}>
+            Register
+          </button>
         </p>
+
       </div>
     </div>
   );

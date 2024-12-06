@@ -72,11 +72,6 @@ h2 {
       font-size: 1rem;
   }
 
-<<<<<<< HEAD
-  /* Adjust layout for 2 cards per row on small devices */
-=======
-
->>>>>>> 43bc21717970a315d3e8e362dd13e7cd04f6c6c3
   .row {
       display: flex;
       flex-wrap: wrap;
@@ -84,19 +79,11 @@ h2 {
   }
 
   .col-12 {
-<<<<<<< HEAD
-      width: 48%; /* Ensures 2 cards per row */
-  }
-}
-
-/* Responsive Styles for Extra Small Screens (Mobile Devices) */
-=======
       width: 48%; 
   }
 }
 
 
->>>>>>> 43bc21717970a315d3e8e362dd13e7cd04f6c6c3
 @media (max-width: 576px) {
   .team-item {
       padding: 10px;
@@ -119,16 +106,8 @@ h2 {
       font-size: 0.9rem;
   }
 
-<<<<<<< HEAD
-  /* Adjust layout for 1 card per row on mobile */
-  .col-12 {
-      width: 100%; /* One card per row */
-  }
-}
-=======
 
   .col-12 {
       width: 100%; 
     }
 }
->>>>>>> 43bc21717970a315d3e8e362dd13e7cd04f6c6c3
