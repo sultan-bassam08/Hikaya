@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Login from "./components/Auth/Login";
 import Logout from "./components/Auth/Logout"; // esraa 
 import Register from "./components/Auth/Register";
-// import Header from "./components/landing_page/Header";
+import Header from "./components/landing_page/Header";
 import Hero from "./components/landing_page/Hero";
 import Features from "./components/landing_page/Features";
 
