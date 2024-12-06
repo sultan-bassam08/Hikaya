@@ -12,12 +12,10 @@
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.6",
     "react-dom": "^18.3.1",
-<<<<<<< HEAD
-=======
     "react-quill": "^2.0.0",
->>>>>>> 43bc21717970a315d3e8e362dd13e7cd04f6c6c3
     "react-router-dom": "^7.0.2",
     "react-scripts": "5.0.1",
+    "sweetalert2": "^11.14.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

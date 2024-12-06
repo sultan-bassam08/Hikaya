@@ -3,12 +3,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 const Header = () => {
   return (
-<<<<<<< HEAD
-    <header className="header">
-      <nav>
-        <div className="logo">
-          <img src="path-to-your-logo.png" alt="Logo" className="logo-img" />
-=======
     <header className="bg-white shadow fixed-top">
       <nav className="navbar navbar-expand-lg navbar-light container">
         <a className="navbar-brand" href="#">
@@ -53,7 +47,6 @@ const Header = () => {
               </a>
             </li>
           </ul>
->>>>>>> 43bc21717970a315d3e8e362dd13e7cd04f6c6c3
         </div>
       </nav>
     </header>
