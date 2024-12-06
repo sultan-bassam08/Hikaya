@@ -9,7 +9,7 @@ function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [error, setError] = useState(""); // Make sure error state is defined
+  const [error, setError] = useState(""); // Error state for displaying messages
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -38,6 +38,7 @@ function Register() {
         password,
         password_confirmation: confirmPassword,
       });
+
       console.log({
         name,
         email,
@@ -46,19 +47,25 @@ function Register() {
       });
 
       // On successful registration
-      Swal.fire(
-        "Success",
-        "Registration successful! Please log in.",
-        "success"
-      );
+      Swal.fire("Success", "Registration successful! Please log in.", "success");
       navigate("/login"); // Redirect to login page after successful registration
     } catch (error) {
       // Handle any error during registration
-      if (error.response && error.response.data.errors) {
-        console.log(error.response.data.errors);
-        setError(Object.values(error.response.data.errors).join(" ")); // Set error from server response
-        Swal.fire("Error", "Registration failed. Please try again.", "error");
+      if (error.response) {
+        if (error.response.status === 409) {
+          // If the email already exists, show a specific message
+          setError(error.response.data.message);
+          Swal.fire("Error", error.response.data.message, "error");
+        } else if (error.response.data.errors) {
+          // Handle other validation errors
+          setError(Object.values(error.response.data.errors).join(" "));
+          Swal.fire("Error", "Registration failed. Please try again.", "error");
+        } else {
+          setError("Registration failed. Please try again.");
+          Swal.fire("Error", "Registration failed. Please try again.", "error");
+        }
       } else {
+        // If the error doesn't have a response (network error, etc.)
         setError("Registration failed. Please try again.");
         Swal.fire("Error", "Registration failed. Please try again.", "error");
       }
@@ -69,9 +76,7 @@ function Register() {
     <div className="auth-container">
       <div className="auth-card">
         <h2 className="auth-heading">Join the Storytellers' Guild</h2>
-        <p className="auth-subheading">
-          Start crafting your magical tales today.
-        </p>
+        <p className="auth-subheading">Start crafting your magical tales today.</p>
         <form onSubmit={handleSubmit} className="auth-form">
           <input
             type="text"
@@ -101,15 +106,18 @@ function Register() {
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
-          {error && <p className="auth-error">{error}</p>}{" "}
-          {/* Display error message */}
+          {error && <p className="auth-error">{error}</p>} {/* Display error message */}
           <button type="submit" className="auth-button">
             Register
           </button>
         </form>
         <p className="auth-switch">
-          Already have an account? <a href="/login">Log in here!</a>
-        </p>
+  Already have an account?{" "}
+  <button className="auth-link" onClick={() => navigate("/login")}>
+    Log in
+  </button>
+</p>
+
       </div>
     </div>
   );

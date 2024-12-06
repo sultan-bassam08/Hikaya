@@ -1,6 +1,7 @@
-import React from "react";
+import React from "react"; 
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Login from "./components/Auth/Login";
+import Logout from "./components/Auth/Logout"; // esraa 
 import Register from "./components/Auth/Register";
 import Header from "./components/landing_page/Header";
 import Hero from "./components/landing_page/Hero";
@@ -11,6 +12,10 @@ import Landing from "./components/landing_page/landingpage";
 import "./App.css"; // Global styles
 import WriteStory from "./components/story_components/writeStory";
 import ReadStory from "./components/readStory/readStory";
+import AboutUs from "./components/About_Us/About_Us";
+import Contact from "./components/Contact_Us/Contact_us";
+import "./axiosSetup";
+
 
 function App() {
   return (
@@ -32,6 +37,9 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/logout" element={<Logout />} /> {/* esraa 8/}
+          <Route path="/contact" element={<Contact />} /> {/* Contact Us route */}
+          <Route path="/about" element={<AboutUs />} /> {/* About Us route */}
         </Routes>
         <Footer />
       </div>

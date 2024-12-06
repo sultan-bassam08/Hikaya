@@ -12,14 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('stories', function (Blueprint $table) {
-            $table->id('story_id'); 
+            $table->id('story_id');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); 
             $table->string('title', 255); 
-            $table->text('content');
-            $table->enum('status', ['draft', 'published']);
-            $table->foreignId('category_id')->constrained('categories')->onDelete('cascade'); 
-            $table->timestamps(); 
-            $table->softDeletes(); 
+            $table->text('content');$table->enum('status', ['draft', 'published']);
+            $table->unsignedBigInteger('category_id'); // Foreign key column
+            $table->foreign('category_id')->references('category_id')->on('categories')->onDelete('cascade'); 
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
