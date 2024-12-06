@@ -17,12 +17,23 @@ function App() {
     <Router>
       <div className="app-container">
         <Header /> {/* Always visible */}
+        <nav className="nav-bar">
+          <Link to="/" className="nav-link">
+            Home
+          </Link>
+          <Link to="/login" className="nav-link">
+            Login
+          </Link>
+          <Link to="/register" className="nav-link">
+            Register
+          </Link>
+        </nav>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Routes>
-        <Footer /> {/* Always visible */}
+        <Footer />
       </div>
     </Router>
   );
