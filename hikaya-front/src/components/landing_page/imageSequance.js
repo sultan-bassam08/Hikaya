@@ -19,8 +19,8 @@ const ImageSequance = () => {
     canvas.height = window.innerHeight;
 
     if (contentDivRef.current) {
-      contentDivRef.current.style.height = numImages * 6 + "px";
-      contentDivRef.current.style.paddingTop = numImages * 6 + "px";
+      contentDivRef.current.style.height = numImages * 2 + "px";
+      contentDivRef.current.style.paddingTop = numImages * 2 + "px";
     }
 
     // Preloading images
