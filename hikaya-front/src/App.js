@@ -41,7 +41,7 @@ function App() {
           <Route path="/contact" element={<Contact />} /> {/* Contact Us route */}
           <Route path="/about" element={<AboutUs />} /> {/* About Us route */}
         </Routes>
-        <Footer /> {/* Always visible */}
+        <Footer />
       </div>
     </Router>
   );

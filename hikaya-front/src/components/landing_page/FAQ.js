@@ -24,7 +24,11 @@ const FAQ = () => {
       <section id="FAQ" className="faq py-5 bg-light">
         <div className="container">
           <h2 className="text-center mb-4">Frequently Asked Questions</h2>
-          <div className="accordion" id="faqAccordion">
+          <div
+            className="accordion"
+            id="faqAccordion"
+            style={{ position: "relative", zIndex: "3" }}
+          >
             {faqs.map((faq, index) => (
               <div className="accordion-item" key={index}>
                 <h2 className="accordion-header" id={`heading${index}`}>

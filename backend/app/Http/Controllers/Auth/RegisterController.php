@@ -22,8 +22,9 @@ class RegisterController extends Controller
 
         // Validation rules including password confirmation
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email',
             'password' => 'required|string|min:8|confirmed',
         ]);
 
@@ -42,11 +43,14 @@ class RegisterController extends Controller
         try {
             // Create the user with hashed password
             $user = User::create([
-                'name' => $request->name,
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
+                'profile_picture' => null, // Default to null; update later if needed
+                'bio' => null, // Default to null; update later if needed
             ]);
-
+            
             Log::info('User registered successfully.', [
                 'user_id' => $user->id,
                 'email' => $user->email,
