@@ -66,7 +66,7 @@ const Header = () => {
               />
               <div className="profile-dropdown">
                 <img
-                  src={"./logo.png"}
+                  src={"/logo.png"}
                   alt="Profile"
                   className="profile-image"
                 />
