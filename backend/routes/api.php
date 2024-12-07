@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\StoryController;
+use App\Http\Controllers\LikeController;
 
 
 /*
@@ -35,3 +36,4 @@ Route::get('/stories/magic-ideas', [StoryController::class, 'getMagicIdea']);
 Route::get('/stories', [StoryController::class, 'index']);  // For listing all stories
 Route::get('/stories/{id}', [StoryController::class, 'show']);  // For showing a specific story
 Route::post('/stories/magic-ideas', [StoryController::class, 'getMagicIdea']);
+Route::post('/stories/{storyId}/toggle-like', [LikeController::class, 'toggleLike']);

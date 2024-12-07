@@ -6,7 +6,7 @@ import StoriesList from "../components/story_components/storiesList";
 
 function MainPage() {
   return (
-    
+    <>
     <div className="container">
       <div className="row">
        
@@ -25,12 +25,16 @@ function MainPage() {
             <a href="#" className="btn btn-primary">Start Sharing</a>
             <a href="#" className="btn btn-secondary">Explore Stories</a>
           </section>
-
-    <StoriesList/>
+   </div>
+   </div>
+      <div className="container"> 
+      <StoriesList/>
+      </div>
+    </>
+    
           
         
-      </div>
-    </div>
+    
   );
 }
 
