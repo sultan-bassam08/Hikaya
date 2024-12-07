@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('content');$table->enum('status', ['draft', 'published']);
             $table->unsignedBigInteger('category_id'); // Foreign key column
             $table->foreign('category_id')->references('category_id')->on('categories')->onDelete('cascade'); 
+            $table->string('story_picture')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
