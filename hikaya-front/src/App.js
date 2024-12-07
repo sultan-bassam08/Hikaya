@@ -37,6 +37,7 @@ function App() {
           <Route path="/dashboard" element={<MainPage />} />
           <Route path="/contactus" element={<Contact />} />
           <Route path="/aboutus" element={<About />} />
+          <Route path="/readStory/:id" element={<ReadStory />} />
         </Routes>
         <Footer />
       </div>
