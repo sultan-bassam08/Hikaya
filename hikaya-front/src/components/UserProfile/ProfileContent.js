@@ -1,8 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./ProfileContent.css";
+import axios from "axios";
 
 const ProfileContent = () => {
   const [selectedTab, setSelectedTab] = useState("completeStories"); // Default tab is 'Complete Stories'
+  const [completeStories, setCompleteStories] = useState([]);
+  const [draftStories, setDraftStories] = useState([]);
+  const [userActivity, setUserActivity] = useState([]);
+  
+  const userId = localStorage.getItem("id"); // Assuming the user ID is stored in localStorage
+  
+  // Fetch stories based on the tab selected
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (selectedTab === "completeStories") {
+          const response = await axios.get(`/api/user-stories/${userId}?status=complete`);
+          setCompleteStories(response.data);
+        } else if (selectedTab === "draftStories") {
+          const response = await axios.get(`/api/user-stories/${userId}?status=draft`);
+          setDraftStories(response.data);
+        } else if (selectedTab === "yourActivity") {
+          const response = await axios.get(`/api/user-activity/${userId}`);
+          setUserActivity(response.data);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, [selectedTab, userId]); // Fetch data whenever selectedTab changes
 
   const handleTabClick = (tab) => {
     setSelectedTab(tab); // Switch between tabs
@@ -13,45 +40,69 @@ const ProfileContent = () => {
       case "completeStories":
         return (
           <div className={`timeline ${styles.timeline}`}>
-            {/* Add your complete stories content here */}
-            <li>
-              <div className={`timeline-time ${styles.timelineTime}`}>
-                <span className="date">today</span>
-                <span className="time">04:20</span>
-              </div>
-              <div className={`timeline-icon ${styles.timelineIcon}`}>
-                <a href="javascript:void(0);">&nbsp;</a>
-              </div>
-              <div className={`timeline-body ${styles.timelineBody}`}>
-                <div className={`timeline-header ${styles.timelineHeader}`}>
-                  <span className={`userimage ${styles.userImage}`}>
-                    <img src="user_12483574.png" alt="User Avatar" />
-                  </span>
-                  <span className={`username ${styles.username}`}>
-                    <a href="javascript:void(0);">Sean Ngu</a>
-                  </span>
-                  <span className={`pull-right text-muted ${styles.viewCount}`}>
-                    18 Views
-                  </span>
-                </div>
-                <div className={`timeline-content ${styles.timelineContent}`}>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Nunc faucibus turpis quis tincidunt luctus. Nam sagittis dui
-                    in nunc consequat, in imperdiet nunc sagittis.
-                  </p>
-                </div>
-              </div>
-            </li>
+            {completeStories.length > 0 ? (
+              completeStories.map((story) => (
+                <li key={story.story_id}>
+                  <div className={`timeline-time ${styles.timelineTime}`}>
+                    <span className="date">
+                      {new Date(story.created_at).toLocaleDateString()}
+                    </span>
+                    <span className="time">
+                      {new Date(story.created_at).toLocaleTimeString()}
+                    </span>
+                  </div>
+                  <div className={`timeline-body ${styles.timelineBody}`}>
+                    <h5 className={styles.storyTitle}>{story.title}</h5>
+                    <p>{story.content}</p>
+                    {story.story_picture && <img src={story.story_picture} alt="Story" />}
+                  </div>
+                </li>
+              ))
+            ) : (
+              <p>No complete stories available.</p>
+            )}
           </div>
         );
       case "draftStories":
         return (
-          <div>Draft Stories - Add content here</div> // Add the actual content for draft stories
+          <div className={`timeline ${styles.timeline}`}>
+            {draftStories.length > 0 ? (
+              draftStories.map((story) => (
+                <li key={story.story_id}>
+                  <div className={`timeline-time ${styles.timelineTime}`}>
+                    <span className="date">
+                      {new Date(story.created_at).toLocaleDateString()}
+                    </span>
+                    <span className="time">
+                      {new Date(story.created_at).toLocaleTimeString()}
+                    </span>
+                  </div>
+                  <div className={`timeline-body ${styles.timelineBody}`}>
+                    <h5 className={styles.storyTitle}>{story.title}</h5>
+                    <p>{story.content}</p>
+                    {story.story_picture && <img src={story.story_picture} alt="Story" />}
+                  </div>
+                </li>
+              ))
+            ) : (
+              <p>No draft stories available.</p>
+            )}
+          </div>
         );
       case "yourActivity":
         return (
-          <div>Your Activity - Add content here</div> // Add the activity details here
+          <div>
+            {userActivity.length > 0 ? (
+              userActivity.map((activity, index) => (
+                <div key={index} className={styles.activity}>
+                  <p>{activity.description}</p>
+                  <span>{new Date(activity.timestamp).toLocaleString()}</span>
+                </div>
+              ))
+            ) : (
+              <p>No activity data available.</p>
+            )}
+          </div>
         );
       default:
         return <div>Loading...</div>;
@@ -63,13 +114,11 @@ const ProfileContent = () => {
       {/* Profile Content */}
       <div className={`profile-content ${styles.profileContent}`}>
         {/* Tabs */}
-        <ul
-          className={`profile-header-tab nav nav-tabs ${styles.profileHeaderTab}`}
-        >
+        <ul className={`profile-header-tab nav nav-tabs ${styles.profileHeaderTab}`}>
           <li className="nav-item">
             <a
               href="javascript:void(0);"
-              className={`nav-link ${styles.navLink}`}
+              className={`nav-link ${selectedTab === "completeStories" ? "active" : ""}`}
               onClick={() => handleTabClick("completeStories")}
             >
               Complete Stories
@@ -78,7 +127,7 @@ const ProfileContent = () => {
           <li className="nav-item">
             <a
               href="javascript:void(0);"
-              className={`nav-link ${styles.navLink}`}
+              className={`nav-link ${selectedTab === "draftStories" ? "active" : ""}`}
               onClick={() => handleTabClick("draftStories")}
             >
               Draft Stories
@@ -87,7 +136,7 @@ const ProfileContent = () => {
           <li className="nav-item">
             <a
               href="javascript:void(0);"
-              className={`nav-link ${styles.navLink}`}
+              className={`nav-link ${selectedTab === "yourActivity" ? "active" : ""}`}
               onClick={() => handleTabClick("yourActivity")}
             >
               Your Activity
