@@ -18,6 +18,8 @@ import Story from "./components/story_components/writeStory";
 import Profile from "./pages/UserProfile";
 import EditProfile from "./components/UserProfile/EditProfile";
 import ProfileContent from "./components/UserProfile/ProfileContent";
+
+import Chatbot from "./components/AI/Chatbot";
 function App() {
   return (
     <Router>

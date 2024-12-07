@@ -1,5 +1,5 @@
 import React from "react";
-import "../components/Contact_Us/Contact_Us.css";
+import "../components/Contact_Us/contact_us.css";
 import Swal from "sweetalert2";
 const Contact = () => {
   const onSubmit = async (event) => {

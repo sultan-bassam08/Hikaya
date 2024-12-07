@@ -34,3 +34,4 @@ Route::get('/stories/magic-ideas', [StoryController::class, 'getMagicIdea']);
 
 Route::get('/stories', [StoryController::class, 'index']);  // For listing all stories
 Route::get('/stories/{id}', [StoryController::class, 'show']);  // For showing a specific story
+Route::post('/stories/magic-ideas', [StoryController::class, 'getMagicIdea']);
