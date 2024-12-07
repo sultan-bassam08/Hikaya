@@ -19,8 +19,8 @@ const ImageSequance = () => {
     canvas.height = window.innerHeight;
 
     if (contentDivRef.current) {
-      contentDivRef.current.style.height = numImages * 2 + "px";
-      contentDivRef.current.style.paddingTop = numImages * 2 + "px";
+      contentDivRef.current.style.height = numImages * 3 + "px";
+      contentDivRef.current.style.paddingTop = numImages * 3 + "px";
     }
 
     // Preloading images
@@ -60,7 +60,7 @@ const ImageSequance = () => {
     preloadImages();
 
     const handleScroll = () => {
-      const scrollTop = window.scrollY || window.pageYOffset;
+      const scrollTop = window.scrollY * 0.7 || window.pageYOffset;
       const windowHeight =
         window.innerHeight || document.documentElement.clientHeight;
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import  './storiesList.css';
+import { Link } from 'react-router-dom';  // Import Link from react-router-dom
+import './storiesList.css';
 
 const StoriesList = () => {
   const [stories, setStories] = useState([]);
@@ -31,9 +32,10 @@ const StoriesList = () => {
               <p className="card-text">
                 {story.content.substring(0, 100)}... {/* Shorten the content */}
               </p>
-              <a href={`/stories/${story.story_id}`} className="btn btn-outline-success btn-sm">
+              {/* Use Link to route to the readStory component */}
+              <Link to={`/readStory/${story.story_id}`} className="btn btn-outline-success btn-sm">
                 Read More
-              </a>
+              </Link>
               <a href="#" className="btn btn-outline-danger btn-sm ml-2">
                 <i className="far fa-heart"></i> Like
               </a>

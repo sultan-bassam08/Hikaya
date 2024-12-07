@@ -18,29 +18,32 @@ import Story from "./components/story_components/writeStory";
 import Profile from "./pages/UserProfile";
 import EditProfile from "./components/UserProfile/EditProfile";
 import ProfileContent from "./components/UserProfile/ProfileContent";
-
+import { AuthProvider } from "./pages/AuthContext"; // Import AuthProvider
 import Chatbot from "./components/AI/Chatbot";
 function App() {
   return (
-    <Router>
-      <div className="app-container">
-        <Header />
+    <AuthProvider>
+      <Router>
+        <div className="app-container">
+          <Header />
 
-        <Routes>
-          <Route path="/" element={<Landing />} />
-          <Route path="/write_story" element={<Story />} />
-          <Route path="/Profile" element={<Profile />} />
-          <Route path="/edit-profile" element={<EditProfile />} />
-          <Route path="/profile-content" element={<ProfileContent />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/dashboard" element={<MainPage />} />
-          <Route path="/contactus" element={<Contact />} />
-          <Route path="/aboutus" element={<About />} />
-        </Routes>
-        <Footer />
-      </div>
-    </Router>
+          <Routes>
+            <Route path="/" element={<Landing />} />
+            <Route path="/write_story" element={<Story />} />
+            <Route path="/Profile" element={<Profile />} />
+            <Route path="/edit-profile" element={<EditProfile />} />
+            <Route path="/profile-content" element={<ProfileContent />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/dashboard" element={<MainPage />} />
+            <Route path="/contactus" element={<Contact />} />
+            <Route path="/aboutus" element={<About />} />
+            <Route path="/readStory/:id" element={<ReadStory />} />
+          </Routes>
+          <Footer />
+        </div>
+      </Router>
+    </AuthProvider>
     //   <Router>
     //     <div className="app-container">
     //       <Header /> {/* Always visible */}

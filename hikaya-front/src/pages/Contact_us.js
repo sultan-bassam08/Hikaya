@@ -1,6 +1,7 @@
 import React from "react";
-import "../components/Contact_Us/contact_us.css";
+import styles from "../components/Contact_Us/Contact_us.module.css"; // Import CSS module
 import Swal from "sweetalert2";
+
 const Contact = () => {
   const onSubmit = async (event) => {
     event.preventDefault();
@@ -36,42 +37,50 @@ const Contact = () => {
   };
 
   return (
-    <section className="contact">
-      <form onSubmit={onSubmit}>
-        <h2>Contact_Us</h2>
-        <div className="input-box">
-          <label>Full Name</label>
+    <section className={styles.contact}>
+      <form onSubmit={onSubmit} className={styles.contactForm}>
+        <h2 className={styles.heading}>Contact Us</h2>
+        <div className={styles.inputBox}>
+          <label htmlFor="name">Full Name</label>
           <input
             type="text"
-            className="field"
+            id="name"
+            className={styles.field}
             placeholder="Enter your name"
             name="name"
             required
-          ></input>
+          />
         </div>
 
-        <div className="input-box">
-          <label>Email</label>
+        <div className={styles.inputBox}>
+          <label htmlFor="email">Email</label>
           <input
             type="email"
-            className="field"
+            id="email"
+            className={styles.field}
             placeholder="Enter your email"
             name="email"
             required
-          ></input>
+          />
         </div>
-        <div className="input-box">
-          <label> Message </label>
+
+        <div className={styles.inputBox}>
+          <label htmlFor="message">Message</label>
           <textarea
             name="message"
-            className="field mess"
+            id="message"
+            className={`${styles.field} ${styles.mess}`}
             placeholder="Enter your message"
             required
-          ></textarea>
+          />
         </div>
-        <button type="submit">Send Message </button>
+
+        <button type="submit" className={styles.submitButton}>
+          Send Message
+        </button>
       </form>
     </section>
   );
 };
+
 export default Contact;

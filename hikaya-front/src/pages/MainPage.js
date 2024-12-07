@@ -6,6 +6,7 @@ import StoriesList from "../components/story_components/storiesList";
 
 function MainPage() {
   return (
+    
     <div className="container">
       <div className="row">
        
