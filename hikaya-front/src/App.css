@@ -1,6 +1,4 @@
-.App {
-  text-align: center;
-}
+
 
 .App-logo {
   height: 40vmin;
@@ -35,33 +33,4 @@
   to {
     transform: rotate(360deg);
   }
-}
-
-.app-container {
-  text-align: center;
-  padding: 20px;
-}
-
-.nav-bar {
-  margin-bottom: 20px;
-}
-
-.nav-link {
-  margin: 0 15px;
-  text-decoration: none;
-  color: #ff7f50;
-  font-weight: bold;
-}
-
-.nav-link:hover {
-  color: #ff4500;
-}
-
-.home-container h1 {
-  font-size: 2rem;
-  color: #fff;
-}
-
-.home-container p {
-  color: #ddd;
 }

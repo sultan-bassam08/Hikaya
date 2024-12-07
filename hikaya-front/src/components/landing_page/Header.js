@@ -1,33 +1,88 @@
 import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "./Header.css";
-
 const Header = () => {
   return (
-    <header className="header">
-      <nav>
-        <div className="logo">
-        <img src="/hikayalogo.png" alt="Logo" className="logo-img" />
-
+    <>
+      <nav class="navbar">
+        <div class="nav-brand">
+          <div class="logo">
+            <span class="logo-text">Hikaya</span>
+            <div class="logo-shine"></div>
+          </div>
         </div>
-        <ul className="nav-list">
-          <li>
-            <a href="#hero">Home</a>
-          </li>
-          <li>
-            <a href="#features">Features</a>
-          </li>
-          <li>
-            <a href="#pricing">Pricing</a>
-          </li>
-          <li>
-            <a href="#footer">Contact</a>
-          </li>
-          <li>
-            <a href="#login">Login</a>
-          </li>
-        </ul>
+
+        <div class="nav-links">
+          <a href="#" class="nav-link active">
+            <span>Home</span>
+            <div class="link-effect"></div>
+          </a>
+          <a href="#" class="nav-link">
+            <span>Products</span>
+            <div class="link-effect"></div>
+          </a>
+          <a href="#" class="nav-link">
+            <span>Services</span>
+            <div class="link-effect"></div>
+          </a>
+          <a href="#" class="nav-link">
+            <span>About</span>
+            <div class="link-effect"></div>
+          </a>
+          <a href="#" class="nav-link">
+            <span>Contact</span>
+            <div class="link-effect"></div>
+          </a>
+        </div>
+
+        <div class="nav-actions">
+          <button class="action-btn">
+            <div class="btn-text">Sign In</div>
+            <div class="btn-effect"></div>
+          </button>
+        </div>
+
+        <button class="mobile-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </nav>
-    </header>
+
+      <div class="mobile-menu">
+        <div class="menu-header">
+          <div class="logo">
+            <span class="logo-text">Premium</span>
+          </div>
+          <button class="close-menu">
+            <span class="close-icon"></span>
+          </button>
+        </div>
+        <div class="menu-links">
+          <a href="#" class="menu-link active">
+            <span>Home</span>
+          </a>
+          <a href="#" class="menu-link">
+            <span>Products</span>
+          </a>
+          <a href="#" class="menu-link">
+            <span>Services</span>
+          </a>
+          <a href="#" class="menu-link">
+            <span>About</span>
+          </a>
+          <a href="#" class="menu-link">
+            <span>Contact</span>
+          </a>
+        </div>
+        <div class="menu-footer">
+          <button class="mobile-action-btn">
+            <span>Sign In</span>
+          </button>
+        </div>
+      </div>
+    </>
   );
 };
 

@@ -5,32 +5,35 @@ import Register from "./components/Auth/Register";
 import Header from "./components/landing_page/Header";
 import Hero from "./components/landing_page/Hero";
 import Features from "./components/landing_page/Features";
-import Pricing from "./components/landing_page/Pricing";
+
 import Footer from "./components/landing_page/Footer";
+import Landing from "./components/landing_page/landingpage";
 import "./App.css"; // Global styles
-import WriteStory from "./components/story_components/writeStory"
-import ReadStory from "./components/readStory/readStory"
+import WriteStory from "./components/story_components/writeStory";
+import ReadStory from "./components/readStory/readStory";
 
 function App() {
   return (
-
     <Router>
       <div className="app-container">
-      <Header /> {/* Always visible */}
-        
+        <Header /> {/* Always visible */}
         <nav className="nav-bar">
-          <Link to="/" className="nav-link">Home</Link>
-          <Link to="/login" className="nav-link">Login</Link>
-          <Link to="/register" className="nav-link">Register</Link>
+          <Link to="/" className="nav-link">
+            Home
+          </Link>
+          <Link to="/login" className="nav-link">
+            Login
+          </Link>
+          <Link to="/register" className="nav-link">
+            Register
+          </Link>
         </nav>
-        
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Routes>
-        
-        <Footer /> {/* Always visible */}
+        <Footer />
       </div>
     </Router>
   );
@@ -39,10 +42,7 @@ function App() {
 function Home() {
   return (
     <div className="home-container">
-      <Hero />
-      <Features />
-      <Pricing />
-      <p>Welcome to the Storytelling App! Explore our features and sign up to get started.</p>
+      <Landing />
     </div>
     // <div className="App">
     //   <Header />
@@ -51,8 +51,8 @@ function Home() {
     //   <Pricing />
     //   <Footer />
     // </div>
-//  <WriteStory/>
-//<ReadStory></ReadStory>
+    //  <WriteStory/>
+    //<ReadStory></ReadStory>
   );
 }
 
