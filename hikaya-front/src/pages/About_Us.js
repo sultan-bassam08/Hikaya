@@ -1,5 +1,5 @@
 import React from "react";
-import "../components/About_Us/About_Us.css";
+import styles from "../components/About_Us/About_Us.module.css"; // Updated import
 
 const AboutUs = () => {
   const projectMessage = `Hikaya is a powerful platform where writers can share their stories, 
@@ -51,38 +51,33 @@ const AboutUs = () => {
   ];
 
   return (
-    <section className="section-white">
+    <section className={styles.aboutUsSection}>
       <div className="container">
         <div className="row">
           <div className="col-12 text-center">
-            <h2 className="section-title">About Us</h2>
-            <p className="section-subtitle">{projectMessage}</p>
+            <h2 className={styles.sectionTitle}>About Us</h2>
+            <p className={styles.sectionSubtitle}>{projectMessage}</p>
           </div>
 
-          {/* Team Section Title */}
           <div className="col-12 text-center mt-5">
             <h2>OUR TEAM</h2>
           </div>
 
-          {/* Team Member Cards */}
-          <div
-            className="row mt-3"
-            style={{ display: "flex", justifyContent: "center" }}
-          >
+          <div className={`row mt-3 ${styles.row}`}>
             {teamMembers.map((member, index) => (
               <div
-                className="col-12 col-sm-6 col-md-4 col-lg-4 mb-4"
+                className={`col-12 col-sm-6 col-md-4 col-lg-4 mb-4 ${styles.col12}`}
                 key={index}
               >
-                <div className="team-item">
+                <div className={styles.teamItem}>
                   <img
                     src={member.img}
                     alt={`${member.name}'s Avatar`}
-                    className="team-img img-fluid rounded-circle"
+                    className={`${styles.teamImg} img-fluid rounded-circle`}
                   />
                   <h3>{member.name}</h3>
                   <p>{member.role}</p>
-                  <div className="team-info">
+                  <div className={styles.teamInfo}>
                     <a
                       href={member.linkedin}
                       className="btn btn-primary"

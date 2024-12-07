@@ -1,16 +1,16 @@
 import React from "react";
 
-const RightLine = () => {
+const RightLine = ({ customStyles = {} }) => {
+  const defaultStyles = {
+    position: "absolute",
+    zIndex: "0",
+    width: "100%",
+    height: "100%",
+  };
+
+  const combinedStyles = { ...defaultStyles, ...customStyles };
   return (
-    <div
-      className="svg"
-      style={{
-        position: "absolute",
-        zIndex: "0",
-        width: "100%",
-        height: "100%",
-      }}
-    >
+    <div className="svg" style={combinedStyles}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         xmlnsXlink="http://www.w3.org/1999/xlink"

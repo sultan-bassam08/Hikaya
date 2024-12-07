@@ -1,0 +1,69 @@
+/* Specific class to scope styles within this component */
+.contact {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+}
+.contact >*{
+  color: white;
+}
+.contactForm {
+  max-width: 600px;
+  width: 100%;
+  background: linear-gradient(45deg, #60a5fa20, #a78bfa20);;
+  padding: 25px 25px 30px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  color: white;
+  margin: 25px;
+}
+
+.contactForm .heading {
+  font-size: 30px;
+  text-align: center;
+  color: white;
+}
+
+.inputBox {
+  margin-top: 20px;
+}
+
+.inputBox .field {
+  width: 100%;
+  height: 50px;
+  background: transparent;
+  border: 2px solid #ddd;
+  outline: none;
+  border-radius: 6px;
+  padding: 15px;
+  font-size: 16px;
+  color: white;
+  margin-top: 8px;
+  box-sizing: border-box;
+}
+
+.inputBox .field.mess {
+  height: 200px;
+  resize: none;
+}
+
+.submitButton {
+  width: 100%;
+  height: 55px;
+  background: #0f172a;
+  border: none;
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  font-size: 16px;
+  color: #fff;
+  font-weight: 500;
+  margin-top: 25px;
+  transition: 0.5s;
+}
+
+.submitButton:hover {
+  background: #1e293b;
+}
