@@ -13,8 +13,8 @@ const AboutUs = () => {
       role: "Software Engineer",
       img: "./images/omar.jpg",
       linkedin: "https://www.linkedin.com/in/omarabed-/",
-      github: "https://github.com/omarabed",
-      email: "omar.abed@example.com",
+      github: "https://github.com/OmarAbed16",
+      email: "omarfathiabed@gmail.com",
     },
     {
       name: "Esra'a Eid",
@@ -37,8 +37,8 @@ const AboutUs = () => {
       role: "Software Engineer",
       img: "./images/sultan.jpg",
       linkedin: "https://www.linkedin.com/in/sultan-b-bkerat-98b1b6199/",
-      github: "https://github.com/sultanbkerat",
-      email: "sultan.bkerat@example.com",
+      github: "https://github.com/sultan-bassam08",
+      email: "sultan.bassam08@gmail.com",
     },
     {
       name: "Mayar Qutishat",
@@ -62,53 +62,96 @@ const AboutUs = () => {
           <div className="col-12 text-center mt-5">
             <h2>OUR TEAM</h2>
           </div>
+        </div>
 
-          <div className={`row mt-3 ${styles.row}`}>
-            {teamMembers.map((member, index) => (
-              <div
-                className={`col-12 col-sm-6 col-md-4 col-lg-4 mb-4 ${styles.col12}`}
-                key={index}
-              >
-                <div className={styles.teamItem}>
-                  <img
-                    src={member.img}
-                    alt={`${member.name}'s Avatar`}
-                    className={`${styles.teamImg} img-fluid rounded-circle`}
-                  />
-                  <h3>{member.name}</h3>
-                  <p>{member.role}</p>
-                  <div className={styles.teamInfo}>
-                    <a
-                      href={member.linkedin}
-                      className="btn btn-primary"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{ marginRight: "10px" }}
-                    >
-                      <i className="fab fa-linkedin"></i>
-                    </a>
-                    <a
-                      href={member.github}
-                      className="btn btn-dark"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{ marginRight: "10px" }}
-                    >
-                      <i className="fab fa-github"></i>
-                    </a>
-                    <a
-                      href={`mailto:${member.email}`}
-                      className="btn btn-secondary"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <i className="fas fa-envelope"></i>
-                    </a>
-                  </div>
+        {/* First Row: 3 Cards */}
+        <div className="row mt-3">
+          {teamMembers.slice(0, 3).map((member, index) => (
+            <div className="col-12 col-sm-6 col-md-4 mb-4" key={index}>
+              <div className={styles.teamItem}>
+                <img
+                  src={member.img}
+                  alt={`${member.name}'s Avatar`}
+                  className={`${styles.teamImg} img-fluid rounded-circle`}
+                />
+                <h3>{member.name}</h3>
+                <p>{member.role}</p>
+                <div className={styles.teamInfo}>
+                  <a
+                    href={member.linkedin}
+                    className="btn btn-primary"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ marginRight: "10px" }}
+                  >
+                    <i className="fab fa-linkedin"></i>
+                  </a>
+                  <a
+                    href={member.github}
+                    className="btn btn-dark"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ marginRight: "10px" }}
+                  >
+                    <i className="fab fa-github"></i>
+                  </a>
+                  <a
+                    href={`mailto:${member.email}`}
+                    className="btn btn-secondary"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <i className="fas fa-envelope"></i>
+                  </a>
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Second Row: 2 Cards, Centered */}
+        <div className="row mt-3 justify-content-center">
+          {teamMembers.slice(3).map((member, index) => (
+            <div className="col-12 col-sm-6 col-md-4 mb-4" key={index}>
+              <div className={styles.teamItem}>
+                <img
+                  src={member.img}
+                  alt={`${member.name}'s Avatar`}
+                  className={`${styles.teamImg} img-fluid rounded-circle`}
+                />
+                <h3>{member.name}</h3>
+                <p>{member.role}</p>
+                <div className={styles.teamInfo}>
+                  <a
+                    href={member.linkedin}
+                    className="btn btn-primary"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ marginRight: "10px" }}
+                  >
+                    <i className="fab fa-linkedin"></i>
+                  </a>
+                  <a
+                    href={member.github}
+                    className="btn btn-dark"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ marginRight: "10px" }}
+                  >
+                    <i className="fab fa-github"></i>
+                  </a>
+                  <a
+                    href={`mailto:${member.email}`}
+                    className="btn btn-secondary"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <i className="fas fa-envelope"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
