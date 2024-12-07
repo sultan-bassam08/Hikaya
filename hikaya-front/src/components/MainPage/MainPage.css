@@ -28,3 +28,26 @@ body {
     background: url(https://images.unsplash.com/photo-1415795854641-f4a487a0fdc8?ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80) center center / cover no-repeat ;
   }
   /* Custom CSS for cards */
+
+
+
+  #header {
+    margin-bottom: 40px; /* Adds space below the header section */
+  }
+  
+  #header .btn {
+    margin-right: 10px; /* Adds space between the buttons */
+  }
+  
+  #header .btn:last-child {
+    margin-right: 0; /* Removes extra margin from the last button */
+  }
+  
+  .btn-primary, .btn-secondary {
+    padding: 12px 20px; /* Adds more padding to the buttons */
+  }
+  
+  .jumbotron {
+    padding-bottom: 50px; /* Adds more space at the bottom of the jumbotron */
+  }
+  
