@@ -26,7 +26,7 @@ class StoryController extends Controller
             $imageName = now()->format('Y-m-d_H-i-s') . '.' . $request->file('story_picture')->getClientOriginalExtension();
     
             // Define the path where the image will be stored
-            $imagePath = 'images/' . $imageName;
+            $imagePath = 'http://127.0.0.1:8000/images/' . $imageName;
     
             // Move the file to the 'public/images' directory with the new name
             $request->file('story_picture')->move(public_path('images'), $imageName);
