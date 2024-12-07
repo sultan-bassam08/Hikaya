@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
-import "./Auth.css";
-
+import styles from "./Auth.module.css";
+import Line2 from "../lines/rightLine";
 function Register() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -11,34 +11,29 @@ function Register() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false); // For loading state
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Clear previous errors before validation
     setError("");
 
-    // Password match validation
     if (password !== confirmPassword) {
       setError("Passwords do not match");
       return;
     }
 
-    // Password length validation
     if (password.length < 8) {
       setError("Password must be at least 8 characters long.");
       return;
     }
 
-    // Empty field validation
     if (!firstName || !lastName || !email || !password || !confirmPassword) {
       setError("Please fill all fields");
       return;
     }
 
-    setLoading(true); // Show loading state
+    setLoading(true);
 
     try {
       const response = await axios.post("http://localhost:8000/api/register", {
@@ -46,85 +41,86 @@ function Register() {
         last_name: lastName,
         email,
         password,
-        password_confirmation: confirmPassword, // Correctly match the field name
+        password_confirmation: confirmPassword,
       });
 
-      // On successful registration
-      Swal.fire("Success", "Registration successful! Please log in.", "success");
-      navigate("/login"); // Redirect to login page after successful registration
+      Swal.fire(
+        "Success",
+        "Registration successful! Please log in.",
+        "success"
+      );
+      navigate("/login");
     } catch (error) {
-      setLoading(false); // Hide loading on error
-
+      setLoading(false);
       if (error.response) {
-        if (error.response.status === 409) {
-          setError(error.response.data.message);
-          Swal.fire("Error", error.response.data.message, "error");
-        } else if (error.response.data.errors) {
-          setError(Object.values(error.response.data.errors).join(" "));
-          Swal.fire("Error", "Registration failed. Please try again.", "error");
-        } else {
-          setError("Registration failed. Please try again.");
-          Swal.fire("Error", "Registration failed. Please try again.", "error");
-        }
-      } else {
         setError("Registration failed. Please try again.");
         Swal.fire("Error", "Registration failed. Please try again.", "error");
+      } else {
+        Swal.fire("Error", "Network error. Please try again.", "error");
       }
-    } finally {
-      setLoading(false); // Hide loading after processing
     }
   };
 
   return (
-    <div className="auth-container">
-      <div className="auth-card">
-        <h2 className="auth-heading">Join the Storytellers' Guild</h2>
-        <p className="auth-subheading">Start crafting your magical tales today.</p>
-        <form onSubmit={handleSubmit} className="auth-form">
+    <div className={styles.authContainer}>
+      <Line2 customStyles={{ zIndex: "0", transform: "rotateY(180deg)" }} />
+      <div className={styles.authCard}>
+        <h2 className={styles.authHeading}>Join the Storytellers</h2>
+        <p className={styles.authSubheading}>
+          Create your account and start your journey.
+        </p>
+        <form onSubmit={handleSubmit} className={styles.authForm}>
+          {error && <div className={styles.authError}>{error}</div>}
           <input
             type="text"
             placeholder="First Name"
-            className="auth-input"
+            className={styles.authInput}
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
           />
           <input
             type="text"
             placeholder="Last Name"
-            className="auth-input"
+            className={styles.authInput}
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
           />
           <input
             type="email"
             placeholder="Email"
-            className="auth-input"
+            className={styles.authInput}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
           <input
             type="password"
             placeholder="Password"
-            className="auth-input"
+            className={styles.authInput}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
           <input
             type="password"
             placeholder="Confirm Password"
-            className="auth-input"
+            className={styles.authInput}
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
-          {error && <p className="auth-error">{error}</p>} {/* Display error message */}
-          <button type="submit" className="auth-button" disabled={loading}>
+          <button
+            type="submit"
+            className={styles.authButton}
+            disabled={loading}
+          >
             {loading ? "Registering..." : "Register"}
           </button>
         </form>
-        <p className="auth-switch">
+        <p className={styles.authSwitch}>
           Already have an account?{" "}
-          <button className="auth-link" onClick={() => navigate("/login")}>
-            Log in
+          <button
+            className={styles.authLink}
+            onClick={() => navigate("/login")}
+          >
+            Log In
           </button>
         </p>
       </div>

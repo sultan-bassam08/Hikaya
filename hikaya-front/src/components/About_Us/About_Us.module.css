@@ -1,0 +1,128 @@
+/* Specific class to scope styles within this component */
+.aboutUsSection {
+  background-color: #0f172a; /* Dark background */
+  color: white;
+  padding: 50px 0;
+}
+
+.aboutUsSection .sectionTitle {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: white;
+}
+
+.aboutUsSection .sectionSubtitle {
+  font-size: 1.2rem;
+  color: #aaa;
+  margin-top: 10px;
+}
+
+.aboutUsSection h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: white;
+}
+
+.aboutUsSection .teamItem {
+  text-align: center;
+  background-color: #1e293b; /* Dark background for team items */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.aboutUsSection .teamItem:hover {
+  transform: translateY(-10px);
+}
+
+.aboutUsSection .teamImg {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  margin-bottom: 15px;
+  border-radius: 50%;
+}
+
+.aboutUsSection .teamInfo {
+  margin-top: 15px;
+}
+
+.aboutUsSection .teamInfo .btn {
+  text-decoration: none;
+}
+
+.aboutUsSection .row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.aboutUsSection .col12 {
+  width: 100%;
+  max-width: 300px;
+}
+
+.aboutUsSection .col12 .teamItem {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .aboutUsSection .teamItem {
+    padding: 15px;
+  }
+
+  .aboutUsSection .teamImg {
+    width: 100px;
+    height: 100px;
+  }
+
+  .aboutUsSection h3 {
+    font-size: 1.2rem;
+  }
+
+  .aboutUsSection .sectionTitle {
+    font-size: 2rem;
+  }
+
+  .aboutUsSection .sectionSubtitle {
+    font-size: 1rem;
+  }
+
+  .aboutUsSection .row {
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .aboutUsSection .col12 {
+    width: 48%;
+  }
+}
+
+@media (max-width: 576px) {
+  .aboutUsSection .teamItem {
+    padding: 10px;
+  }
+
+  .aboutUsSection .teamImg {
+    width: 90px;
+    height: 90px;
+  }
+
+  .aboutUsSection h3 {
+    font-size: 1rem;
+  }
+
+  .aboutUsSection .sectionTitle {
+    font-size: 1.8rem;
+  }
+
+  .aboutUsSection .sectionSubtitle {
+    font-size: 0.9rem;
+  }
+
+  .aboutUsSection .col12 {
+    width: 100%;
+  }
+}

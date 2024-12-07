@@ -1,21 +1,23 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../pages/AuthContext";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "./Header.css";
 
 const Header = () => {
-  // State to manage the mobile menu open/close state
-  const [menuOpen, setMenuOpen] = useState(false);
+  const { user, logout } = useAuth(); // Access user and logout method from context
+  const navigate = useNavigate();
 
-  // Function to toggle the mobile menu
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
+  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const handleLogout = () => {
+    logout(); // Call logout from context
+    navigate("/login"); // Redirect to login page after logging out
   };
 
-  // Function to close the menu when a link is clicked
-  const closeMenu = () => {
-    setMenuOpen(false);
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!isMobileMenuOpen); // Toggle mobile menu visibility
   };
 
   return (
@@ -28,81 +30,65 @@ const Header = () => {
           </div>
         </div>
 
-        <div className="nav-links">
-          <Link to="/" className="nav-link active" onClick={closeMenu}>
+        <div className={`nav-links ${isMobileMenuOpen ? "active" : ""}`}>
+          <Link to="/" className="nav-link">
             <span>Home</span>
-            <div className="link-effect"></div>
           </Link>
-          <Link to="/products" className="nav-link" onClick={closeMenu}>
+          <Link to="/products" className="nav-link">
             <span>Products</span>
-            <div className="link-effect"></div>
           </Link>
-          <Link to="/services" className="nav-link" onClick={closeMenu}>
+          <Link to="/services" className="nav-link">
             <span>Services</span>
-            <div className="link-effect"></div>
           </Link>
-          <Link to="/aboutus" className="nav-link" onClick={closeMenu}>
+          <Link to="/aboutus" className="nav-link">
             <span>About</span>
-            <div className="link-effect"></div>
           </Link>
-          <Link to="/contactus" className="nav-link" onClick={closeMenu}>
+          <Link to="/contactus" className="nav-link">
             <span>Contact</span>
-            <div className="link-effect"></div>
           </Link>
         </div>
 
+        {/* Mobile Hamburger Icon */}
+        <div className="mobile-toggle" onClick={toggleMobileMenu}>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        {/* Show search bar and profile dropdown if user is logged in, else show login button */}
         <div className="nav-actions">
-          <Link to="/login">
-            <button className="action-btn">
-              <div className="btn-text">Sign In</div>
-              <div className="btn-effect"></div>
-            </button>
-          </Link>
+          {user ? (
+            <>
+              <input
+                type="text"
+                className="search-bar"
+                placeholder="Search..."
+              />
+              <div className="profile-dropdown">
+                <img
+                  src={"./logo.png"}
+                  alt="Profile"
+                  className="profile-image"
+                />
+                <div className="dropdown-content">
+                  <Link to="/profile" className="dropdown-item">
+                    Profile
+                  </Link>
+                  <button className="dropdown-item" onClick={handleLogout}>
+                    Log Out
+                  </button>
+                </div>
+              </div>
+            </>
+          ) : (
+            <Link to="/login">
+              <button className="action-btn">
+                <div className="btn-text">Sign In</div>
+              </button>
+            </Link>
+          )}
         </div>
-
-        {/* Mobile Toggle Button */}
-        <button className="mobile-toggle" onClick={toggleMenu}>
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
       </nav>
-
-      {/* Mobile Menu */}
-      <div className={`mobile-menu ${menuOpen ? "active" : ""}`}>
-        <div className="menu-header">
-          <div className="logo">
-            <span className="logo-text">Premium</span>
-          </div>
-          <button className="close-menu" onClick={toggleMenu}>
-            <span className="close-icon"></span>
-          </button>
-        </div>
-        <div className="menu-links">
-          <Link to="/" className="menu-link active" onClick={closeMenu}>
-            <span>Home</span>
-          </Link>
-          <Link to="/products" className="menu-link" onClick={closeMenu}>
-            <span>Products</span>
-          </Link>
-          <Link to="/services" className="menu-link" onClick={closeMenu}>
-            <span>Services</span>
-          </Link>
-          <Link to="/aboutus" className="menu-link" onClick={closeMenu}>
-            <span>About</span>
-          </Link>
-          <Link to="/contactus" className="menu-link" onClick={closeMenu}>
-            <span>Contact</span>
-          </Link>
-        </div>
-        <div className="menu-footer">
-          <Link to="/login">
-            <button className="mobile-action-btn">
-              <span>Sign In</span>
-            </button>
-          </Link>
-        </div>
-      </div>
     </>
   );
 };
