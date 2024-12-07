@@ -1,0 +1,11 @@
+.card {
+    width: 20rem; /* Set a fixed width */
+    height: 25rem; /* Set a fixed height */
+    overflow: hidden; /* Ensures content doesn't overflow */
+  }
+  
+  .card-img-top {
+    height: 12rem; /* Set a fixed height for images */
+    object-fit: cover; /* Ensures images fit within the designated area without stretching */
+  }
+  

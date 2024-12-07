@@ -28,4 +28,24 @@ class StoryController extends Controller
 
         return response()->json($story);
     }
+    public function index()
+    {
+        // Fetch all published stories with the user and category information
+        $stories = Story::with(['user', 'category'])
+                        ->where('status', 'published')
+                        ->orderBy('created_at', 'desc')
+                        ->get();
+
+        // Return the stories as JSON (for API) or pass to view (for Blade template)
+        // dd($stories);
+        return response()->json($stories);  // For API
+    }
+    public function show($id)
+    {
+        // Find the story with the related user and category
+        $story = Story::with(['user', 'category'])->findOrFail($id);
+
+        return response()->json($story);  // For API
+    }
+
 }

@@ -31,3 +31,6 @@ Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth:san
 Route::post('/stories/draft', [StoryController::class, 'saveDraft']);
 Route::post('/stories/{id}/publish', [StoryController::class, 'publishStory']);
 Route::get('/stories/magic-ideas', [StoryController::class, 'getMagicIdea']);
+
+Route::get('/stories', [StoryController::class, 'index']);  // For listing all stories
+Route::get('/stories/{id}', [StoryController::class, 'show']);  // For showing a specific story
