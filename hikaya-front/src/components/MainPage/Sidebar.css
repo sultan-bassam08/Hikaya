@@ -1,5 +1,5 @@
 .sidebar {
-    background-color: #333;
+    background-color: rgba(30, 41, 59, 1);
     color: #ffffff;
     padding: 20px;
     border-right: 1px solid #444;
@@ -29,19 +29,19 @@
   
   .sidebar .card {
     background-color: #444;
-    border: 1px solid #555;
+    border: none;
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.7);
   }
   
   .sidebar .card-header {
-    background-color: #555;
+    background: #0f172a;
     font-weight: bold;
     color: #ffffff;
   }
   
   .sidebar .card-body {
-    background-color: #444;
+    background: #1e293b;
     color: #ffffff;
   }
   

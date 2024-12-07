@@ -1,6 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom"; // Import Link from react-router-dom
 import Hikaya3d from "./hikaya3d";
-
 import "./Hero.css";
 
 const Hero = () => {
@@ -11,7 +11,7 @@ const Hero = () => {
       <section
         style={{
           position: "absolute",
-          top: "92.5vh",
+          top: "30vh",
           left: "50%",
           transform: "translate(-50%, -50%)",
           zIndex: 5,
@@ -22,7 +22,9 @@ const Hero = () => {
       >
         <div className="hero-content">
           <p id="qoute">Your story, your voice, your impact.</p>
-          <button className="btn-primary">Get Started</button>
+          <Link to="/login">
+            <button className="btn-primary">Get Started</button>
+          </Link>
         </div>
       </section>
     </>
