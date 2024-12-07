@@ -2,11 +2,13 @@
   max-width: 900px;
   margin: 0 auto;
   padding: 20px;
+  background: rgba(30, 41, 59, 1);
 }
 
 #writeStory-title {
   text-align: center;
   margin-bottom: 20px;
+  color: white;
 }
 
 #writeStory-titleInputContainer {
@@ -20,7 +22,9 @@
   padding: 10px;
   border: 1px solid #dee2e6;
   border-radius: 5px;
+  
 }
+
 
 #writeStory-optionsContainer {
   display: flex;
@@ -43,6 +47,7 @@
 
 .editor-column {
   flex: 1;
+  background-color: white;
 }
 
 .image-column {
@@ -59,6 +64,7 @@
   max-height: 500px;
   overflow-y: auto;
   resize: vertical;
+  
 }
 
 #writeStory-defaultImage,
