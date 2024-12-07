@@ -9,5 +9,12 @@ class Story extends Model
 {
     protected $primaryKey = 'story_id';
     use HasFactory;
-    protected $fillable = ['user_id','title', 'content', 'status'];
+    protected $fillable = [
+        'user_id',
+        'title',
+        'content',
+        'status',
+        'category_id',
+        'story_picture',
+    ];
 }

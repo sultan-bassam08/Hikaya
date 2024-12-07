@@ -30,4 +30,4 @@ Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth:san
 
 Route::post('/stories/draft', [StoryController::class, 'saveDraft']);
 Route::post('/stories/{id}/publish', [StoryController::class, 'publishStory']);
-Route::get('/stories/magic-ideas', [StoryController::class, 'getMagicIdea']);
+Route::post('/stories/magic-ideas', [StoryController::class, 'getMagicIdea']);
