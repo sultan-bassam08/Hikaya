@@ -1,10 +1,13 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // For navigation
+import Swal from "sweetalert"; // SweetAlert
 import "./EditProfile.css";
 
 const EditProfile = () => {
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [profilePic, setProfilePic] = useState("user_12483574.png"); // Default profile picture
+  const navigate = useNavigate(); // Navigation hook
 
   const handleProfilePicChange = (e) => {
     const file = e.target.files[0];
@@ -17,6 +20,22 @@ const EditProfile = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // SweetAlert confirmation
+    Swal({
+      title: "Profile Updated!",
+      text: "Your profile has been successfully updated.",
+      icon: "success",
+      button: "OK",
+    }).then(() => {
+      // Navigate back to the UserProfile page
+      navigate("/Profile");
+    });
+  };
+
+  const handleCancel = () => {
+    // Redirect to UserProfile
+    navigate("/Profile");
   };
 
   return (
@@ -62,7 +81,11 @@ const EditProfile = () => {
           <button type="submit" className="save-button">
             Save Changes
           </button>
-          <button type="button" className="cancel-button">
+          <button
+            type="button"
+            className="cancel-button"
+            onClick={handleCancel}
+          >
             Cancel
           </button>
         </div>
