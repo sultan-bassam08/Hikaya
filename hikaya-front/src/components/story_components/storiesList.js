@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
-import "./storiesList.css";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+import './storiesList.css';
 
-const StoriesList = ({ query, selectedCategories }) => {
+const StoriesList = () => {
   const [stories, setStories] = useState([]);
   const user = JSON.parse(localStorage.getItem('user'));
 
@@ -12,36 +12,42 @@ const StoriesList = ({ query, selectedCategories }) => {
   
   useEffect(() => {
     // Fetch stories from the Laravel API
-    axios
-      .get("http://localhost:8000/api/stories")
-      .then((response) => {
-        setStories(response.data); // Set the fetched stories to the state
+    axios.get('http://localhost:8000/api/stories')
+      .then(response => {
+        setStories(response.data);  // Assume the response contains whether each story is liked
       })
-      .catch((error) => {
-        console.error("There was an error fetching the stories!", error);
+      .catch(error => {
+        console.error('There was an error fetching the stories!', error);
       });
   }, []);
 
-  // Filter stories based on search query and selected categories
-  const filteredStories = stories.filter((story) => {
-    console.log("Story Categories:", story.category_id); // Log the story's category_id for debugging
-
-    const matchesQuery =
-      !query ||
-      story.title.toLowerCase().includes(query.toLowerCase()) || // Match the query with the title
-      story.content.toLowerCase().includes(query.toLowerCase()); // Match the query with the content
-
-    // Compare the category_id of the story to the selected categories
-    const matchesCategory =
-      selectedCategories.length === 0 || // If no category is selected, show all stories
-      selectedCategories.includes(story.category_id); // Check if story's category_id is in selectedCategories
-
-    return matchesQuery && matchesCategory; // Return stories that match both query and category filter
-  });
+  // Toggle like/unlike for a story
+  const toggleLike = (storyId) => {
+    if (userId) {  // Ensure userId is available
+      axios.post(`http://localhost:8000/api/stories/${storyId}/toggle-like`, {
+        user_id: userId  // Pass the user_id from the parsed user object
+      })
+      .then(response => {
+        // Update the stories array with the new like status
+        const updatedStories = stories.map(story => {
+          if (story.story_id === storyId) {
+            return { ...story, liked: !story.liked };  // Toggle the liked status
+          }
+          return story;
+        });
+        setStories(updatedStories);  // Update the state with the modified stories array
+      })
+      .catch(error => {
+        console.error('There was an error toggling the like!', error);
+      });
+    } else {
+      console.error('User is not authenticated');
+    }
+  };
 
   return (
     <div className="row">
-      {filteredStories.map((story) => (
+      {stories.map(story => (
         <div className="col-lg-4 mb-4" key={story.story_id}>
           <div className="card">
             <img
@@ -57,12 +63,7 @@ const StoriesList = ({ query, selectedCategories }) => {
                   __html: story.content.substring(0, 100) + "...",
                 }}
               />
-
-              {/* Use Link to route to the readStory component */}
-              <Link
-                to={`/readStory/${story.story_id}`}
-                className="btn btn-outline-success btn-sm"
-              >
+              <Link to={`/readStory/${story.story_id}`} className="btn btn-outline-success btn-sm">
                 Read More
               </Link>
               <button
