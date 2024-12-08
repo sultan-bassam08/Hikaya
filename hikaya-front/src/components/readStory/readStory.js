@@ -36,13 +36,18 @@ const StoryDetail = () => {
   }
 
   return (
-    <div className="blog-single gray-bg">
+    <div className="blog-single ">
       <div className="container">
         <div className="row align-items-start">
           <div className="col-lg-8 m-15px-tb">
             <article className="article">
               <div className="article-img">
                 <img
+                  style={{
+                    width: "100%",
+                    maxHeight: "500px",
+                    objectFit: "cover",
+                  }}
                   src={
                     story.story_picture ||
                     "https://www.bootdey.com/image/800x350/87CEFA/000000"
@@ -84,53 +89,6 @@ const StoryDetail = () => {
                 />
               </div>
             </article>
-            <div className="contact-form article-comment">
-              <h4>Leave a Reply</h4>
-              <form id="contact-form" method="POST">
-                <div className="row">
-                  <div className="col-md-6">
-                    <div className="form-group">
-                      <input
-                        name="Name"
-                        id="name"
-                        placeholder="Name *"
-                        className="form-control"
-                        type="text"
-                      />
-                    </div>
-                  </div>
-                  <div className="col-md-6">
-                    <div className="form-group">
-                      <input
-                        name="Email"
-                        id="email"
-                        placeholder="Email *"
-                        className="form-control"
-                        type="email"
-                      />
-                    </div>
-                  </div>
-                  <div className="col-md-12">
-                    <div className="form-group">
-                      <textarea
-                        name="message"
-                        id="message"
-                        placeholder="Your message *"
-                        rows="4"
-                        className="form-control"
-                      ></textarea>
-                    </div>
-                  </div>
-                  <div className="col-md-12">
-                    <div className="send">
-                      <button className="px-btn theme">
-                        <span>Submit</span> <i className="arrow"></i>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </form>
-            </div>
           </div>
           <div className="col-lg-4 m-15px-tb blog-aside">
             {/* Author */}
