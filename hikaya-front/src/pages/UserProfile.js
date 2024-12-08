@@ -39,9 +39,13 @@ const UserProfile = () => {
       <div className="row">
         <div className="col-md-12">
           <div className={`content content-full-width ${styles.content}`}>
+            {/* Profile Header */}
             <div className={`profile ${styles.profile}`}>
               <div className={`profile-header ${styles.profileHeader}`}>
-                <div className={`profile-header-cover ${styles.profileHeaderCover}`}></div>
+                {/* Profile Cover */}
+                <div
+                  className={`profile-header-cover ${styles.profileHeaderCover}`}
+                ></div>
 
                 {/* Profile Content */}
                 <div
@@ -76,12 +80,6 @@ const UserProfile = () => {
                 {/* Profile Tabs */}
                 {/* You can add the tab navigation here */}
               </div>
-            </div>
-
-            <div className={`profile-content ${styles.profileContent}`}>
-              <ul className={`timeline ${styles.timeline}`}>
-                {stories.length > 0 ? renderStories() : <p>No stories to display.</p>}
-              </ul>
             </div>
           </div>
         </div>

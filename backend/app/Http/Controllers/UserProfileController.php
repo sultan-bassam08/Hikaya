@@ -1,14 +1,15 @@
 <?php
+
+// UserProfileController.php
+
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class UserProfileController extends Controller
 {
-    // Fetch user profile details
-    public function getUserProfile(Request $request)
+    public function getUserProfile($id)
     {
         // Find the user by ID
         $user = User::find($id);
