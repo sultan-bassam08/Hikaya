@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import "./readStory.css";
 
 const StoryDetail = () => {
   const { id } = useParams(); // Get the story ID from the URL
   const [story, setStory] = useState(null);
+  const [otherStories, setOtherStories] = useState([]);
 
   useEffect(() => {
     // Fetch the specific story by ID from the Laravel API
@@ -13,6 +14,17 @@ const StoryDetail = () => {
       .get(`http://localhost:8000/api/stories/${id}`)
       .then((response) => {
         setStory(response.data); // Set the story data to the state
+        // Fetch other stories by the same author
+        axios
+          .get(
+            `http://localhost:8000/api/stories?author_id=${response.data.user.id}`
+          )
+          .then((res) => {
+            setOtherStories(res.data); // Set other stories to the state
+          })
+          .catch((error) => {
+            console.error("There was an error fetching other stories!", error);
+          });
       })
       .catch((error) => {
         console.error("There was an error fetching the story!", error);
@@ -147,10 +159,22 @@ const StoryDetail = () => {
             {/* Latest Post */}
             <div className="widget widget-latest-post">
               <div className="widget-title">
-                <h3>
-                  More stories by{" "}
-                  {story.user.first_name + " " + story.user.last_name}
-                </h3>
+                <h3>More stories</h3>
+              </div>
+              <div className="widget-body">
+                {otherStories.length > 0 ? (
+                  <ul>
+                    {otherStories.map((otherStory) => (
+                      <li key={otherStory.story_id}>
+                        <Link to={`/readStory/${otherStory.story_id}`}>
+                          {otherStory.title}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p>No other stories available.</p>
+                )}
               </div>
             </div>
             {/* End Latest Post */}

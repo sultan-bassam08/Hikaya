@@ -72,7 +72,11 @@ const Footer = () => {
                   Receive updates, hot deals, tutorials, and discounts straight
                   to your inbox every month.
                 </p>
-                <form onSubmit={handleSubmit} className="mt-4" aria-label="Newsletter subscription form">
+                <form
+                  onSubmit={handleSubmit}
+                  className="mt-4"
+                  aria-label="Newsletter subscription form"
+                >
                   <div className="input-group flex-wrap align-items-center">
                     <input
                       type="email"
@@ -100,7 +104,14 @@ const Footer = () => {
               <div className="footer_widget">
                 <h4 className="widget_title">Quick Links</h4>
                 <ul className="footer-menu">
-                  {["Home Page", "About Page", "Contact Page", "Blog", "Pricing", "Services"].map((link, idx) => (
+                  {[
+                    "Home Page",
+                    "About Page",
+                    "Contact Page",
+                    "Blog",
+                    "Pricing",
+                    "Services",
+                  ].map((link, idx) => (
                     <li key={idx}>
                       <a href="#" className="footer-link">
                         {link}
