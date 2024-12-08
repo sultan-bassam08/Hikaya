@@ -4,7 +4,7 @@ import axios from "axios"; // To make API calls
 import Swal from "sweetalert2"; // Import SweetAlert2
 import "./EditProfile.css";
 
-const user = JSON.parse(localStorage.getItem('user'));
+const user = JSON.parse(localStorage.getItem("user"));
 
 // Access the user ID
 const userId = user ? user.id : null;
@@ -22,7 +22,9 @@ const EditProfile = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get(`http://127.0.0.1:8000/api/user-profile/${userId}`);
+        const response = await axios.get(
+          `http://127.0.0.1:8000/api/user-profile/${userId}`
+        );
         const userData = response.data;
         setUser(userData);
         setFirstName(userData.first_name);
@@ -59,7 +61,10 @@ const EditProfile = () => {
     };
 
     try {
-      const response = await axios.put(`http://127.0.0.1:8000/api/user-profile/${userId}`, updatedData);
+      const response = await axios.put(
+        `http://127.0.0.1:8000/api/user-profile/${userId}`,
+        updatedData
+      );
       if (response.status === 200) {
         Swal.fire({
           title: "Success!",
@@ -136,7 +141,11 @@ const EditProfile = () => {
           <button type="submit" className="save-button">
             Save Changes
           </button>
-          <button type="button" className="cancel-button" onClick={() => navigate(-1)}>
+          <button
+            type="button"
+            className="cancel-button"
+            onClick={() => navigate(-1)}
+          >
             Cancel
           </button>
         </div>

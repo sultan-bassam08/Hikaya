@@ -12,9 +12,8 @@ const WriteStory = () => {
   const [imagePreview, setImagePreview] = useState("/logo.png"); // Default logo
   const [image, setImage] = useState(null);
   const [isSaving, setIsSaving] = useState(false);
-  const [isPublishing, setIsPublishing] = useState(false);
   const [draftSaved, setDraftSaved] = useState(false);
-  const [storyId, setStoryId] = useState(3); // Default story ID for testing
+  const [isMagicGenerating, setIsMagicGenerating] = useState(false); // New state for button text
 
   const quillModules = {
     toolbar: [
@@ -31,6 +30,31 @@ const WriteStory = () => {
   };
 
   const handleMagicIdeas = async () => {
+    if (!title || !category) {
+      Swal.fire({
+        icon: "error",
+        title: "Missing Information",
+        text: "Please provide a title and select a category before using Magic Ideas.",
+      });
+      return;
+    }
+
+    setIsMagicGenerating(true); // Update button text
+
+    Swal.fire({
+      title: "Please wait...",
+      text: "Generating magic ideas may take 20–40 seconds.",
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+      didOpen: () => {
+        Swal.showLoading();
+      },
+    });
+
+    // Simulate delay (20-40 seconds)
+    const delay = Math.floor(Math.random() * 20 + 20) * 1000;
+    await new Promise((resolve) => setTimeout(resolve, delay));
+
     try {
       const response = await axios.post(
         "http://127.0.0.1:8000/api/stories/magic-ideas",
@@ -79,6 +103,8 @@ const WriteStory = () => {
         title: "Error",
         text: "An error occurred while trying to fetch the ideas.",
       });
+    } finally {
+      setIsMagicGenerating(false); // Reset button text
     }
   };
 
@@ -122,8 +148,8 @@ const WriteStory = () => {
       setDraftSaved(true);
       Swal.fire({
         icon: "success",
-        title: "Draft Saved!",
-        text: "Your draft has been saved successfully.",
+        title: "Draft Published!",
+        text: "Your draft has been published successfully.",
       });
     } catch (error) {
       console.error("Error saving draft:", error);
@@ -134,54 +160,6 @@ const WriteStory = () => {
       });
     } finally {
       setIsSaving(false);
-    }
-  };
-
-  const handlePublishStory = async () => {
-    if (!title || !category || !story) {
-      Swal.fire({
-        icon: "error",
-        title: "Failed to Publish Story",
-        text: "Please fill in all required fields before publishing the story.",
-      });
-      return;
-    }
-
-    setIsPublishing(true);
-    try {
-      const user = JSON.parse(localStorage.getItem("user"));
-      const formData = new FormData();
-      formData.append("user_id", user?.id);
-      formData.append("title", title);
-      formData.append("content", story);
-      formData.append("category_id", category);
-      if (image) {
-        formData.append("story_picture", image);
-      }
-
-      // Send the storyId in the URL
-      const response = await axios.post(
-        `http://127.0.0.1:8000/api/stories/${storyId}/publish`, // Use storyId in the URL
-        formData,
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-        }
-      );
-
-      Swal.fire({
-        icon: "success",
-        title: "Story Published!",
-        text: "Your story has been published successfully.",
-      });
-    } catch (error) {
-      console.error("Error publishing story:", error);
-      Swal.fire({
-        icon: "error",
-        title: "Error Publishing Story",
-        text: "Something went wrong while publishing your story.",
-      });
-    } finally {
-      setIsPublishing(false);
     }
   };
 
@@ -244,19 +222,20 @@ const WriteStory = () => {
       </div>
 
       <div id="writeStory-actionButtonsContainer">
-        <button onClick={handleMagicIdeas} id="writeStory-magicIdeasButton">
-          Magic Ideas
+        <button
+          onClick={handleMagicIdeas}
+          id="writeStory-magicIdeasButton"
+          disabled={isMagicGenerating}
+        >
+          {isMagicGenerating ? "Generating Magic Ideas..." : "Magic Ideas"}
         </button>
         <button onClick={handleSaveDraft} id="writeStory-saveDraftButton">
-          {isSaving ? "Saving..." : "Save Draft"}
-        </button>
-        <button onClick={handlePublishStory} id="writeStory-publishStoryButton">
-          {isPublishing ? "Publishing..." : "Publish Story"}
+          {isSaving ? "Saving..." : "Publish"}
         </button>
       </div>
 
       {draftSaved && (
-        <p id="writeStory-draftSavedAlert">Your draft has been saved!</p>
+        <p id="writeStory-draftSavedAlert">Your draft has been published!</p>
       )}
     </div>
   );

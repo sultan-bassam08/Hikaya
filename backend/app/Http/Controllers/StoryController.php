@@ -37,13 +37,13 @@ class StoryController extends Controller
             'user_id' => $request->user_id,
             'title' => $request->title,
             'content' => $request->content,
-            'status' => 'draft',
+            'status' => 'published',
             'category_id' => $request->category_id, // Use category_id here
             'story_picture' => $imagePath, // Save the relative image path
         ]);
     
         return response()->json([
-            'message' => 'Draft saved successfully.',
+            'message' => 'Draft published successfully.',
             'story' => $story,
         ], 201);
     }
