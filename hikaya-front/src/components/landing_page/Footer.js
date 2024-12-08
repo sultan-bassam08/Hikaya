@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 import "./Footer.css";
 
 const Footer = () => {
@@ -100,13 +101,36 @@ const Footer = () => {
               <div className="footer_widget">
                 <h4 className="widget_title">Quick Links</h4>
                 <ul className="footer-menu">
-                  {["Home Page", "About Page", "Contact Page", "Blog", "Pricing", "Services"].map((link, idx) => (
-                    <li key={idx}>
-                      <a href="#" className="footer-link">
-                        {link}
-                      </a>
-                    </li>
-                  ))}
+                  <li>
+                    <Link to="/" className="footer-link">
+                      Home Page
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/aboutus" className="footer-link">
+                      About Page
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/contactus" className="footer-link">
+                      Contact Page
+                    </Link>
+                  </li>
+                  <li>
+                    <a href="#" className="footer-link">
+                      Blog
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" className="footer-link">
+                      Pricing
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" className="footer-link">
+                      Services
+                    </a>
+                  </li>
                 </ul>
               </div>
             </div>
