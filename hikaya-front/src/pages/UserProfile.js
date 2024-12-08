@@ -1,69 +1,38 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-import axios from "axios";
+import { useNavigate, useParams } from "react-router-dom"; // Use useParams to get user ID from the URL
+import axios from "axios"; // To make API calls
 import styles from "../components/UserProfile/UserProfile.css";
 
 const UserProfile = () => {
+  const [user, setUser] = useState(null); // State to store the fetched user data
   const navigate = useNavigate();
-  const location = useLocation();
-  const userId = localStorage.getItem("id");
-  const [activeSection, setActiveSection] = useState(
-    new URLSearchParams(location.search).get("section") || "complete"
-  );
-  const [userData, setUserData] = useState(null);
-  const [stories, setStories] = useState([]);
+  const { id } = useParams(); // Get user ID from URL parameter
 
-  // Fetch user data
+  // Fetch user data from API
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/api/user-profile/${userId}`);
-        setUserData(response.data);
+        const user = JSON.parse(localStorage.getItem('user'));
+
+        // Access the user ID
+        const userId = user ? user.id : null; 
+        const response = await axios.get(`http://127.0.0.1:8000/api/user-profile/${userId}`);
+        setUser(response.data); // Update state with the user data
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
     };
-    fetchUserData();
-  }, [userId]);
-
-  // Fetch stories based on the active section
-  useEffect(() => {
-    const fetchUserStories = async () => {
-      try {
-        const response = await axios.get(
-          `http://localhost:8000/api/user-stories/${userId}?status=${activeSection}`
-        );
-        setStories(response.data);
-      } catch (error) {
-        console.error("Error fetching stories:", error);
-      }
-    };
-    fetchUserStories();
-  }, [userId, activeSection]);
+    
+    fetchUserData(); // Call the function to fetch data
+  }, [id]);
 
   const handleTabClick = (section) => {
-    setActiveSection(section);
     navigate(`/profile-content?section=${section}`);
   };
 
-  const renderStories = () =>
-    stories.map((story) => (
-      <li key={story.story_id}>
-        <div className={`timeline-time ${styles.timelineTime}`}>
-          <span className="date">
-            {new Date(story.created_at).toLocaleDateString()}
-          </span>
-          <span className="time">
-            {new Date(story.created_at).toLocaleTimeString()}
-          </span>
-        </div>
-        <div className={`timeline-body ${styles.timelineBody}`}>
-          <h5 className={styles.storyTitle}>{story.title}</h5>
-          <p>{story.content}</p>
-          {story.story_picture && <img src={story.story_picture} alt="Story" />}
-        </div>
-      </li>
-    ));
+  if (!user) {
+    return <div>Loading...</div>; // Show loading while fetching data
+  }
 
   return (
     <div className={`container ${styles.container}`}>
@@ -74,18 +43,27 @@ const UserProfile = () => {
               <div className={`profile-header ${styles.profileHeader}`}>
                 <div className={`profile-header-cover ${styles.profileHeaderCover}`}></div>
 
-                <div className={`profile-header-content ${styles.profileHeaderContent}`}>
-                  <div className={`profile-header-img ${styles.profileHeaderImg}`}>
+                {/* Profile Content */}
+                <div
+                  className={`profile-header-content ${styles.profileHeaderContent}`}
+                >
+                  {/* Profile Image */}
+                  <div
+                    className={`profile-header-img ${styles.profileHeaderImg}`}
+                  >
+                    {/* Display profile picture or a default one */}
                     <img
-                      src={userData?.profile_picture || "default_avatar.png"}
+                      src={user.profile_picture || "default-user-avatar.png"} 
                       alt="User Avatar"
                     />
                   </div>
 
-                  <div className={`profile-header-info ${styles.profileHeaderInfo}`}>
-                    <h4 className="m-t-10 m-b-5">
-                      {userData ? `${userData.first_name} ${userData.last_name}` : "Loading..."}
-                    </h4>
+                  {/* Profile Info */}
+                  <div
+                    className={`profile-header-info ${styles.profileHeaderInfo}`}
+                  >
+                    <h4 className="m-t-10 m-b-5">{user.first_name} {user.last_name}</h4>
+                    <p className="m-b-10">{user.bio || "No bio available"}</p>
                     <button
                       className="btn btn-primary"
                       onClick={() => navigate("/edit-profile")}
@@ -95,24 +73,8 @@ const UserProfile = () => {
                   </div>
                 </div>
 
-                <ul className={`profile-header-tab nav nav-tabs ${styles.profileHeaderTab}`}>
-                  <li className="nav-item">
-                    <button
-                      className={`btn btn-secondary ${activeSection === "complete" ? "active" : ""}`}
-                      onClick={() => handleTabClick("complete")}
-                    >
-                      Complete Stories
-                    </button>
-                  </li>
-                  <li className="nav-item">
-                    <button
-                      className={`btn btn-secondary ${activeSection === "draft" ? "active" : ""}`}
-                      onClick={() => handleTabClick("draft")}
-                    >
-                      Draft Stories
-                    </button>
-                  </li>
-                </ul>
+                {/* Profile Tabs */}
+                {/* You can add the tab navigation here */}
               </div>
             </div>
 

@@ -1,9 +1,8 @@
 <?php
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
 class UserProfileController extends Controller
@@ -11,50 +10,62 @@ class UserProfileController extends Controller
     // Fetch user profile details
     public function getUserProfile(Request $request)
     {
-        $user = $request->user(); // Get logged-in user
+        // Find the user by ID
+        $user = User::find($id);
 
+        // Check if user exists
+        if (!$user) {
+            return response()->json(['message' => 'User not found'], 404);
+        }
+
+        // Return user data as JSON
         return response()->json([
+            'id' => $user->id,
             'first_name' => $user->first_name,
             'last_name' => $user->last_name,
+            'email' => $user->email,
+            'bio' => $user->bio,
             'profile_picture' => $user->profile_picture,
         ]);
     }
+    public function updateUserProfile(Request $request, $id)
+{
+    $user = User::find($id);
 
-    // Update user profile
-    public function updateUserProfile(Request $request)
-    {
-        $user = $request->user(); // Get logged-in user
-
-        $validated = $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'old_password' => 'nullable|string',
-            'new_password' => 'nullable|string|min:6',
-            'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
-
-        // Check and update password if provided
-        if ($request->filled('old_password') && Hash::check($request->old_password, $user->password)) {
-            if ($request->filled('new_password')) {
-                $user->password = Hash::make($request->new_password);
-            } else {
-                return response()->json(['error' => 'New password is required'], 400);
-            }
-        } else {
-            return response()->json(['error' => 'Old password is incorrect'], 400);
-        }
-
-        // Handle profile picture upload
-        if ($request->hasFile('profile_picture')) {
-            $file = $request->file('profile_picture');
-            $path = $file->storeAs('images1', $file->getClientOriginalName(), 'public');
-            $user->profile_picture = $path;
-        }
-
-        $user->first_name = $validated['first_name'];
-        $user->last_name = $validated['last_name'];
-        $user->save();
-
-        return response()->json(['success' => true]);
+    if (!$user) {
+        return response()->json(['message' => 'User not found'], 404);
     }
+
+    // Validate the input data
+    $validated = $request->validate([
+        'first_name' => 'required|string|max:255',
+        'last_name' => 'required|string|max:255',
+        'old_password' => 'required|string',
+        'new_password' => 'nullable|string|min:8',
+        'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+    ]);
+
+    // Check if old password matches
+    if (!Hash::check($request->old_password, $user->password)) {
+        return response()->json(['message' => 'Old password is incorrect'], 400);
+    }
+
+    // Update user data
+    $user->first_name = $validated['first_name'];
+    $user->last_name = $validated['last_name'];
+
+    if ($request->new_password) {
+        $user->password = Hash::make($request->new_password);
+    }
+
+    // Handle profile picture upload (if any)
+    if ($request->hasFile('profile_picture')) {
+        $imagePath = $request->file('profile_picture')->store('profile_pics', 'public');
+        $user->profile_picture = $imagePath;
+    }
+
+    $user->save();
+
+    return response()->json(['message' => 'Profile updated successfully']);
+}
 }

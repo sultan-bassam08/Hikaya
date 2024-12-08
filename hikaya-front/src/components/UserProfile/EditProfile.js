@@ -1,38 +1,15 @@
-import React, { useState, useEffect } from "react";
-import axios from "../../axiosSetup";
+import React, { useState } from "react";
 import "./EditProfile.css";
 
+const user = JSON.parse(localStorage.getItem('user'));
+
+// Access the user ID
+const userId = user ? user.id : null;
+
 const EditProfile = () => {
-  const [userData, setUserData] = useState({
-    firstName: "",
-    lastName: "",
-    oldPassword: "",
-    newPassword: "",
-    profilePic: "user_12483574.png", // Default profile picture
-  });
-
-  const [isLoading, setIsLoading] = useState(true);
-
-  // Fetch user data when the component mounts
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const response = await fetch("http://localhost:8000/api/user");
-        const data = await response.json();
-        setUserData({
-          firstName: data.first_name,
-          lastName: data.last_name,
-          profilePic: data.profile_picture || "user_12483574.png",
-        });
-        setIsLoading(false);
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-        setIsLoading(false);
-      }
-    };
-
-    fetchUserData();
-  }, []);
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [profilePic, setProfilePic] = useState("user_12483574.png"); // Default profile picture
 
   const handleProfilePicChange = (e) => {
     const file = e.target.files[0];
@@ -64,39 +41,9 @@ const EditProfile = () => {
     setUserData({ ...userData, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-
-    const { oldPassword, newPassword, firstName, lastName } = userData;
-
-    try {
-      const response = await fetch("http://localhost:8000/api/user", { // Your API endpoint for updating user data
-        method: "PUT", // Change to POST if that's the method you use
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          firstName,
-          lastName,
-          oldPassword,
-          newPassword,
-        }),
-      });
-
-      const data = await response.json();
-      if (data.success) {
-        alert("Profile updated successfully!");
-      } else {
-        alert("Error updating profile!");
-      }
-    } catch (error) {
-      console.error("Error updating profile:", error);
-    }
   };
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <div className="edit-profile-container">
@@ -112,22 +59,12 @@ const EditProfile = () => {
 
         <label>
           First Name:
-          <input
-            type="text"
-            name="firstName"
-            value={userData.firstName}
-            onChange={handleChange}
-          />
+          <input type="text" defaultValue="John" />
         </label>
 
         <label>
           Last Name:
-          <input
-            type="text"
-            name="lastName"
-            value={userData.lastName}
-            onChange={handleChange}
-          />
+          <input type="text" defaultValue="Doe" />
         </label>
 
         <label>
@@ -156,7 +93,7 @@ const EditProfile = () => {
           <button type="submit" className="save-button">
             Save Changes
           </button>
-          <button type="button" className="cancel-button">
+          <button type="button" className="cancel-button" onClick={() => navigate(-1)}>
             Cancel
           </button>
         </div>
