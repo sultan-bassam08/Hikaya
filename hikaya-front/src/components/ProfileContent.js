@@ -2,8 +2,39 @@ import React from "react";
 import styles from "./ProfileContent.css"; 
 
 const ProfileContent = () => {
-    return (
+    const navigate = useNavigate();
+
+  const handleTabClick = (section) => {
+    navigate(`/profile-content?section=${section}`);
         <div className={`container ${styles.container}`}>
+                 <ul
+                  className={`profile-header-tab nav nav-tabs ${styles.profileHeaderTab}`}
+                >
+                  <li className="nav-item">
+                    <button
+                      className="btn btn-secondary"
+                      onClick={() => handleTabClick("complete")}
+                    >
+                      Complete Stories
+                    </button>
+                  </li>
+                  <li className="nav-item">
+                    <button
+                      className="btn btn-secondary"
+                      onClick={() => handleTabClick("draft")}
+                    >
+                      Draft Stories
+                    </button>
+                  </li>
+                  <li className="nav-item">
+                    <button
+                      className="btn btn-secondary"
+                      onClick={() => handleTabClick("activity")}
+                    >
+                      Your Activity
+                    </button>
+                  </li>
+                </ul>
     {/* Profile Content */}
     <div className={`profile-content ${styles.profileContent}`}>
     {/* Timeline */}

@@ -1,13 +1,38 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom"; // Use useParams to get user ID from the URL
+import axios from "axios"; // To make API calls
 import styles from "../components/UserProfile/UserProfile.css";
 
 const UserProfile = () => {
+  const [user, setUser] = useState(null); // State to store the fetched user data
   const navigate = useNavigate();
+  const { id } = useParams(); // Get user ID from URL parameter
+
+  // Fetch user data from API
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const user = JSON.parse(localStorage.getItem('user'));
+
+        // Access the user ID
+        const userId = user ? user.id : null; 
+        const response = await axios.get(`http://127.0.0.1:8000/api/user-profile/${userId}`);
+        setUser(response.data); // Update state with the user data
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+    
+    fetchUserData(); // Call the function to fetch data
+  }, [id]);
 
   const handleTabClick = (section) => {
-    navigate(`/profile-content?section=${section}`); // Pass the section as a query parameter
+    navigate(`/profile-content?section=${section}`);
   };
+
+  if (!user) {
+    return <div>Loading...</div>; // Show loading while fetching data
+  }
 
   return (
     <div className={`container ${styles.container}`}>
@@ -30,15 +55,19 @@ const UserProfile = () => {
                   <div
                     className={`profile-header-img ${styles.profileHeaderImg}`}
                   >
-                    <img src="user_12483574.png" alt="User Avatar" />
+                    {/* Display profile picture or a default one */}
+                    <img
+                      src={user.profile_picture || "default-user-avatar.png"} 
+                      alt="User Avatar"
+                    />
                   </div>
 
                   {/* Profile Info */}
                   <div
                     className={`profile-header-info ${styles.profileHeaderInfo}`}
                   >
-                    <h4 className="m-t-10 m-b-5">Sean Ngu</h4>
-                    <p className="m-b-10">UXUI + Frontend Developer</p>
+                    <h4 className="m-t-10 m-b-5">{user.first_name} {user.last_name}</h4>
+                    <p className="m-b-10">{user.bio || "No bio available"}</p>
                     <button
                       className="btn btn-primary"
                       onClick={() => navigate("/edit-profile")}
@@ -49,34 +78,7 @@ const UserProfile = () => {
                 </div>
 
                 {/* Profile Tabs */}
-                <ul
-                  className={`profile-header-tab nav nav-tabs ${styles.profileHeaderTab}`}
-                >
-                  <li className="nav-item">
-                    <button
-                      className="btn btn-secondary"
-                      onClick={() => handleTabClick("complete")}
-                    >
-                      Complete Stories
-                    </button>
-                  </li>
-                  <li className="nav-item">
-                    <button
-                      className="btn btn-secondary"
-                      onClick={() => handleTabClick("draft")}
-                    >
-                      Draft Stories
-                    </button>
-                  </li>
-                  <li className="nav-item">
-                    <button
-                      className="btn btn-secondary"
-                      onClick={() => handleTabClick("activity")}
-                    >
-                      Your Activity
-                    </button>
-                  </li>
-                </ul>
+                {/* You can add the tab navigation here */}
               </div>
             </div>
           </div>
@@ -85,4 +87,5 @@ const UserProfile = () => {
     </div>
   );
 };
+
 export default UserProfile;
