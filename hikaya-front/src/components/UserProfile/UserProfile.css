@@ -13,8 +13,8 @@ body{
   overflow: hidden
 }
 
-.profile-header .profile-header-cover {
-  background-image: url("../../../public/logo.png");
+.profile-header .profile-header-cover { 
+  background-color: azure;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
