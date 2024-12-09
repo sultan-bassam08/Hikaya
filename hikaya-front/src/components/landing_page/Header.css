@@ -136,7 +136,7 @@ body {
 /* Profile Dropdown */
 .profile-dropdown {
     position: relative;
-    display: block;
+    display: inline-block;
     padding-left:15px;
     margin-top:4px ;
 }
