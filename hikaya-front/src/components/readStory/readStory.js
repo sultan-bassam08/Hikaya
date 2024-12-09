@@ -43,7 +43,7 @@ const StoryDetail = () => {
   }, [id]);
 
   if (!story) {
-    return <div>Loading...</div>;
+    return <div></div>;
   }
 console.log(story.user.profile_picture ,"   story.user.profile_picture");
 

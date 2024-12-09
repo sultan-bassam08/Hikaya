@@ -85,9 +85,12 @@ const StoriesList = ({ query, selectedCategories }) => {
 
                   </div>
                   <div className="postcard__bar"></div>
-                  <div className="postcard__preview-txt">
-                    {story.content.substring(0, 100)}...
-                  </div>
+                  <div
+                    className="postcard__preview-txt"
+                    dangerouslySetInnerHTML={{
+                      __html: story.content.substring(0, 100).replace(/\s+/g, ' ').trim() + "...",
+                    }}
+                  ></div>
                   <ul className="postcard__tagbox">
                     <li className="tag__item">
                       <i className="bi bi-tag"></i> {story.category.category_name}

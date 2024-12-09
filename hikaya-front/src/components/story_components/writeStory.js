@@ -4,7 +4,7 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import Swal from "sweetalert2";
 import "./writeStory.css";
-
+import { useNavigate } from "react-router-dom";
 const WriteStory = () => {
   const [title, setTitle] = useState("");
   const [story, setStory] = useState("");
@@ -14,7 +14,7 @@ const WriteStory = () => {
   const [isSaving, setIsSaving] = useState(false);
   const [draftSaved, setDraftSaved] = useState(false);
   const [isMagicGenerating, setIsMagicGenerating] = useState(false);
-
+  const navigate = useNavigate();
   const quillModules = {
     toolbar: [
       [{ header: [1, 2, false] }],
@@ -81,7 +81,7 @@ const WriteStory = () => {
           </div>
         </div>
        <iframe 
-    src="https://my.spline.design/floatingstonemultiscenecopy-8f2604c901b03cb52457bc658763df9a/" 
+    src="https://app.spline.design/file/150894ae-e90f-4305-9c20-ab0bdfbe68a3" 
     width="100%" 
     height="500px" 
     style="border:none; overflow:hidden;" 
@@ -221,6 +221,11 @@ const WriteStory = () => {
         icon: "success",
         title: "Draft Published!",
         text: "Your draft has been published successfully.",
+        timer: 2000,
+        timerProgressBar: true,
+        willClose: () => {
+          navigate("/dashboard");
+        },
       });
     } catch (error) {
       console.error("Error saving draft:", error);
@@ -276,8 +281,7 @@ const WriteStory = () => {
             htmlFor="writeStory-image"
             className="custom-file-upload"
             style={{
-              background:
-                "radial-gradient(ellipse farthest-corner at right bottom, #37A0FE 0%, #318EFD 8%, #28799F 30%, #2F6E8A 40%, transparent 80%), radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #ACFFFF 8%, #64D1B4 25%, #1F5D4A 62.5%, #1F5D4A 100%)",
+              background: "#2d3748",
             }}
           >
             Choose Image
