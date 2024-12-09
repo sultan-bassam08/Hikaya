@@ -20,9 +20,7 @@ const EditProfile = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get(
-          `http://127.0.0.1:8000/api/user-profile/${userId}`
-        );
+        const response = await axios.get(`http://127.0.0.1:8000/api/user-profile/${userId}`);
         const userData = response.data;
         setUser(userData);
         setFirstName(userData.first_name);
@@ -130,11 +128,7 @@ const EditProfile = () => {
           <button type="submit" className="save-button">
             Save Changes
           </button>
-          <button
-            type="button"
-            className="cancel-button"
-            onClick={() => navigate(-1)}
-          >
+          <button type="button" className="cancel-button" onClick={() => navigate(-1)}>
             Cancel
           </button>
         </div>
