@@ -11,35 +11,31 @@ class StoryController extends Controller
 {
     public function saveDraft(Request $request)
     {
-        // Validate the incoming request
         $request->validate([
-            'user_id' => 'required|exists:users,id', // Ensure user exists
+            'user_id' => 'required|exists:users,id',
             'title' => 'required|string|max:255',
             'content' => 'required|string',
-            'category_id' => 'required|integer|exists:categories,category_id', // Ensure category exists
-            'story_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'category_id' => 'required|integer|exists:categories,category_id',
+            'story_picture' => 'nullable|'.(filter_var($request->story_picture, FILTER_VALIDATE_URL) ? 'string' : 'image'),
         ]);
     
         $imagePath = null;
-        if ($request->hasFile('story_picture')) {
-            // Generate a new image name using the current timestamp and the original extension
+    
+        if (filter_var($request->story_picture, FILTER_VALIDATE_URL)) {
+            $imagePath = $request->story_picture;
+        } elseif ($request->hasFile('story_picture')) {
             $imageName = now()->format('Y-m-d_H-i-s') . '.' . $request->file('story_picture')->getClientOriginalExtension();
-    
-            // Define the path where the image will be stored
             $imagePath = 'http://127.0.0.1:8000/images/' . $imageName;
-    
-            // Move the file to the 'public/images' directory with the new name
             $request->file('story_picture')->move(public_path('images'), $imageName);
         }
     
-        // Create the story in the database
         $story = Story::create([
             'user_id' => $request->user_id,
             'title' => $request->title,
             'content' => $request->content,
             'status' => 'published',
-            'category_id' => $request->category_id, // Use category_id here
-            'story_picture' => $imagePath, // Save the relative image path
+            'category_id' => $request->category_id,
+            'story_picture' => $imagePath,
         ]);
     
         return response()->json([
@@ -80,7 +76,7 @@ class StoryController extends Controller
             $messages = [
                 [
                     'role' => 'system',
-                    'content' => 'You are a creative assistant for the Hikaya website. Generate a new title and content for the hikaya ensuring the content is divided into 3 sections: start, middle, and end. Keep the content concise (maximum 200 characters). The content should match the provided category.'
+                    'content' => 'You are a creative assistant for the Hikaya website. Generate a new title and content for the hikaya ensuring the content is divided into 3 sections: start, middle, and end.(dont mention start, middle, and end in the result) Keep the content concise . The content should match the provided category.make the title well formated and have keywords to be bery good as prompt '
                 ],
                 [
                     'role' => 'user',
@@ -91,7 +87,7 @@ class StoryController extends Controller
             $data = [
                 'model' => 'gpt-3.5-turbo',
                 'messages' => $messages,
-                'max_tokens' => 300,
+                'max_tokens' => 600,
                 'temperature' => 0.7,
             ];
     
@@ -127,11 +123,11 @@ class StoryController extends Controller
                 $shortContent = substr($newContent, 0, 200);
     
                 // Image generation with the new title and short content
-                $imageDescription = "Full HD highly detailed image for hikaya story '$newTitle' in '$category'. Description: $shortContent. Focus on realism, vibrant colors, and detailed environments.";
+                $imageDescription = "Full HD highly detailed image for hikaya story '$newTitle' in '$category'.  Focus on realism, vibrant colors, and detailed environments.";
     
                 $imageData = [
                     'prompt' => $imageDescription,
-                    'n' => 1,
+                    'n' => 3,
                     'size' => '512x512',
                 ];
     
