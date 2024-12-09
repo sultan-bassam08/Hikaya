@@ -49,21 +49,26 @@ class UserProfileController extends Controller
         $user->first_name = $validated['first_name'];
         $user->last_name = $validated['last_name'];
         $user->bio = $validated['bio']; // Update the bio
-    
+        $old_image='';
         // Handle profile picture upload (if any)
         if ($request->hasFile('profile_picture')) {
             $validatedImage = $request->validate([
                 'profile_picture' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
             ]);
-    
-            $imagePath = $request->file('profile_picture')->store('profile_pics', 'public');
-            $user->profile_picture = $imagePath;
-        }
-    
+   
+            $imageName = now()->format('Y-m-d_H-i-s') . '.' . $request->file('profile_picture')->getClientOriginalExtension();
+            $imagePath = 'http://127.0.0.1:8000/images/' . $imageName;
+            $request->file('profile_picture')->move(public_path('images'), $imageName);
+            
+            $user->profile_picture=$imagePath;
+            $user->save();
+            return response()->json(['message' => $imagePath]);
+         }
+         $old_image=$user->profile_picture;
         // Save the user with the updated fields
         $user->save();
     
-        return response()->json(['message' => 'Profile updated successfully']);
+        return response()->json(['message' => $old_image]);
     }
     
     
