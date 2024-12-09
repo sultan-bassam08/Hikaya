@@ -121,7 +121,7 @@ const ProfileContent = () => {
               className={`nav-link ${selectedTab === "completeStories" ? "active" : ""}`}
               onClick={() => handleTabClick("completeStories")}
             >
-              Complete Stories
+              Your Stories
             </a>
           </li>
           <li className="nav-item">
@@ -130,7 +130,7 @@ const ProfileContent = () => {
               className={`nav-link ${selectedTab === "draftStories" ? "active" : ""}`}
               onClick={() => handleTabClick("draftStories")}
             >
-              Draft Stories
+              your drafts
             </a>
           </li>
           <li className="nav-item">

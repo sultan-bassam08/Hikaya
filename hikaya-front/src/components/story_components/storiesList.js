@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import "./storiesList.css";
+// import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+import './storiesList.css';
 
 const StoriesList = ({ query, selectedCategories }) => {
   const [stories, setStories] = useState([]);
   const user = JSON.parse(localStorage.getItem("user"));
-
-  const userId = user ? user.id : null; // Safely retrieve user.id
+  const userId = user ? user.id : null;
 
   useEffect(() => {
     // Fetch stories from the Laravel API
     axios
       .get("http://localhost:8000/api/stories")
       .then((response) => {
-        setStories(response.data); // Set the fetched stories
+        setStories(response.data);
       })
       .catch((error) => {
         console.error("There was an error fetching the stories!", error);
@@ -23,19 +24,18 @@ const StoriesList = ({ query, selectedCategories }) => {
 
   const toggleLike = (storyId) => {
     if (userId) {
-      // Ensure userId is available
       axios
         .post(`http://localhost:8000/api/stories/${storyId}/toggle-like`, {
-          user_id: userId, // Pass the user_id from the parsed user object
+          user_id: userId,
         })
-        .then((response) => {
+        .then(() => {
           const updatedStories = stories.map((story) => {
             if (story.story_id === storyId) {
-              return { ...story, liked: !story.liked }; // Toggle the liked status
+              return { ...story, liked: !story.liked };
             }
             return story;
           });
-          setStories(updatedStories); // Update the state with the modified stories array
+          setStories(updatedStories);
         })
         .catch((error) => {
           console.error("There was an error toggling the like!", error);
@@ -45,7 +45,7 @@ const StoriesList = ({ query, selectedCategories }) => {
     }
   };
 
-  // Filter stories based on the search query and selected categories
+  // Filter stories based on query and categories
   const filteredStories = stories.filter((story) => {
     const matchesQuery =
       story.title.toLowerCase().includes(query.toLowerCase()) ||
@@ -59,44 +59,65 @@ const StoriesList = ({ query, selectedCategories }) => {
   });
 
   return (
-    <div className="row">
-      {filteredStories.map((story) => (
-        <div className="col-lg-4 mb-4" key={story.story_id}>
-          <div className="card">
-            <img
-              src={story.story_picture || "https://via.placeholder.com/600x300"}
-              alt="Story"
-              className="card-img-top"
-            />
-            <div className="card-body">
-              <h5 className="card-title">{story.title}</h5>
-              <p
-                className="card-text"
-                dangerouslySetInnerHTML={{
-                  __html: story.content.substring(0, 100) + "...",
-                }}
-              />
-              <Link
-                to={`/readStory/${story.story_id}`}
-                className="btn btn-outline-success btn-sm"
-              >
-                Read More
-              </Link>
-              <button
-                onClick={() => toggleLike(story.story_id)}
-                className="btn btn-outline-danger btn-sm ml-2"
-              >
-                <i
-                  className={story.liked ? "fas fa-heart" : "far fa-heart"}
-                ></i>{" "}
-                {/* Toggle heart icon */}
-                {story.liked ? " Unlike" : " Like"}
-              </button>
+    <section className="dark">
+      <div className="container py-4">
+        <div className="row">
+          {filteredStories.map((story) => (
+            <div className="col-lg-12 mb-4" key={story.story_id}>
+              <article className="postcard dark blue">
+                <Link className="postcard__img_link" to={`/readStory/${story.story_id}`}>
+                  <img
+                    className="postcard__img"
+                    src={story.story_picture || "https://via.placeholder.com/600x300"}
+                    alt={story.title}
+                  />
+                </Link>
+                <div className="postcard__text">
+                  <h1 className="postcard__title blue">
+                    <Link to={`/readStory/${story.story_id}`}>{story.title}</Link>
+                  </h1>
+                 
+                  <div className="postcard__subtitle small">
+                  <span dateTime={story.created_at}>
+                    <i className="fas fa-calendar-alt mr-2"></i>
+                  {story.created_at ? new Date(story.created_at).toLocaleDateString() : 'N/A'}
+                  </span>
+
+                  </div>
+                  <div className="postcard__bar"></div>
+                  <div className="postcard__preview-txt">
+                    {story.content.substring(0, 100)}...
+                  </div>
+                  <ul className="postcard__tagbox">
+                    <li className="tag__item">
+                      <i className="bi bi-tag"></i> {story.category.category_name}
+                    </li>
+                    
+                    <li className="tag__item play blue">
+                      <Link to={`/readStory/${story.story_id}`}>
+                        <i className="bi bi-book"></i> Read story now
+                      </Link>
+                    </li>
+                  </ul>
+                   <span>
+        
+                      <button
+                        onClick={() => toggleLike(story.story_id)}
+                        className="btn btn-outline-danger btn-sm ml-2"
+                      >
+                        <i className={story.liked ? "fas fa-heart" : "far fa-heart"}></i>{" "}
+                        {story.liked ? "bookmarked" : "add to bookmark"}
+                      </button>
+                    
+                  </span>
+                </div>
+                
+              </article>
             </div>
-          </div>
+          ))}
         </div>
-      ))}
-    </div>
+      </div>
+    </section>
   );
 };
 
