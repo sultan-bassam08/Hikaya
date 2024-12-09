@@ -1,6 +1,5 @@
-/* Specific class to scope styles within this component */
 .aboutUsSection {
-  background-color: #0f172a; /* Dark background */
+  background-color: #0f172a;
   color: white;
   padding: 50px 0;
 }
@@ -25,10 +24,10 @@
 
 .aboutUsSection .teamItem {
   text-align: center;
-  background-color: #1e293b; /* Dark background for team items */
+  background-color: #1e293b;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease-in-out;
 }
 
@@ -46,65 +45,56 @@
 
 .aboutUsSection .teamInfo {
   margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
 }
 
 .aboutUsSection .teamInfo .btn {
-  text-decoration: none;
-}
-
-.aboutUsSection .row {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
   display: flex;
+  align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
-  gap: 20px;
+  font-size: 16px;
+  color: white;
+  text-decoration: none;
+  transition: background-color 0.3s ease-in-out;
 }
 
-.aboutUsSection .col12 {
-  width: 100%;
-  max-width: 300px;
+.aboutUsSection .teamInfo .btn-primary {
+  background-color: #0077b5; /* LinkedIn color */
 }
 
-.aboutUsSection .col12 .teamItem {
-  width: 100%;
+.aboutUsSection .teamInfo .btn-dark {
+  background-color: #333; /* GitHub color */
+}
+
+.aboutUsSection .teamInfo .btn-secondary {
+  background-color: #6c757d; /* Email color */
+}
+
+.aboutUsSection .teamInfo .btn:hover {
+  opacity: 0.8;
 }
 
 @media (max-width: 768px) {
-  .aboutUsSection .teamItem {
-    padding: 15px;
-  }
-
   .aboutUsSection .teamImg {
     width: 100px;
     height: 100px;
   }
 
+  .aboutUsSection .teamItem {
+    padding: 15px;
+  }
+
   .aboutUsSection h3 {
     font-size: 1.2rem;
-  }
-
-  .aboutUsSection .sectionTitle {
-    font-size: 2rem;
-  }
-
-  .aboutUsSection .sectionSubtitle {
-    font-size: 1rem;
-  }
-
-  .aboutUsSection .row {
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-
-  .aboutUsSection .col12 {
-    width: 48%;
   }
 }
 
 @media (max-width: 576px) {
-  .aboutUsSection .teamItem {
-    padding: 10px;
-  }
-
   .aboutUsSection .teamImg {
     width: 90px;
     height: 90px;
@@ -120,9 +110,5 @@
 
   .aboutUsSection .sectionSubtitle {
     font-size: 0.9rem;
-  }
-
-  .aboutUsSection .col12 {
-    width: 100%;
   }
 }

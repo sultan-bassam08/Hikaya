@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../components/About_Us/About_Us.module.css"; // Updated import
+import styles from "../components/About_Us/About_Us.module.css";
 
 const AboutUs = () => {
   const projectMessage = `Hikaya is a powerful platform where writers can share their stories, 
@@ -53,26 +53,23 @@ const AboutUs = () => {
   return (
     <section className={styles.aboutUsSection}>
       <div className="container">
-        <div className="row">
-          <div className="col-12 text-center">
-            <h2 className={styles.sectionTitle}>About Us</h2>
-            <p className={styles.sectionSubtitle}>{projectMessage}</p>
-          </div>
-
-          <div className="col-12 text-center mt-5">
-            <h2>OUR TEAM</h2>
-          </div>
+        <div className="text-center">
+          <h2 className={styles.sectionTitle}>About Us</h2>
+          <p className={styles.sectionSubtitle}>{projectMessage}</p>
         </div>
 
-        {/* First Row: 3 Cards */}
-        <div className="row mt-3">
-          {teamMembers.slice(0, 3).map((member, index) => (
+        <div className="text-center mt-5">
+          <h2>OUR TEAM</h2>
+        </div>
+
+        <div className="row mt-4 justify-content-center">
+          {teamMembers.map((member, index) => (
             <div className="col-12 col-sm-6 col-md-4 mb-4" key={index}>
               <div className={styles.teamItem}>
                 <img
                   src={member.img}
                   alt={`${member.name}'s Avatar`}
-                  className={`${styles.teamImg} img-fluid rounded-circle`}
+                  className={styles.teamImg}
                 />
                 <h3>{member.name}</h3>
                 <p>{member.role}</p>
@@ -82,7 +79,6 @@ const AboutUs = () => {
                     className="btn btn-primary"
                     target="_blank"
                     rel="noopener noreferrer"
-                    style={{ marginRight: "10px" }}
                   >
                     <i className="fab fa-linkedin"></i>
                   </a>
@@ -91,52 +87,6 @@ const AboutUs = () => {
                     className="btn btn-dark"
                     target="_blank"
                     rel="noopener noreferrer"
-                    style={{ marginRight: "10px" }}
-                  >
-                    <i className="fab fa-github"></i>
-                  </a>
-                  <a
-                    href={`mailto:${member.email}`}
-                    className="btn btn-secondary"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <i className="fas fa-envelope"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Second Row: 2 Cards, Centered */}
-        <div className="row mt-3 justify-content-center">
-          {teamMembers.slice(3).map((member, index) => (
-            <div className="col-12 col-sm-6 col-md-4 mb-4" key={index}>
-              <div className={styles.teamItem}>
-                <img
-                  src={member.img}
-                  alt={`${member.name}'s Avatar`}
-                  className={`${styles.teamImg} img-fluid rounded-circle`}
-                />
-                <h3>{member.name}</h3>
-                <p>{member.role}</p>
-                <div className={styles.teamInfo}>
-                  <a
-                    href={member.linkedin}
-                    className="btn btn-primary"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{ marginRight: "10px" }}
-                  >
-                    <i className="fab fa-linkedin"></i>
-                  </a>
-                  <a
-                    href={member.github}
-                    className="btn btn-dark"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{ marginRight: "10px" }}
                   >
                     <i className="fab fa-github"></i>
                   </a>
