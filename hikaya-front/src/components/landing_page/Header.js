@@ -61,7 +61,7 @@ const Header = () => {
           <div className="profile-dropdown">
           
             <img
-              src=  {user.profile_picture || "/logo.png"}
+              src=  {'http://127.0.0.1:8000/storage/'+ user.profile_picture || "/logo.png"}
               alt="Profile"
               className="profile-image"
             />

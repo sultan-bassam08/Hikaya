@@ -28,6 +28,8 @@ const EditProfile = () => {
         setLastName(userData.last_name);
         setBio(userData.bio); // Set bio from fetched data
         setProfilePic('http://127.0.0.1:8000/storage/' + userData.profile_picture || "default-avatar.png");
+        user.profile_picture=userData.profile_picture;
+        localStorage.setItem("user", JSON.stringify(user));
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -71,13 +73,15 @@ const EditProfile = () => {
         }
       );
       if (response.status === 200) {
+        
         Swal.fire({
           title: "Success!",
           text: "Profile updated successfully!",
           icon: "success",
           confirmButtonText: "OK",
+          
         });
-        navigate(`/profile`);
+          navigate(`/profile`);
       }
     } catch (error) {
       console.error("Error updating profile:", error);
