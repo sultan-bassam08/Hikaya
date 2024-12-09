@@ -2,41 +2,61 @@
   background-color: rgb(30, 41, 59);
   color: #ffffff;
   padding: 40px 0 0 0;
-  top: 0px;
   position: relative;
 }
 
-.footer_widget h4 {
-  font-size: 18px;
-  margin-bottom: 15px;
-  color: #ffffff;
-}
-
-.footer_widget ul {
-  list-style: none;
-  padding: 0;
-}
-
-.footer_widget ul li {
-  margin-bottom: 10px;
-}
-
-.footer_widget ul li a {
-  color: #d1d1d1;
-  text-decoration: none;
-}
-
-.footer_widget ul li a:hover {
-  color: #ffffff;
-}
-
+/* Adjust input group styling for better alignment */
 .footer_widget .input-group {
-  margin-top: 15px;
+  display: flex;
+  gap: 10px; /* Spacing between input and button */
+  align-items: center; /* Align input and button vertically */
 }
 
-.footer_widget .btn-danger {
+.footer_widget .form-control {
+  flex: 1; /* Allow input field to stretch */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px 0 0 4px; /* Rounded left corners */
+}
+
+.footer_widget .subscribe {
+  padding: 10px 20px;
   background-color: #0098FF;
-  border-color: black;
+  border: 1px solid #0098FF;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 0 4px 4px 0; /* Rounded right corners */
+  transition: background-color 0.3s ease; /* Smooth hover effect */
+  white-space: nowrap;
+}
+
+.footer_widget .subscribe:hover {
+  background: #a78bfa;
+  border-color: #a78bfa;
+  box-shadow: 0 6px 15px rgba(167, 139, 250, 0.4);
+}
+
+/* Error message styling */
+.text-danger {
+  font-size: 14px;
+}
+
+/* Responsiveness */
+@media (max-width: 576px) {
+  .footer_widget .input-group {
+    flex-direction: column; /* Stack input and button vertically */
+  }
+
+  .footer_widget .form-control,
+  .footer_widget .subscribe {
+    width: 100%; /* Full width for both elements */
+    border-radius: 4px; /* Adjust corners for stacked layout */
+  }
+
+  .footer_widget .subscribe {
+    margin-top: 10px; /* Add spacing between elements */
+  }
 }
 
 .footer-bottom {
@@ -60,17 +80,37 @@
   width: 100%;
   height: 300px;
 }
+/* Quick Links Style */
+.footer-menu {
+  list-style: none;
+  padding: 0;
+}
 
-/* mayar add */
-.input-group {
+.footer-menu li {
+  margin-bottom: 10px;
+}
+
+.footer-menu .footer-link {
+  color: #ffffff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-menu .footer-link:hover {
+  color: #0098ff;
+}
+
+/* Align Quick Links and Subscription Section */
+.footer-row {
   display: flex;
-  gap: 10px; 
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
-.input-group .form-control {
-  flex: 1;
-}
-
-.input-group .btn {
-  white-space: nowrap; 
+.subscription-section,
+.quick-links-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 20px;
 }

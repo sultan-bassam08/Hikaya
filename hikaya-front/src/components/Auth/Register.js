@@ -65,10 +65,10 @@ function Register() {
     <div className={styles.authContainer}>
       <Line2 customStyles={{ zIndex: "0", transform: "rotateY(180deg)" }} />
       <div className={styles.authCard}>
-        <h2 className={styles.authHeading}>Join the Storytellers</h2>
-        <p className={styles.authSubheading}>
+        <h2 className={styles.authHeading}>Join us!</h2>
+        {/* <p className={styles.authSubheading}>
           Create your account and start your journey.
-        </p>
+        </p> */}
         <form onSubmit={handleSubmit} className={styles.authForm}>
   {error && <div className={styles.authError}>{error}</div>}
   

@@ -25,28 +25,28 @@ img {
 }
 
 .article-title h6 {
-  font-size: 16px; /* Slight increase in font size */
+  font-size: 16px; 
   font-weight: 700;
   margin-bottom: 20px;
 }
 
 .article-title h6 a {
   text-transform: uppercase;
-  color: #0098FF; /* Updated to blue */
-  border-bottom: 2px solid #0098FF; /* Updated to blue */
+  color: #007bff; 
+  /* border-bottom: 2px solid #007bff; */
 }
 
 .article-title h2 {
   color: #fff;
   font-weight: 700;
-  font-size: 28px; /* Increased font size for the title */
+  font-size: 28px;
 }
 
 .article-content p,
 .article-content li {
   font-size: 16px;
   line-height: 1.6;
-  color: #93BCFA; /* Light blue for readability */
+  color: white;
 }
 
 .article-content h1,
@@ -64,13 +64,13 @@ img {
   max-width: 600px;
   padding: 15px 0 30px 0;
   margin: 0;
-  border-left: 5px solid #0098FF; /* Updated to blue */
+  border-left: 5px solid #007bff; /* Updated to blue */
 }
 
 .article-content blockquote p {
   font-size: 20px;
   font-weight: 500;
-  color: #0098FF; /* Updated to blue */
+  color: #007bff; /* Updated to blue */
   margin: 0;
 }
 
@@ -102,7 +102,7 @@ img {
 .blog-aside .widget-author .widget-title h3 {
   font-size: 24px;
   font-weight: 700;
-  color: #00BFFF; /* Bright blue for attention */
+  color: white; /* Bright blue for attention */
   margin: 0;
 }
 
@@ -129,12 +129,19 @@ img {
 
 .blog-aside .widget-author .media-body {
   flex-grow: 1;
-  color: #93BCFA; /* Subtle light blue text */
+  color: #aaa; /* Subtle light blue text */
 }
 
 .blog-aside .widget-author .media-body a {
   font-weight: 700;
-  color: #00BFFF; /* Standout link color */
+  color: #007bff; /* Standout link color */
+  font-size: 18px;
+  text-decoration: none;
+}
+
+.blog-aside .widget-author .media-body .auth-name {
+  font-weight: 700;
+  color: #007bff; /* Standout link color */
   font-size: 18px;
   text-decoration: none;
 }
@@ -152,7 +159,7 @@ img {
 .blog-aside .widget-author .media-body span {
   display: block;
   font-size: 14px;
-  color: #6E7C91; /* Muted color for the date */
+  color: #BDC6D0; /* Muted color for the date */
   margin-top: 5px;
 }
 
@@ -167,7 +174,7 @@ img {
 }
 
 .widget-latest-post a {
-  color: #0098FF; /* Updated to blue */
+  color: #007bff; /* Updated to blue */
   font-weight: 600;
   text-decoration: none;
 }
@@ -205,7 +212,7 @@ img {
 
 .widget-body .story-title a {
   font-size: 16px;
-  color: #0098FF; /* Use your accent color for the link */
+  color: #007bff; /* Use your accent color for the link */
   text-decoration: none;
 }
 

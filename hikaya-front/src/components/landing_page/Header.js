@@ -25,11 +25,13 @@ const Header = () => {
       <nav className="navbar">
         <div className="nav-brand">
           <div className="logo">
-            <span className="logo-text">Hikaya</span>
-            <div className="logo-shine"></div>
+            {/* Wrap the logo text with a Link to home */}
+            <Link to="/" className="logo-text">
+              Hikaya
+            </Link>
           </div>
         </div>
-
+  
         <div className={`nav-links ${isMobileMenuOpen ? "active" : ""}`}>
           <Link to="/" className="nav-link">
             <span>Home</span>
@@ -41,47 +43,45 @@ const Header = () => {
             <span>Write Story</span>
           </Link>
           <Link to="/aboutus" className="nav-link">
-            <span>About-us</span>
+            <span>About Us</span>
           </Link>
           <Link to="/contactus" className="nav-link">
-            <span>Contact</span>
+            <span>Contact Us</span>
           </Link>
         </div>
-
+  
         {/* Mobile Hamburger Icon */}
         <div className="mobile-toggle" onClick={toggleMobileMenu}>
           <span></span>
           <span></span>
           <span></span>
         </div>
-
+  
         {/* Show search bar and profile dropdown if user is logged in, else show login button */}
         <div className="nav-actions">
-                {user ? (
-          <div className="profile-dropdown">
-          
-            <img
-              src=  {'http://127.0.0.1:8000/storage/'+ user.profile_picture || "/logo.png"}
-              alt="Profile"
-              className="profile-image"
-            />
-            <div className="dropdown-content">
-              <Link to="/profile" className="dropdown-item">
-                Profile
-              </Link>
-              <button className="dropdown-item" onClick={handleLogout}>
-                Log Out
-              </button>
+          {user ? (
+            <div className="profile-dropdown">
+              <img
+                src={'http://127.0.0.1:8000/storage/' + user.profile_picture || "/logo.png"}
+                alt="Profile"
+                className="profile-image"
+              />
+              <div className="dropdown-content">
+                <Link to="/profile" className="dropdown-item">
+                  Profile
+                </Link>
+                <button className="dropdown-item" onClick={handleLogout}>
+                  Log Out
+                </button>
+              </div>
             </div>
-          </div>
-        ) : (
-          <Link to="/login">
-            <button className="action-btn">
-              <div className="btn-text">Sign In</div>
-            </button>
-          </Link>
-        )}
-
+          ) : (
+            <Link to="/login">
+              <button className="action-btn">
+                <div className="btn-text">Sign In</div>
+              </button>
+            </Link>
+          )}
         </div>
       </nav>
     </>
