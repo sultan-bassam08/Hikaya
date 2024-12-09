@@ -21,14 +21,14 @@ function MainPage() {
     <div className="container">
       <div className="row">
         <section id="header" className="jumbotron text-center">
-          <h1 className="display-3">Hikaya</h1>
-          <p className="lead">Share your stories with the world</p>
-          <a href="#" className="btn btn-primary" onClick={handleLoginClick}>
+          <h1 className="display-3 logo-text">Hikaya</h1>
+          <p className="lead">Discover inspiring stories from people around the world</p>
+          <a href="#" className="submitButton" onClick={handleLoginClick}>
             Start Sharing
           </a>
           <a
             href="#"
-            className="btn btn-secondary"
+            className="submitButton"
             onClick={handleExploreClick}
           >
             Explore Stories

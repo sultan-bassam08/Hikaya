@@ -31,7 +31,7 @@ const Header = () => {
             </Link>
           </div>
         </div>
-
+  
         <div className={`nav-links ${isMobileMenuOpen ? "active" : ""}`}>
           <Link to="/" className="nav-link">
             <span>Home</span>
@@ -49,14 +49,14 @@ const Header = () => {
             <span>Contact Us</span>
           </Link>
         </div>
-
+  
         {/* Mobile Hamburger Icon */}
         <div className="mobile-toggle" onClick={toggleMobileMenu}>
           <span></span>
           <span></span>
           <span></span>
         </div>
-
+  
         {/* Show search bar and profile dropdown if user is logged in, else show login button */}
         <div className="nav-actions">
           {user ? (

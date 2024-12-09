@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
+import Hikaya3D from "../landing_page/hikaya3d"
 import axios from "axios";
 import "./readStory.css";
 
@@ -9,18 +10,29 @@ const StoryDetail = () => {
   const [otherStories, setOtherStories] = useState([]);
 
   useEffect(() => {
+    // console.log("iiiiiiiiiiiiiiiiiiiiiiiiiiiiiid", id);
+    
     // Fetch the specific story by ID from the Laravel API
     axios
       .get(`http://localhost:8000/api/stories/${id}`)
       .then((response) => {
         setStory(response.data); // Set the story data to the state
         // Fetch other stories by the same author
+        // console.log(response.data.user.id,"response.data.user.idresponse.data.user.id");
+        
+
         axios
+        
           .get(
+
             `http://localhost:8000/api/stories?author_id=${response.data.user.id}`
           )
           .then((res) => {
+            console.log(res);
+            
             setOtherStories(res.data); // Set other stories to the state
+            console.log(res.data,"test");
+            
           })
           .catch((error) => {
             console.error("There was an error fetching other stories!", error);
@@ -34,6 +46,7 @@ const StoryDetail = () => {
   if (!story) {
     return <div></div>;
   }
+console.log(story.user.profile_picture ,"   story.user.profile_picture");
 
   return (
     <div className="blog-single ">
@@ -87,17 +100,16 @@ const StoryDetail = () => {
                     />
                   </div>
                   <div className="media-body">
-                    <Link to={`/user-profile/${story.user.id}`}>
-                      {story.user.first_name + " " + story.user.last_name ||
-                      "Unknown Author"}
-                    </Link>
-                    <span>
-                      {new Date(story.updated_at).toLocaleDateString() ||
-                        "Unknown Date"}
-                    </span>
-                  </div>
+  {/* Replace the Link with a plain span */}
+  <span className = "auth-name">
+    {story.user.first_name + " " + story.user.last_name || "Unknown Author"}
+  </span>
+  <p>{story.user.bio}</p>
+  <span>
+    {new Date(story.updated_at).toLocaleDateString() || "Unknown Date"}
+  </span>
+</div>
                 </div>
-              
             </div>
             {/* End Author */}
 

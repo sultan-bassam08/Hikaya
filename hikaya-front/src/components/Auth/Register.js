@@ -65,55 +65,60 @@ function Register() {
     <div className={styles.authContainer}>
       <Line2 customStyles={{ zIndex: "0", transform: "rotateY(180deg)" }} />
       <div className={styles.authCard}>
-        <h2 className={styles.authHeading}>Join the Storytellers</h2>
-        <p className={styles.authSubheading}>
+        <h2 className={styles.authHeading}>Join us!</h2>
+        {/* <p className={styles.authSubheading}>
           Create your account and start your journey.
-        </p>
+        </p> */}
         <form onSubmit={handleSubmit} className={styles.authForm}>
-          {error && <div className={styles.authError}>{error}</div>}
-          <input
-            type="text"
-            placeholder="First Name"
-            className={styles.authInput}
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="Last Name"
-            className={styles.authInput}
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-          />
-          <input
-            type="email"
-            placeholder="Email"
-            className={styles.authInput}
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            className={styles.authInput}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="Confirm Password"
-            className={styles.authInput}
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
-          <button
-            type="submit"
-            className={styles.authButton}
-            disabled={loading}
-          >
-            {loading ? "Registering..." : "Register"}
-          </button>
-        </form>
+  {error && <div className={styles.authError}>{error}</div>}
+  
+  <div className={styles.row}>
+    <input
+      type="text"
+      placeholder="First Name"
+      className={styles.authInput}
+      value={firstName}
+      onChange={(e) => setFirstName(e.target.value)}
+    />
+    <input
+      type="text"
+      placeholder="Last Name"
+      className={styles.authInput}
+      value={lastName}
+      onChange={(e) => setLastName(e.target.value)}
+    />
+  </div>
+  
+  <input
+    type="email"
+    placeholder="Email"
+    className={styles.authInput}
+    value={email}
+    onChange={(e) => setEmail(e.target.value)}
+  />
+  <input
+    type="password"
+    placeholder="Password"
+    className={styles.authInput}
+    value={password}
+    onChange={(e) => setPassword(e.target.value)}
+  />
+  <input
+    type="password"
+    placeholder="Confirm Password"
+    className={styles.authInput}
+    value={confirmPassword}
+    onChange={(e) => setConfirmPassword(e.target.value)}
+  />
+  <button
+    type="submit"
+    className={styles.authButton}
+    disabled={loading}
+  >
+    {loading ? "Registering..." : "Register"}
+  </button>
+</form>
+
         <p className={styles.authSwitch}>
           Already have an account?{" "}
           <button
