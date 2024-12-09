@@ -30,8 +30,11 @@ class CreateUsersTable extends Migration
      *
      * @return void
      */
-    public function down()
+      public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::table('users', function (Blueprint $table) {
+        $table->dropColumn('profile_picture');
+         });
     }
+
 }
