@@ -7,8 +7,8 @@ import styles from "./Auth.module.css";
 import Line1 from "../lines/liftLine";
 
 function Login() {
-  const [email, setEmail] = useState("omarfathiabed1@gmail.com");
-  const [password, setPassword] = useState("12345678");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const { login } = useAuth(); // Access login method from context
   const navigate = useNavigate();
 
