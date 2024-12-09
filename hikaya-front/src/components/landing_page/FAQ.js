@@ -21,7 +21,7 @@ const FAQ = () => {
 
   return (
     <>
-      <section id="FAQ" className="faq py-5 ">
+      <section id="FAQ" className="faq py-5">
         <div className="container">
           <h2 className="text-center mb-4" style={{ color: "white" }}>
             Frequently Asked Questions
@@ -32,7 +32,11 @@ const FAQ = () => {
             style={{ position: "relative", zIndex: "3" }}
           >
             {faqs.map((faq, index) => (
-              <div className="accordion-item" key={index}>
+              <div
+                className="accordion-item"
+                style={{ backgroundColor: "rgb(30, 41, 59)" }} 
+                key={index}
+              >
                 <h2 className="accordion-header" id={`heading${index}`}>
                   <button
                     className="accordion-button collapsed"
@@ -41,6 +45,7 @@ const FAQ = () => {
                     data-bs-target={`#collapse${index}`}
                     aria-expanded="false"
                     aria-controls={`collapse${index}`}
+                    style={{ backgroundColor: "rgb(30, 41, 59)", color: "white" }}
                   >
                     {faq.question}
                   </button>

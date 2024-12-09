@@ -12,13 +12,11 @@ const Footer = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // التحقق من صحة البريد الإلكتروني
     if (!email.includes("@")) {
       setError("Please enter a valid email address.");
       return;
     }
 
-    // إعداد البيانات للإرسال
     const formData = {
       access_key: "7eb2f20d-f246-43da-abe2-b79a358edae4",
       email,
@@ -57,6 +55,10 @@ const Footer = () => {
     }
 
     setError("");
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -102,34 +104,45 @@ const Footer = () => {
                 <h4 className="widget_title">Quick Links</h4>
                 <ul className="footer-menu">
                   <li>
-                    <Link to="/" className="footer-link">
-                      Home Page
+                    <Link to="/" className="footer-link" onClick={scrollToTop}>
+                      Home
                     </Link>
                   </li>
                   <li>
-                    <Link to="/aboutus" className="footer-link">
-                      About Page
+                    <Link
+                      to="/aboutus"
+                      className="footer-link"
+                      onClick={scrollToTop}
+                    >
+                      About us
                     </Link>
                   </li>
                   <li>
-                    <Link to="/contactus" className="footer-link">
-                      Contact Page
+                    <Link
+                      to="/contactus"
+                      className="footer-link"
+                      onClick={scrollToTop}
+                    >
+                      Contact us
                     </Link>
                   </li>
                   <li>
-                    <a href="#" className="footer-link">
-                      Blog
-                    </a>
+                    <Link
+                      to="/write_story"
+                      className="footer-link"
+                      onClick={scrollToTop}
+                    >
+                      Write story
+                    </Link>
                   </li>
                   <li>
-                    <a href="#" className="footer-link">
-                      Pricing
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" className="footer-link">
-                      Services
-                    </a>
+                    <Link
+                      to="/dashboard"
+                      className="footer-link"
+                      onClick={scrollToTop}
+                    >
+                      Stories
+                    </Link>
                   </li>
                 </ul>
               </div>

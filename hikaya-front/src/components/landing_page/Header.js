@@ -34,14 +34,14 @@ const Header = () => {
           <Link to="/" className="nav-link">
             <span>Home</span>
           </Link>
-          <Link to="/products" className="nav-link">
-            <span>Products</span>
+          <Link to="/dashboard" className="nav-link">
+            <span>Stories</span>
           </Link>
-          <Link to="/services" className="nav-link">
-            <span>Services</span>
+          <Link to="/write_story" className="nav-link">
+            <span>Write Story</span>
           </Link>
           <Link to="/aboutus" className="nav-link">
-            <span>About</span>
+            <span>About-us</span>
           </Link>
           <Link to="/contactus" className="nav-link">
             <span>Contact</span>
@@ -59,14 +59,10 @@ const Header = () => {
         <div className="nav-actions">
           {user ? (
             <>
-              <input
-                type="text"
-                className="search-bar"
-                placeholder="Search..."
-              />
+             
               <div className="profile-dropdown">
                 <img
-                  src={"./logo.png"}
+                  src={"/logo.png"}
                   alt="Profile"
                   className="profile-image"
                 />
