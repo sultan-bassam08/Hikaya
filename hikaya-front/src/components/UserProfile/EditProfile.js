@@ -3,9 +3,11 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 import "./EditProfile.css";
+import { useAuth } from "../../pages/AuthContext";
 
 const user = JSON.parse(localStorage.getItem("user"));
 const userId = user ? user.id : null;
+
 
 const EditProfile = () => {
   const [user, setUser] = useState(null);
@@ -28,8 +30,7 @@ const EditProfile = () => {
         setLastName(userData.last_name);
         setBio(userData.bio); // Set bio from fetched data
         setProfilePic('http://127.0.0.1:8000/storage/' + userData.profile_picture || "default-avatar.png");
-        user.profile_picture=userData.profile_picture;
-        localStorage.setItem("user", JSON.stringify(user));
+  
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -41,6 +42,9 @@ const EditProfile = () => {
   const handleProfilePicChange = (e) => {
     const file = e.target.files[0];
     if (file) {
+      
+      user.profile_picture=file;
+        localStorage.setItem("user", JSON.stringify(user));
       setProfilePic(URL.createObjectURL(file)); // Generate preview URL
       setSelectedFile(file); // Store the file for the form data submission
     } 
@@ -66,10 +70,13 @@ const EditProfile = () => {
       const response = await axios.post(
         `http://127.0.0.1:8000/api/edit-profile/${userId}`,
         formData,
+        
         {
+          
           headers: {
             "Content-Type": "multipart/form-data", // File upload requires this header
           },
+          
         }
       );
       if (response.status === 200) {

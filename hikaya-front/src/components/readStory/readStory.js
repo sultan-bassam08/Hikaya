@@ -32,7 +32,7 @@ const StoryDetail = () => {
   }, [id]);
 
   if (!story) {
-    return <div>Loading...</div>;
+    return <div></div>;
   }
 
   return (

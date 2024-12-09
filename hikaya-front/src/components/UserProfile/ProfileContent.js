@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./ProfileContent.css";
 import axios from "axios";
+import UserStories from './userStories';
 
 const ProfileContent = () => {
   const [selectedTab, setSelectedTab] = useState("completeStories"); // Default tab is 'Complete Stories'
@@ -59,36 +60,17 @@ const ProfileContent = () => {
                 </li>
               ))
             ) : (
-              <p>No complete stories available.</p>
+              <div className="container container-cards">
+                <UserStories/>
+                <UserStories/>
+                <UserStories/>
+                <UserStories/>
+                <UserStories/>
+              </div>
             )}
           </div>
         );
-      case "draftStories":
-        return (
-          <div className={`timeline ${styles.timeline}`}>
-            {draftStories.length > 0 ? (
-              draftStories.map((story) => (
-                <li key={story.story_id}>
-                  <div className={`timeline-time ${styles.timelineTime}`}>
-                    <span className="date">
-                      {new Date(story.created_at).toLocaleDateString()}
-                    </span>
-                    <span className="time">
-                      {new Date(story.created_at).toLocaleTimeString()}
-                    </span>
-                  </div>
-                  <div className={`timeline-body ${styles.timelineBody}`}>
-                    <h5 className={styles.storyTitle}>{story.title}</h5>
-                    <p>{story.content}</p>
-                    {story.story_picture && <img src={story.story_picture} alt="Story" />}
-                  </div>
-                </li>
-              ))
-            ) : (
-              <p>No draft stories available.</p>
-            )}
-          </div>
-        );
+      
       case "yourActivity":
         return (
           <div>
@@ -100,7 +82,13 @@ const ProfileContent = () => {
                 </div>
               ))
             ) : (
-              <p>No activity data available.</p>
+              <div className="container container-cards">
+              <UserStories/>
+              <UserStories/>
+              <UserStories/>
+              <UserStories/>
+              <UserStories/>
+            </div>
             )}
           </div>
         );
@@ -124,15 +112,7 @@ const ProfileContent = () => {
               Your Stories
             </a>
           </li>
-          <li className="nav-item">
-            <a
-              href="javascript:void(0);"
-              className={`nav-link ${selectedTab === "draftStories" ? "active" : ""}`}
-              onClick={() => handleTabClick("draftStories")}
-            >
-              your drafts
-            </a>
-          </li>
+         
           <li className="nav-item">
             <a
               href="javascript:void(0);"
