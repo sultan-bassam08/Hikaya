@@ -33,7 +33,7 @@ const StoryDetail = () => {
   }, [id]);
 
   if (!story) {
-    return <div><Hikaya3D/></div>;
+    return <div></div>;
   }
 
   return (
