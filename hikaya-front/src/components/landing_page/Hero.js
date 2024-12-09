@@ -1,9 +1,24 @@
 import React from "react";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import { Link, useNavigate } from "react-router-dom";
 import Hikaya3d from "./hikaya3d";
 import "./Hero.css";
 
 const Hero = () => {
+  const navigate = useNavigate();
+
+  const handleButtonClick = () => {
+    // Check if the user is logged in by checking for the token in localStorage
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      // If the user is logged in, navigate to the write_story page
+      navigate("/write_story");
+    } else {
+      // If the user is not logged in, navigate to the login page
+      navigate("/login");
+    }
+  };
+
   return (
     <>
       <Hikaya3d />
@@ -22,9 +37,9 @@ const Hero = () => {
       >
         <div className="hero-content">
           <p id="qoute">Your story, your voice, your impact.</p>
-          <Link to="/login">
-            <button className="btn-primary">Get Started</button>
-          </Link>
+          <button className="callActionBtn" onClick={handleButtonClick}>
+            Get Inspired
+          </button>
         </div>
       </section>
     </>

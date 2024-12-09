@@ -72,7 +72,7 @@ function Login() {
           </button>
         </form>
         <p className={styles.authSwitch}>
-          New to the world of stories?{" "}
+         Don't have an account?{" "}
           <button
             className={styles.authLink}
             onClick={() => navigate("/register")}

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
+import Hikaya3D from "../landing_page/hikaya3d"
 import axios from "axios";
 import "./readStory.css";
 
@@ -99,17 +100,16 @@ console.log(story.user.profile_picture ,"   story.user.profile_picture");
                     />
                   </div>
                   <div className="media-body">
-                    <Link to={`/user-profile/${story.user.id}`}>
-                      {story.user.first_name + " " + story.user.last_name ||
-                      "Unknown Author"}
-                    </Link>
-                    <span>
-                      {new Date(story.updated_at).toLocaleDateString() ||
-                        "Unknown Date"}
-                    </span>
-                  </div>
+  {/* Replace the Link with a plain span */}
+  <span className = "auth-name">
+    {story.user.first_name + " " + story.user.last_name || "Unknown Author"}
+  </span>
+  <p>{story.user.bio}</p>
+  <span>
+    {new Date(story.updated_at).toLocaleDateString() || "Unknown Date"}
+  </span>
+</div>
                 </div>
-              
             </div>
             {/* End Author */}
 

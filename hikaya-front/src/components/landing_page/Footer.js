@@ -63,11 +63,10 @@ const Footer = () => {
 
   return (
     <footer className="dark-footer skin-dark-footer style-2">
-      <div className="footer-middle">
         <div className="container">
           <div className="row">
             {/* Subscription Section */}
-            <div className="col-lg-5 col-md-5">
+            <div className="col-lg-5 col-md-5 subscription-section">
               <div className="footer_widget">
                 <span className="logo-text">Hikaya</span>
                 <h4 className="extream mb-3">Need help with something?</h4>
@@ -80,10 +79,10 @@ const Footer = () => {
                   className="mt-4"
                   aria-label="Newsletter subscription form"
                 >
-                  <div className="input-group flex-wrap align-items-center">
+                  <div className="input-group">
                     <input
                       type="email"
-                      className="form-control mr-2"
+                      className="form-control"
                       placeholder="Email Address"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
@@ -91,8 +90,8 @@ const Footer = () => {
                     />
                     <button
                       type="submit"
-                      className="btn btn-danger text-light"
-                      aria-label="Subscribe Button"
+                      className="subscribe text-light"
+                      aria-label="Subscribe"
                     >
                       {submitted ? "Subscribed" : "Subscribe"}
                     </button>
@@ -103,7 +102,7 @@ const Footer = () => {
             </div>
 
             {/* Quick Links */}
-            <div className="col-lg-3 col-md-3">
+            <div className="col-lg-3 col-md-3 quick-links-section">
               <div className="footer_widget">
                 <h4 className="widget_title">Quick Links</h4>
                 <ul className="footer-menu">
@@ -118,7 +117,7 @@ const Footer = () => {
                       className="footer-link"
                       onClick={scrollToTop}
                     >
-                      About us
+                      About Us
                     </Link>
                   </li>
                   <li>
@@ -127,7 +126,7 @@ const Footer = () => {
                       className="footer-link"
                       onClick={scrollToTop}
                     >
-                      Contact us
+                      Contact Us
                     </Link>
                   </li>
                   <li>
@@ -168,7 +167,6 @@ const Footer = () => {
               </div>
             </div>
           </div>
-        </div>
       </div>
 
       {/* Footer Bottom */}
