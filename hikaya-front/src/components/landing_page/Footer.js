@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 import "./Footer.css";
 
 const Footer = () => {
@@ -11,13 +12,11 @@ const Footer = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // التحقق من صحة البريد الإلكتروني
     if (!email.includes("@")) {
       setError("Please enter a valid email address.");
       return;
     }
 
-    // إعداد البيانات للإرسال
     const formData = {
       access_key: "7eb2f20d-f246-43da-abe2-b79a358edae4",
       email,
@@ -58,6 +57,10 @@ const Footer = () => {
     setError("");
   };
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <footer className="dark-footer skin-dark-footer style-2">
       <div className="footer-middle">
@@ -72,7 +75,11 @@ const Footer = () => {
                   Receive updates, hot deals, tutorials, and discounts straight
                   to your inbox every month.
                 </p>
-                <form onSubmit={handleSubmit} className="mt-4" aria-label="Newsletter subscription form">
+                <form
+                  onSubmit={handleSubmit}
+                  className="mt-4"
+                  aria-label="Newsletter subscription form"
+                >
                   <div className="input-group flex-wrap align-items-center">
                     <input
                       type="email"
@@ -100,13 +107,47 @@ const Footer = () => {
               <div className="footer_widget">
                 <h4 className="widget_title">Quick Links</h4>
                 <ul className="footer-menu">
-                  {["Home Page", "About Page", "Contact Page", "Blog", "Pricing", "Services"].map((link, idx) => (
-                    <li key={idx}>
-                      <a href="#" className="footer-link">
-                        {link}
-                      </a>
-                    </li>
-                  ))}
+                  <li>
+                    <Link to="/" className="footer-link" onClick={scrollToTop}>
+                      Home
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/aboutus"
+                      className="footer-link"
+                      onClick={scrollToTop}
+                    >
+                      About us
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/contactus"
+                      className="footer-link"
+                      onClick={scrollToTop}
+                    >
+                      Contact us
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/write_story"
+                      className="footer-link"
+                      onClick={scrollToTop}
+                    >
+                      Write story
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/dashboard"
+                      className="footer-link"
+                      onClick={scrollToTop}
+                    >
+                      Stories
+                    </Link>
+                  </li>
                 </ul>
               </div>
             </div>
