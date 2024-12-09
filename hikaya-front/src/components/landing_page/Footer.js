@@ -75,7 +75,11 @@ const Footer = () => {
                   Receive updates, hot deals, tutorials, and discounts straight
                   to your inbox every month.
                 </p>
-                <form onSubmit={handleSubmit} className="mt-4" aria-label="Newsletter subscription form">
+                <form
+                  onSubmit={handleSubmit}
+                  className="mt-4"
+                  aria-label="Newsletter subscription form"
+                >
                   <div className="input-group flex-wrap align-items-center">
                     <input
                       type="email"

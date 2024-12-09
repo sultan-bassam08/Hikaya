@@ -47,7 +47,7 @@ class RegisterController extends Controller
                 'last_name' => $request->last_name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
-                'profile_picture' => null, // Default to null; update later if needed
+                'profile_picture' => "http://127.0.0.1:8000/images/user.jpg", // Default to null; update later if needed
                 'bio' => null, // Default to null; update later if needed
             ]);
             
