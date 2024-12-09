@@ -14,7 +14,8 @@ const EditProfile = () => {
   const [bio, setBio] = useState(""); // New bio field
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  const [profilePic, setProfilePic] = useState("");
+  const [profilePic, setProfilePic] = useState(""); // For previewing the image
+  const [selectedFile, setSelectedFile] = useState(null); // To hold the actual file for uploading
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -26,7 +27,7 @@ const EditProfile = () => {
         setFirstName(userData.first_name);
         setLastName(userData.last_name);
         setBio(userData.bio); // Set bio from fetched data
-        setProfilePic(userData.profile_picture || "default-avatar.png");
+        setProfilePic('http://127.0.0.1:8000/storage/' + userData.profile_picture || "default-avatar.png");
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -38,28 +39,36 @@ const EditProfile = () => {
   const handleProfilePicChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => setProfilePic(reader.result);
-      reader.readAsDataURL(file);
-    }
+      setProfilePic(URL.createObjectURL(file)); // Generate preview URL
+      setSelectedFile(file); // Store the file for the form data submission
+    } 
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const updatedData = {
-      first_name: firstName,
-      last_name: lastName,
-      bio: bio, // Include bio in the update
-      old_password: oldPassword,
-      new_password: newPassword,
-      profile_picture: profilePic,
-    };
-
+  
+    // Prepare FormData with text fields and file
+    const formData = new FormData();
+    formData.append("first_name", firstName);
+    formData.append("last_name", lastName);
+    formData.append("bio", bio);
+    
+    // Only append profile picture if a new one is selected
+    if (selectedFile) {
+      formData.append("profile_picture", selectedFile);
+    } else {
+      formData.append("profile_picture", "");
+    }
+  
     try {
-      const response = await axios.put(
+      const response = await axios.post(
         `http://127.0.0.1:8000/api/edit-profile/${userId}`,
-        updatedData
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data", // File upload requires this header
+          },
+        }
       );
       if (response.status === 200) {
         Swal.fire({
@@ -68,7 +77,7 @@ const EditProfile = () => {
           icon: "success",
           confirmButtonText: "OK",
         });
-        navigate(`/user-profile/${userId}`);
+        navigate(`/profile`);
       }
     } catch (error) {
       console.error("Error updating profile:", error);
@@ -88,12 +97,12 @@ const EditProfile = () => {
   return (
     <div className="edit-profile-container">
       <h1>Edit Profile</h1>
-      <form className="edit-profile-form" onSubmit={handleSubmit}>
+      <form className="edit-profile-form" onSubmit={handleSubmit} encType="multipart/form-data">
         <div className="profile-pic-section">
           <img src={profilePic} alt="Profile" className="profile-pic" />
           <label className="upload-label">
             Change Picture
-            <input type="file" onChange={handleProfilePicChange} />
+            <input type="file" onChange={handleProfilePicChange} className="inputfile" accept="image/*"/>
           </label>
         </div>
 
