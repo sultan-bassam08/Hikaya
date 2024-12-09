@@ -62,7 +62,7 @@ const Header = () => {
           {user ? (
             <div className="profile-dropdown">
               <img
-                src={'http://127.0.0.1:8000/storage/' + user.profile_picture || "/logo.png"}
+                src={user.profile_picture || "/logo.png"}
                 alt="Profile"
                 className="profile-image"
               />
