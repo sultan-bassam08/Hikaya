@@ -54,15 +54,14 @@ const UserProfile = () => {
                   className={`profile-header-content ${styles.profileHeaderContent}`}
                 >
                   {/* Profile Image */}
-                  <div
-                    className={`profile-header-img ${styles.profileHeaderImg}`}
-                  >
-                    {/* Display profile picture or a default one */}
-                    <img
-                      src={user.profile_picture || "default-user-avatar.png"} 
-                      alt="User Avatar"
-                    />
-                  </div>
+                  <div className={`profile-header-img ${styles.profileHeaderImg}`}>
+  {/* Display profile picture or a default one */}
+  <img
+    src={user?.profile_picture ? 'http://127.0.0.1:8000/storage/' + user.profile_picture : "default-user-avatar.png"}
+    alt="User Avatar"
+  />
+</div>
+
 
                   {/* Profile Info */}
                   <div

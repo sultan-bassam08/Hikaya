@@ -58,4 +58,5 @@ Route::get('/stories/{id}', [StoryController::class, 'show']);
 Route::post('/stories/magic-ideas', [StoryController::class, 'getMagicIdea']);
 Route::post('/stories/{storyId}/toggle-like', [LikeController::class, 'toggleLike']);
 Route::get('/user-profile/{id}', [UserProfileController::class, 'getUserProfile']);
-Route::put('/edit-profile/{id}', [UserProfileController::class, 'updateUserProfile']);
+Route::post('/edit-profile/{id}', [UserProfileController::class, 'updateUserProfile']);
+

@@ -57,32 +57,31 @@ const Header = () => {
 
         {/* Show search bar and profile dropdown if user is logged in, else show login button */}
         <div className="nav-actions">
-          {user ? (
-            <>
-             
-              <div className="profile-dropdown">
-                <img
-                  src={"/logo.png"}
-                  alt="Profile"
-                  className="profile-image"
-                />
-                <div className="dropdown-content">
-                  <Link to="/profile" className="dropdown-item">
-                    Profile
-                  </Link>
-                  <button className="dropdown-item" onClick={handleLogout}>
-                    Log Out
-                  </button>
-                </div>
-              </div>
-            </>
-          ) : (
-            <Link to="/login">
-              <button className="action-btn">
-                <div className="btn-text">Sign In</div>
+                {user ? (
+          <div className="profile-dropdown">
+          
+            <img
+              src=  {'http://127.0.0.1:8000/storage/'+ user.profile_picture || "/logo.png"}
+              alt="Profile"
+              className="profile-image"
+            />
+            <div className="dropdown-content">
+              <Link to="/profile" className="dropdown-item">
+                Profile
+              </Link>
+              <button className="dropdown-item" onClick={handleLogout}>
+                Log Out
               </button>
-            </Link>
-          )}
+            </div>
+          </div>
+        ) : (
+          <Link to="/login">
+            <button className="action-btn">
+              <div className="btn-text">Sign In</div>
+            </button>
+          </Link>
+        )}
+
         </div>
       </nav>
     </>
