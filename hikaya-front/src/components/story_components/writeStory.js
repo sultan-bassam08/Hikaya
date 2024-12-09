@@ -9,11 +9,11 @@ const WriteStory = () => {
   const [title, setTitle] = useState("");
   const [story, setStory] = useState("");
   const [category, setCategory] = useState("");
-  const [imagePreview, setImagePreview] = useState("/logo.png"); // Default logo
+  const [imagePreview, setImagePreview] = useState("/images/omar.jpg");
   const [image, setImage] = useState(null);
   const [isSaving, setIsSaving] = useState(false);
   const [draftSaved, setDraftSaved] = useState(false);
-  const [isMagicGenerating, setIsMagicGenerating] = useState(false); // New state for button text
+  const [isMagicGenerating, setIsMagicGenerating] = useState(false);
 
   const quillModules = {
     toolbar: [
@@ -39,11 +39,11 @@ const WriteStory = () => {
       return;
     }
 
-    setIsMagicGenerating(true); // Update button text
+    setIsMagicGenerating(true);
 
     Swal.fire({
       title: "Please wait...",
-      text: "Generating magic ideas may take 20–40 seconds.",
+      text: "Generating magic ideas may take 1–2 minutes.",
       allowOutsideClick: false,
       allowEscapeKey: false,
       didOpen: () => {
@@ -51,7 +51,6 @@ const WriteStory = () => {
       },
     });
 
-    // Simulate delay (20-40 seconds)
     const delay = Math.floor(Math.random() * 20 + 20) * 1000;
     await new Promise((resolve) => setTimeout(resolve, delay));
 
@@ -78,15 +77,44 @@ const WriteStory = () => {
           html: `
             <strong>Title:</strong> ${apiTitle}<br/><br/>
             <strong>Content:</strong> <p>${apiContent}</p>
-            <img src="${images[0]}" alt="Generated Image" style="width:100%;margin-top:10px;border-radius:5px;" />
+            <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
+              ${images
+                .map(
+                  (img, index) => `
+                <div style="margin-bottom: 20px; text-align: center;">
+                  <input type="radio" id="image${index}" name="selectedImage" value="${img}" ${
+                    index === 0 ? "checked" : ""
+                  } />
+                  <label for="image${index}">
+                    <img src="${img}" alt="Generated Image" style="width: 150px; height: auto; margin-top: 10px; border-radius: 5px; border: 2px solid #ddd;" />
+                  </label>
+                </div>
+              `
+                )
+                .join("")}
+            </div>
           `,
           showCancelButton: true,
           confirmButtonText: "Apply Changes",
           cancelButtonText: "Cancel",
+          width: "600px",
           preConfirm: () => {
-            setTitle(apiTitle);
-            setStory(apiContent);
-            setImagePreview(images[0]);
+            const selectedImage = document.querySelector(
+              'input[name="selectedImage"]:checked'
+            );
+            if (selectedImage) {
+              const selectedImageUrl = selectedImage.value;
+              setTitle(apiTitle);
+              setStory(apiContent);
+              setImagePreview(selectedImageUrl);
+              setImage(selectedImageUrl);
+            } else {
+              Swal.fire({
+                icon: "error",
+                title: "No Image Selected",
+                text: "Please select an image to apply changes.",
+              });
+            }
           },
         });
       } else {
@@ -104,7 +132,7 @@ const WriteStory = () => {
         text: "An error occurred while trying to fetch the ideas.",
       });
     } finally {
-      setIsMagicGenerating(false); // Reset button text
+      setIsMagicGenerating(false);
     }
   };
 
@@ -165,19 +193,18 @@ const WriteStory = () => {
 
   return (
     <div id="writeStory-container">
-      <h2 id="writeStory-title">Write Your Story</h2>
-      <div id="writeStory-titleInputContainer">
-        <label htmlFor="writeStory-titleInput">Title</label>
-        <input
-          type="text"
-          id="writeStory-titleInput"
-          placeholder="Enter your story title..."
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-      </div>
-      <div id="writeStory-optionsContainer">
-        <div id="writeStory-categoryContainer">
+      <div id="writeStory-sidebar">
+        <h2>Write Your Story</h2>
+        <div>
+          <label htmlFor="writeStory-titleInput">Title</label>
+          <input
+            type="text"
+            id="writeStory-titleInput"
+            placeholder="Enter your story title..."
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+
           <label htmlFor="writeStory-category">Category</label>
           <select
             id="writeStory-category"
@@ -194,8 +221,7 @@ const WriteStory = () => {
             <option value="5">Romance</option>
             <option value="6">Sci-Fi</option>
           </select>
-        </div>
-        <div id="writeStory-imageContainer">
+
           <label htmlFor="writeStory-image">Upload Image</label>
           <input
             type="file"
@@ -203,11 +229,42 @@ const WriteStory = () => {
             accept="image/*"
             onChange={handleImageChange}
           />
+          <label
+            htmlFor="writeStory-image"
+            className="custom-file-upload"
+            style={{
+              background:
+                "radial-gradient(ellipse farthest-corner at right bottom, #37A0FE 0%, #318EFD 8%, #28799F 30%, #2F6E8A 40%, transparent 80%), radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #ACFFFF 8%, #64D1B4 25%, #1F5D4A 62.5%, #1F5D4A 100%)",
+            }}
+          >
+            Choose Image
+          </label>
+        </div>
+
+        <div>
+          <button
+            style={{
+              background:
+                "linear-gradient(to right, rgb(242, 112, 156), rgb(255, 148, 114))",
+            }}
+            onClick={handleMagicIdeas}
+            id="writeStory-magicIdeasButton"
+            disabled={isMagicGenerating}
+          >
+            {isMagicGenerating ? "Generating Magic Ideas..." : "Magic Ideas"}
+          </button>
+          <button
+            onClick={handleSaveDraft}
+            id="writeStory-saveDraftButton"
+            style={{ background: "linear-gradient(to right, #32a852, #6bcf5e" }}
+          >
+            {isSaving ? "Saving..." : "Publish"}
+          </button>
         </div>
       </div>
 
-      <div id="writeStory-editorContainer">
-        <div className="editor-column">
+      <div id="writeStory-main">
+        <div id="writeStory-editorContainer">
           <ReactQuill
             value={story}
             onChange={setStory}
@@ -216,27 +273,11 @@ const WriteStory = () => {
             id="writeStory-editor"
           />
         </div>
-        <div className="image-column">
+
+        <div id="writeStory-imageContainer">
           <img src={imagePreview} alt="Preview" className="image-preview" />
         </div>
       </div>
-
-      <div id="writeStory-actionButtonsContainer">
-        <button
-          onClick={handleMagicIdeas}
-          id="writeStory-magicIdeasButton"
-          disabled={isMagicGenerating}
-        >
-          {isMagicGenerating ? "Generating Magic Ideas..." : "Magic Ideas"}
-        </button>
-        <button onClick={handleSaveDraft} id="writeStory-saveDraftButton">
-          {isSaving ? "Saving..." : "Publish"}
-        </button>
-      </div>
-
-      {draftSaved && (
-        <p id="writeStory-draftSavedAlert">Your draft has been published!</p>
-      )}
     </div>
   );
 };
