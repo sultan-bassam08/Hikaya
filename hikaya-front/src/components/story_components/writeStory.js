@@ -43,12 +43,55 @@ const WriteStory = () => {
 
     Swal.fire({
       title: "Please wait...",
-      text: "Generating magic ideas may take 1–2 minutes.",
+      width: "60%",
       allowOutsideClick: false,
       allowEscapeKey: false,
       didOpen: () => {
         Swal.showLoading();
       },
+      html: `
+        <h1>Generating magic ideas may take 1–2 minutes.</h1>
+          <p style="margin-top: 10px; font-size: 16px; color: #333; text-align: center;">
+          Use the arrows below to navigate while you wait for the magic button to appear.
+        </p>
+        <div style="display: flex; justify-content: center; align-items: center; gap: 20px; margin-top: 10px;">
+          <!-- Left Arrow -->
+          <div title="Move Left" style="cursor: pointer;">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="black" xmlns="http://www.w3.org/2000/svg">
+              <polygon points="15,4 7,12 15,20" />
+            </svg>
+          </div>
+          <!-- Up Arrow -->
+          <div title="Move Up" style="cursor: pointer;">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="black" xmlns="http://www.w3.org/2000/svg">
+              <polygon points="12,4 4,12 20,12" />
+            </svg>
+          </div>
+          <!-- Down Arrow -->
+          <div title="Move Down" style="cursor: pointer;">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="black" xmlns="http://www.w3.org/2000/svg">
+              <polygon points="4,12 12,20 20,12" />
+            </svg>
+          </div>
+          <!-- Right Arrow -->
+          <div title="Move Right" style="cursor: pointer;">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="black" xmlns="http://www.w3.org/2000/svg">
+              <polygon points="9,4 17,12 9,20" />
+            </svg>
+          </div>
+        </div>
+       <iframe 
+    src="https://my.spline.design/floatingstonemultiscenecopy-8f2604c901b03cb52457bc658763df9a/" 
+    width="100%" 
+    height="500px" 
+    style="border:none; overflow:hidden;" 
+    allow="xr-spatial-tracking; fullscreen"
+    frameborder="0">
+</iframe>
+
+      
+      `,
+      showConfirmButton: false, // Hides the confirm button
     });
 
     const delay = Math.floor(Math.random() * 20 + 20) * 1000;
