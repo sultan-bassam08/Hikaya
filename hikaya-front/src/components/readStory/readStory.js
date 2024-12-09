@@ -91,13 +91,13 @@ const StoryDetail = () => {
                       {story.user.first_name + " " + story.user.last_name ||
                       "Unknown Author"}
                     </Link>
+                    <p>{(story.user.bio)}</p>
                     <span>
                       {new Date(story.updated_at).toLocaleDateString() ||
                         "Unknown Date"}
                     </span>
                   </div>
                 </div>
-              
             </div>
             {/* End Author */}
 

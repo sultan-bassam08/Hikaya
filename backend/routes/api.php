@@ -27,7 +27,23 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('register', [RegisterController::class, 'register']);
 
 Route::post('/login', [LoginController::class, 'login']);
-Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth:sanctum');
+// Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth:sanctum');
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/user-profile/{userId}', [UserProfileController::class, 'getUserProfile']);
+    Route::get('/user-stories/{userId}', [UserProfileController::class, 'getUserStories']);
+    Route::post('/stories/draft', [StoryController::class, 'saveDraft']);
+    Route::post('/stories/{id}/publish', [StoryController::class, 'publishStory']);
+    Route::get('/stories/{id}', [StoryController::class, 'show']); 
+    Route::post('/logout', [LoginController::class, 'logout']);
+    // Route::get('/stories', [StoryController::class, 'index']);
+    // Route::get('/stories/magic-ideas', [StoryController::class, 'getMagicIdea']);
+    // Route::post('/stories/magic-ideas', [StoryController::class, 'getMagicIdea']);
+    // Route::post('/stories/{storyId}/toggle-like', [LikeController::class, 'toggleLike']);
+    // Route::get('/user-profile/{id}', [UserProfileController::class, 'getUserProfile']);
+    // Route::put('/edit-profile/{id}', [UserProfileController::class, 'updateUserProfile']);
+});
+
 
 //esraa
 Route::get('/user-profile/{userId}', [UserProfileController::class, 'getUserProfile']);
@@ -37,8 +53,8 @@ Route::post('/stories/draft', [StoryController::class, 'saveDraft']);
 Route::post('/stories/{id}/publish', [StoryController::class, 'publishStory']);
 Route::get('/stories/magic-ideas', [StoryController::class, 'getMagicIdea']);
 
-Route::get('/stories', [StoryController::class, 'index']);  // For listing all stories
-Route::get('/stories/{id}', [StoryController::class, 'show']);  // For showing a specific story
+Route::get('/stories', [StoryController::class, 'index']);
+Route::get('/stories/{id}', [StoryController::class, 'show']);
 Route::post('/stories/magic-ideas', [StoryController::class, 'getMagicIdea']);
 Route::post('/stories/{storyId}/toggle-like', [LikeController::class, 'toggleLike']);
 Route::get('/user-profile/{id}', [UserProfileController::class, 'getUserProfile']);

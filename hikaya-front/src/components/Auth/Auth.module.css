@@ -186,3 +186,11 @@
   }
 }
 
+.row {
+  display: flex;
+  gap: 10px;
+}
+
+.row .authInput {
+  flex: 1; 
+}

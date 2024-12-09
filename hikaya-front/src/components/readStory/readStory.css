@@ -8,7 +8,7 @@ img {
 .blog-single {
   padding-top: 30px;
   padding-bottom: 30px;
-  background-color: #1E293B; /* Keep background dark theme */
+  background-color: #0F172A; /* Keep background dark theme */
 }
 
 .article {
@@ -83,38 +83,11 @@ img {
   font-weight: 600;
 }
 
-.blog-aside .widget {
-  box-shadow: 0 10px 30px rgba(31, 45, 61, 0.125);
-  border-radius: 8px; /* Updated border radius for widgets */
-  overflow: hidden;
-  background: #1E293B;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  width: 100%;
-}
-
-.blog-aside .widget-body {
-  padding: 20px;
-}
-
-.blog-aside .widget-title {
-  padding: 20px;
-  border-bottom: 2px solid #eee; /* Added border below widget title */
-}
-
-.blog-aside .widget-title h3 {
-  font-size: 22px;
-  font-weight: 700;
-  color: #0098FF; /* Updated to blue */
-  margin: 0;
-}
-
-/* Improved Author Section */
 .blog-aside .widget-author {
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Softer shadow for widget */
-  border-radius: 8px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); /* Subtle shadow for depth */
+  border-radius: 10px; /* Smooth, rounded corners */
   overflow: hidden;
-  background: #1E293B;
+  background: linear-gradient(135deg, #1E293B, #2C3E50); /* Gradient for a dynamic effect */
   padding: 20px;
   margin-top: 20px;
   margin-bottom: 20px;
@@ -122,56 +95,64 @@ img {
 
 .blog-aside .widget-author .widget-title {
   padding-bottom: 15px;
-  border-bottom: 2px solid #eee;
+  border-bottom: 2px solid #3B4754; /* Softer divider */
+  margin-bottom: 15px;
 }
 
 .blog-aside .widget-author .widget-title h3 {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 700;
-  color: #0098FF; /* Updated to blue */
+  color: #00BFFF; /* Bright blue for attention */
   margin: 0;
 }
 
 .blog-aside .widget-author .media {
   display: flex;
   align-items: center;
+  gap: 15px; /* Consistent spacing */
   margin-top: 15px;
 }
 
 .blog-aside .widget-author .avatar {
-  width: 80px;
-  height: 80px;
+  width: 90px;
+  height: 90px;
   border-radius: 50%;
   overflow: hidden;
-  margin-right: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Depth for avatar */
 }
 
 .blog-aside .widget-author .avatar img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: cover; /* Ensure the image fills the container */
 }
 
 .blog-aside .widget-author .media-body {
   flex-grow: 1;
+  color: #93BCFA; /* Subtle light blue text */
 }
 
 .blog-aside .widget-author .media-body a {
-  font-weight: 600;
-  color: #0098FF; /* Updated to blue */
+  font-weight: 700;
+  color: #00BFFF; /* Standout link color */
   font-size: 18px;
   text-decoration: none;
-  margin: 0;
 }
 
 .blog-aside .widget-author .media-body a:hover {
-  text-decoration: underline;
+  text-decoration: underline; /* Clear hover effect */
+}
+
+.blog-aside .widget-author .media-body p {
+  margin: 10px 0;
+  font-size: 14px;
+  color: #BDC6D0; /* Soft gray-blue for the bio */
 }
 
 .blog-aside .widget-author .media-body span {
   display: block;
   font-size: 14px;
-  color: #93BCFA; /* Light blue for the date */
+  color: #6E7C91; /* Muted color for the date */
   margin-top: 5px;
 }
 
