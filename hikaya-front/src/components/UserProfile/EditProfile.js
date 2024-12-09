@@ -21,14 +21,16 @@ const EditProfile = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get(`http://127.0.0.1:8000/api/user-profile/${userId}`);
+        const response = await axios.get(
+          `http://127.0.0.1:8000/api/user-profile/${userId}`
+        );
         const userData = response.data;
         setUser(userData);
         setFirstName(userData.first_name);
         setLastName(userData.last_name);
         setBio(userData.bio); // Set bio from fetched data
-        setProfilePic('http://127.0.0.1:8000/storage/' + userData.profile_picture || "default-avatar.png");
-        user.profile_picture=userData.profile_picture;
+        setProfilePic(userData.profile_picture || "default-avatar.png");
+        user.profile_picture = userData.profile_picture;
         localStorage.setItem("user", JSON.stringify(user));
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -43,25 +45,25 @@ const EditProfile = () => {
     if (file) {
       setProfilePic(URL.createObjectURL(file)); // Generate preview URL
       setSelectedFile(file); // Store the file for the form data submission
-    } 
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     // Prepare FormData with text fields and file
     const formData = new FormData();
     formData.append("first_name", firstName);
     formData.append("last_name", lastName);
     formData.append("bio", bio);
-    
+
     // Only append profile picture if a new one is selected
     if (selectedFile) {
       formData.append("profile_picture", selectedFile);
     } else {
       formData.append("profile_picture", "");
     }
-  
+
     try {
       const response = await axios.post(
         `http://127.0.0.1:8000/api/edit-profile/${userId}`,
@@ -72,16 +74,34 @@ const EditProfile = () => {
           },
         }
       );
+
       if (response.status === 200) {
-        
         Swal.fire({
           title: "Success!",
           text: "Profile updated successfully!",
           icon: "success",
           confirmButtonText: "OK",
-          
         });
-          navigate(`/profile`);
+
+        const user = JSON.parse(localStorage.getItem("user"));
+
+        if (user) {
+          user.profile_picture = response.data.message;
+          localStorage.setItem(
+            "user",
+            JSON.stringify({ ...user, profile_picture: response.data.message })
+          );
+
+          const profileImageElement = document.querySelector(".profile-image"); // Get the image element with the class 'profile-image'
+
+          if (profileImageElement) {
+            profileImageElement.src = response.data.message; // Update the image source
+          }
+
+          navigate("/profile");
+        } else {
+          console.error("User not found in localStorage.");
+        }
       }
     } catch (error) {
       console.error("Error updating profile:", error);
@@ -101,12 +121,21 @@ const EditProfile = () => {
   return (
     <div className="edit-profile-container">
       <h1>Edit Profile</h1>
-      <form className="edit-profile-form" onSubmit={handleSubmit} encType="multipart/form-data">
+      <form
+        className="edit-profile-form"
+        onSubmit={handleSubmit}
+        encType="multipart/form-data"
+      >
         <div className="profile-pic-section">
           <img src={profilePic} alt="Profile" className="profile-pic" />
           <label className="upload-label">
             Change Picture
-            <input type="file" onChange={handleProfilePicChange} className="inputfile" accept="image/*"/>
+            <input
+              type="file"
+              onChange={handleProfilePicChange}
+              className="inputfile"
+              accept="image/*"
+            />
           </label>
         </div>
 
@@ -141,7 +170,11 @@ const EditProfile = () => {
           <button type="submit" className="save-button">
             Save Changes
           </button>
-          <button type="button" className="cancel-button" onClick={() => navigate(-1)}>
+          <button
+            type="button"
+            className="cancel-button"
+            onClick={() => navigate(-1)}
+          >
             Cancel
           </button>
         </div>
