@@ -17,7 +17,7 @@ body {
     left: 0;
     right: 0;
     height: 70px;
-    padding: 0 2rem;
+    padding: 0 2.5rem;
     background: rgba(30, 41, 59, 1);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -132,37 +132,24 @@ body {
     opacity: 0.2;
 }
 
-/* Search Bar */
-.search-bar {
-    padding: 0.5rem;
-    width: 200px;
-    border: 1px solid #ccc;
-    border-radius: 0.5rem;
-    background-color: transparent;
-    color: white;
-    font-size: 1rem;
-    transition: width 0.3s ease;
-}
-
-.search-bar:focus {
-    outline: none;
-    border-color: #60a5fa;
-    width: 250px;
-}
 
 /* Profile Dropdown */
 .profile-dropdown {
     position: relative;
-    display: inline-block;
-    padding-left:25px ;
+    display: block;
+    padding-left:15px;
+    margin-top:4px ;
 }
 
 .profile-image {
     width: 50px;
     height: 50px !important;
-    border-radius: 50%;
+    border-radius: 80% !important; /* Ensures a perfect circle */
+    object-fit: cover; /* Makes sure the image fills the circle */
     cursor: pointer;
+    display: block; /* Prevents inline display issues */
 }
+
 
 .dropdown-content {
     display: none;
@@ -206,4 +193,3 @@ body {
     }
 }
 
-  
