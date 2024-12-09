@@ -4,9 +4,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\UserProfileController;//esraa
 use App\Http\Controllers\StoryController;
 use App\Http\Controllers\LikeController;
-use App\Http\Controllers\UserProfileController;
 
 
 /*
@@ -29,6 +29,9 @@ Route::post('register', [RegisterController::class, 'register']);
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth:sanctum');
 
+//esraa
+Route::get('/user-profile/{userId}', [UserProfileController::class, 'getUserProfile']);
+Route::get('/user-stories/{userId}', [UserProfileController::class, 'getUserStories']);
 
 Route::post('/stories/draft', [StoryController::class, 'saveDraft']);
 Route::post('/stories/{id}/publish', [StoryController::class, 'publishStory']);
