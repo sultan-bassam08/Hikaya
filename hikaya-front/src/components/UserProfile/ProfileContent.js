@@ -72,7 +72,7 @@ const ProfileContent = () => {
               className={`nav-link ${styles.navLink}`}
               onClick={() => handleTabClick("completeStories")}
             >
-              Complete Stories
+              Your Stories
             </a>
           </li>
           <li className="nav-item">
@@ -81,7 +81,7 @@ const ProfileContent = () => {
               className={`nav-link ${styles.navLink}`}
               onClick={() => handleTabClick("draftStories")}
             >
-              Draft Stories
+              your drafts
             </a>
           </li>
           <li className="nav-item">

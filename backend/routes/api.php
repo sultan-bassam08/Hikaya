@@ -39,4 +39,4 @@ Route::get('/stories/{id}', [StoryController::class, 'show']);  // For showing a
 Route::post('/stories/magic-ideas', [StoryController::class, 'getMagicIdea']);
 Route::post('/stories/{storyId}/toggle-like', [LikeController::class, 'toggleLike']);
 Route::get('/user-profile/{id}', [UserProfileController::class, 'getUserProfile']);
-Route::put('/user-profile/{id}', [UserProfileController::class, 'updateUserProfile']);
+Route::put('/edit-profile/{id}', [UserProfileController::class, 'updateUserProfile']);
