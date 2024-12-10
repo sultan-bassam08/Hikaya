@@ -17,16 +17,11 @@
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
 }
 
-/* Search Input with Icon */
-.search-bar {
-  display: flex;
-  justify-content: center;
-}
-
+/* Search Input with Icon - Shorter Search Bar */
 .search-input-container {
   position: relative;
   width: 100%;
-  max-width: 500px;
+  max-width: 400px; /* Shorter search bar */
 }
 
 .search-icon {
@@ -89,11 +84,49 @@
   color: #4b91e0;
 }
 
-
-
 .category-icon {
   font-size: 16px;
   color: inherit;
+}
+
+/* Checkbox Styles - Row Layout with Icons */
+.checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: flex-start;
+}
+
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #cbd5e1;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.checkbox-item:hover {
+  color: #60a5fa;
+}
+
+.category-checkbox {
+  margin-right: 8px;
+  accent-color: #60a5fa;
+  transition: all 0.2s ease;
+  width: 18px;
+  height: 18px;
+}
+
+/* Category Icons in Checkbox Items */
+.category-icon {
+  font-size: 20px; /* Icon size */
+  color: #60a5fa; /* Icon color */
+  margin-right: 8px; /* Spacing between icon and label */
+}
+
+.category-checkbox:hover {
+  transform: scale(1.2); /* Slightly enlarge on hover */
 }
 
 /* Stories List Styles */

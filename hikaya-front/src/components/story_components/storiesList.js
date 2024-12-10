@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 // import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap-icons/font/bootstrap-icons.css';
-import './storiesList.css';
+import "bootstrap-icons/font/bootstrap-icons.css";
+import "./storiesList.css";
 
 const StoriesList = ({ query, selectedCategories }) => {
   const [stories, setStories] = useState([]);
@@ -65,56 +65,71 @@ const StoriesList = ({ query, selectedCategories }) => {
           {filteredStories.map((story) => (
             <div className="col-lg-12 mb-4" key={story.story_id}>
               <article className="postcard dark blue">
-                <Link className="postcard__img_link" to={`/readStory/${story.story_id}`}>
+                <Link
+                  className="postcard__img_link"
+                  to={`/readStory/${story.story_id}`}
+                >
                   <img
                     className="postcard__img"
-                    src={story.story_picture || "https://via.placeholder.com/600x300"}
+                    src={
+                      story.story_picture ||
+                      "https://via.placeholder.com/600x300"
+                    }
                     alt={story.title}
                   />
                 </Link>
                 <div className="postcard__text">
                   <h1 className="postcard__title blue">
-                    <Link to={`/readStory/${story.story_id}`}>{story.title}</Link>
+                    <Link to={`/readStory/${story.story_id}`}>
+                      {story.title}
+                    </Link>
                   </h1>
-                 
-                  <div className="postcard__subtitle small">
-                  <span dateTime={story.created_at}>
-                    <i className="fas fa-calendar-alt mr-2"></i>
-                  {story.created_at ? new Date(story.created_at).toLocaleDateString() : 'N/A'}
-                  </span>
 
+                  <div className="postcard__subtitle small">
+                    <span dateTime={story.created_at}>
+                      <i className="fas fa-calendar-alt mr-2"></i>
+                      {story.created_at
+                        ? new Date(story.created_at).toLocaleDateString()
+                        : "N/A"}
+                    </span>
                   </div>
                   <div className="postcard__bar"></div>
                   <div
                     className="postcard__preview-txt"
                     dangerouslySetInnerHTML={{
-                      __html: story.content.substring(0, 100).replace(/\s+/g, ' ').trim() + "...",
+                      __html:
+                        story.content
+                          .substring(0, 100)
+                          .replace(/\s+/g, " ")
+                          .trim() + "...",
                     }}
                   ></div>
                   <ul className="postcard__tagbox">
                     <li className="tag__item">
-                      <i className="bi bi-tag"></i> {story.category.category_name}
+                      <i className="bi bi-tag"></i>{" "}
+                      {story.category.category_name}
                     </li>
-                    
+
                     <li className="tag__item play blue">
                       <Link to={`/readStory/${story.story_id}`}>
                         <i className="bi bi-book"></i> Read story now
                       </Link>
                     </li>
                   </ul>
-                   <span>
-        
-                      <button
-                        onClick={() => toggleLike(story.story_id)}
-                        className="btn btn-outline-danger btn-sm ml-2"
-                      >
-                        <i className={story.liked ? "fas fa-heart" : "far fa-heart"}></i>{" "}
-                        {story.liked ? "bookmarked" : "add to bookmark"}
-                      </button>
-                    
+                  <span>
+                    <button
+                      onClick={() => toggleLike(story.story_id)}
+                      className="btn btn-outline-danger btn-sm ml-2"
+                    >
+                      <i
+                        className={
+                          story.liked ? "fas fa-heart" : "far fa-heart"
+                        }
+                      ></i>{" "}
+                      {story.liked ? "bookmarked" : "add to bookmark"}
+                    </button>
                   </span>
                 </div>
-                
               </article>
             </div>
           ))}
