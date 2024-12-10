@@ -15,7 +15,18 @@ const StoriesList = ({ query, selectedCategories }) => {
     axios
       .get("http://localhost:8000/api/stories")
       .then((response) => {
-        setStories(response.data);
+        const fetchedStories = response.data;
+
+        // Get liked stories from localStorage
+        const likedStories =
+          JSON.parse(localStorage.getItem("likedStories")) || [];
+
+        // Update stories with the persisted liked status
+        const updatedStories = fetchedStories.map((story) => {
+          return { ...story, liked: likedStories.includes(story.story_id) };
+        });
+
+        setStories(updatedStories);
       })
       .catch((error) => {
         console.error("There was an error fetching the stories!", error);
@@ -29,9 +40,26 @@ const StoriesList = ({ query, selectedCategories }) => {
           user_id: userId,
         })
         .then(() => {
+          // Update the local stories state
           const updatedStories = stories.map((story) => {
             if (story.story_id === storyId) {
-              return { ...story, liked: !story.liked };
+              const newLikedStatus = !story.liked;
+
+              // Save to local storage to persist the like status
+              const likedStories =
+                JSON.parse(localStorage.getItem("likedStories")) || [];
+              if (newLikedStatus) {
+                likedStories.push(storyId);
+              } else {
+                const index = likedStories.indexOf(storyId);
+                if (index > -1) likedStories.splice(index, 1);
+              }
+              localStorage.setItem(
+                "likedStories",
+                JSON.stringify(likedStories)
+              ); // Store in localStorage
+
+              return { ...story, liked: newLikedStatus };
             }
             return story;
           });
@@ -79,11 +107,25 @@ const StoriesList = ({ query, selectedCategories }) => {
                   />
                 </Link>
                 <div className="postcard__text">
-                  <h1 className="postcard__title blue">
-                    <Link to={`/readStory/${story.story_id}`}>
-                      {story.title}
-                    </Link>
-                  </h1>
+                  <div className="postcard__header">
+                    <h1 className="postcard__title blue">
+                      <Link to={`/readStory/${story.story_id}`}>
+                        {story.title}
+                      </Link>
+                    </h1>
+                    <button
+                      onClick={() => toggleLike(story.story_id)}
+                      className="btn btn-outline-danger btn-sm bookmark-btn"
+                    >
+                      <i
+                        className={
+                          story.liked
+                            ? "bi bi-bookmark-check"
+                            : "bi bi-bookmark"
+                        }
+                      ></i>
+                    </button>
+                  </div>
 
                   <div className="postcard__subtitle small">
                     <span dateTime={story.created_at}>
@@ -112,23 +154,10 @@ const StoriesList = ({ query, selectedCategories }) => {
 
                     <li className="tag__item play blue">
                       <Link to={`/readStory/${story.story_id}`}>
-                        <i className="bi bi-book"></i> Read story now
+                        <i className="bi bi-book"></i> Read story
                       </Link>
                     </li>
                   </ul>
-                  <span>
-                    <button
-                      onClick={() => toggleLike(story.story_id)}
-                      className="btn btn-outline-danger btn-sm ml-2"
-                    >
-                      <i
-                        className={
-                          story.liked ? "fas fa-heart" : "far fa-heart"
-                        }
-                      ></i>{" "}
-                      {story.liked ? "bookmarked" : "add to bookmark"}
-                    </button>
-                  </span>
                 </div>
               </article>
             </div>
