@@ -102,7 +102,7 @@ const UserStories = () => {
             >
               <strong> {story.title}</strong>
             </div>
-              <a href={`/readStory/${story.story_id}`} className={styles.storyLink}>Read the story now!</a>
+              <a href={`/readStory/${story.story_id}`} className={styles.storyLink}> <button className="readButton"> Read the story now!</button> </a>
 
               <div
                 className={styles.cover}
@@ -112,12 +112,12 @@ const UserStories = () => {
                   backgroundPosition: 'center',
                 }}
               >
-                {/* <div
+                <div
                   className={styles.title}
                   onClick={() => goToStory(story.story_id)} // Navigate to read story
                 >
-                  {story.title}
-                </div> */}
+                 <button className="titleButton"style={{opacity:0.4,background:'black'}}> {story.title} </button> 
+                </div>
               </div>
               <div className={styles.buttonContainer}>
                 <button onClick={() => removeBookmark(story.story_id)} className={styles.deleteButton}><i class="bi bi-bookmark-x-fill"></i>Remove Bookmark</button>

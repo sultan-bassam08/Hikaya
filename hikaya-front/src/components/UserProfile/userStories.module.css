@@ -87,7 +87,6 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    gap: 20px;
   }
   
   .book {
@@ -143,9 +142,14 @@
     justify-content: center;
     margin-top: 10px;
   }
+  .titleButton
+  {
+    opacity: 0.6;
+    cursor: none;
+  }
   
-  button {
-    padding: 10px 20px;
+  .deleteButton {
+    padding: 10px ;
     background-color: #ff4757;
     color: white;
     border: none;
@@ -154,7 +158,11 @@
    
   }
   
-  button:hover {
+  .deleteButton:hover {
     background-color: #ff6b81;
   }
-  
+  .readButton
+  {
+    background-color: blue;
+  }
+ 
