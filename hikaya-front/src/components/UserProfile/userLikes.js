@@ -112,12 +112,12 @@ const UserStories = () => {
                   backgroundPosition: 'center',
                 }}
               >
-                <div
+                {/* <div
                   className={styles.title}
                   onClick={() => goToStory(story.story_id)} // Navigate to read story
                 >
                   {story.title}
-                </div>
+                </div> */}
               </div>
               <div className={styles.buttonContainer}>
                 <button onClick={() => removeBookmark(story.story_id)} className={styles.deleteButton}><i class="bi bi-bookmark-x-fill"></i>Remove Bookmark</button>

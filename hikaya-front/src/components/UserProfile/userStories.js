@@ -131,12 +131,12 @@ const UserStories = () => {
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
                 }}>
-            <div
+            {/* <div
               className={styles.title}  
               onClick={() => goToStory(story.story_id)} // Navigate to read story
             >
               <strong> {story.title}</strong>
-            </div>
+            </div> */}
           </div>
 
           <div className={styles.buttonContainer}>
