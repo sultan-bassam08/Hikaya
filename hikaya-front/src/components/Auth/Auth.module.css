@@ -105,7 +105,6 @@
 .authLink:hover {
   background-color: #a78bfa; /* Purple color on hover */
   border-color: #a78bfa; /* Matching border color on hover */
-  box-shadow: 0 0 0 0.2rem rgba(167, 139, 250, 0.5); /* Light purple focus shadow */
 }
 
 .authLink:active {
@@ -186,3 +185,11 @@
   }
 }
 
+.row {
+  display: flex;
+  gap: 10px;
+}
+
+.row .authInput {
+  flex: 1; 
+}

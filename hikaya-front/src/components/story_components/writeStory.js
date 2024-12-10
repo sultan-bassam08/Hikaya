@@ -4,7 +4,7 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import Swal from "sweetalert2";
 import "./writeStory.css";
-
+import { useNavigate } from "react-router-dom";
 const WriteStory = () => {
   const [title, setTitle] = useState("");
   const [story, setStory] = useState("");
@@ -14,7 +14,7 @@ const WriteStory = () => {
   const [isSaving, setIsSaving] = useState(false);
   const [draftSaved, setDraftSaved] = useState(false);
   const [isMagicGenerating, setIsMagicGenerating] = useState(false);
-
+  const navigate = useNavigate();
   const quillModules = {
     toolbar: [
       [{ header: [1, 2, false] }],
@@ -43,12 +43,55 @@ const WriteStory = () => {
 
     Swal.fire({
       title: "Please wait...",
-      text: "Generating magic ideas may take 1–2 minutes.",
+      width: "60%",
       allowOutsideClick: false,
       allowEscapeKey: false,
       didOpen: () => {
         Swal.showLoading();
       },
+      html: `
+        <h1>Generating magic ideas may take 1–2 minutes.</h1>
+          <p style="margin-top: 10px; font-size: 16px; color: #333; text-align: center;">
+          Use the arrows below to navigate while you wait for the magic button to appear.
+        </p>
+        <div style="display: flex; justify-content: center; align-items: center; gap: 20px; margin-top: 10px;">
+          <!-- Left Arrow -->
+          <div title="Move Left" style="cursor: pointer;">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="black" xmlns="http://www.w3.org/2000/svg">
+              <polygon points="15,4 7,12 15,20" />
+            </svg>
+          </div>
+          <!-- Up Arrow -->
+          <div title="Move Up" style="cursor: pointer;">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="black" xmlns="http://www.w3.org/2000/svg">
+              <polygon points="12,4 4,12 20,12" />
+            </svg>
+          </div>
+          <!-- Down Arrow -->
+          <div title="Move Down" style="cursor: pointer;">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="black" xmlns="http://www.w3.org/2000/svg">
+              <polygon points="4,12 12,20 20,12" />
+            </svg>
+          </div>
+          <!-- Right Arrow -->
+          <div title="Move Right" style="cursor: pointer;">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="black" xmlns="http://www.w3.org/2000/svg">
+              <polygon points="9,4 17,12 9,20" />
+            </svg>
+          </div>
+        </div>
+       <iframe 
+    src="https://app.spline.design/file/150894ae-e90f-4305-9c20-ab0bdfbe68a3" 
+    width="100%" 
+    height="500px" 
+    style="border:none; overflow:hidden;" 
+    allow="xr-spatial-tracking; fullscreen"
+    frameborder="0">
+</iframe>
+
+      
+      `,
+      showConfirmButton: false, // Hides the confirm button
     });
 
     const delay = Math.floor(Math.random() * 20 + 20) * 1000;
@@ -178,6 +221,11 @@ const WriteStory = () => {
         icon: "success",
         title: "Draft Published!",
         text: "Your draft has been published successfully.",
+        timer: 2000,
+        timerProgressBar: true,
+        willClose: () => {
+          navigate("/dashboard");
+        },
       });
     } catch (error) {
       console.error("Error saving draft:", error);
@@ -233,8 +281,7 @@ const WriteStory = () => {
             htmlFor="writeStory-image"
             className="custom-file-upload"
             style={{
-              background:
-                "radial-gradient(ellipse farthest-corner at right bottom, #37A0FE 0%, #318EFD 8%, #28799F 30%, #2F6E8A 40%, transparent 80%), radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #ACFFFF 8%, #64D1B4 25%, #1F5D4A 62.5%, #1F5D4A 100%)",
+              background: "#2d3748",
             }}
           >
             Choose Image

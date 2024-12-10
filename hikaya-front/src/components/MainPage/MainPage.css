@@ -1,53 +1,106 @@
+/* General Body Styles */
 body {
-    background-color: #333;
-    /*color: #ffffff;*/
-    font-family: Arial, sans-serif;
-  }
-  
-  .container {
-    margin-top: 20px;
-    margin-bottom: 20px;
-  }
-  
-  footer {
-    background-color: #444;
-    text-align: center;
-    padding: 10px;
-    border-top: 1px solid #555;
-  }
-  
-  footer a {
-    text-decoration: none;
-    color: #ffffff;
-  }
-  
-  footer a:hover {
-    color: #007bff;
-  }
-  #header {
-    background: url(https://images.unsplash.com/photo-1415795854641-f4a487a0fdc8?ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80) center center / cover no-repeat ;
-  }
-  /* Custom CSS for cards */
+  background-color: #1a202c; /* Darker background for contrast */
+  font-family: "Roboto", Arial, sans-serif;
+  color: #edf2f7;
+  margin: 0;
+  padding: 0;
+}
 
+/* Main Container */
+.container {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
 
+/* Header Section Styling */
+#header {
+  background: linear-gradient(
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+    ),
+    url("https://images.unsplash.com/photo-1415795854641-f4a487a0fdc8?ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80")
+      center center / cover no-repeat;
+  color: #fff;
+  text-align: center;
+  padding: 80px 20px;
+  border-radius: 8px;
+  margin-bottom: 40px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
 
-  #header {
-    margin-bottom: 40px; /* Adds space below the header section */
+#header h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+#header p {
+  font-size: 1.5rem;
+  margin-bottom: 30px;
+  letter-spacing: 1px;
+  color: #d4d4d4;
+}
+
+/* Buttons in Header */
+#header .submitButton {
+  display: inline-block;
+  padding: 12px 24px;
+  margin: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  background: #60a5fa;
+  border: 1px solid #60a5fa;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+#header .submitButton:hover {
+  background: #a78bfa;
+  border-color: #a78bfa;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(167, 139, 250, 0.4);
+}
+
+/* Footer Section */
+footer {
+  background-color: #2d3748;
+  text-align: center;
+  padding: 15px;
+  border-top: 1px solid #4a5568;
+  color: #a0aec0;
+}
+
+footer a {
+  text-decoration: none;
+  color: #a0aec0;
+}
+
+footer a:hover {
+  color: #60a5fa;
+}
+
+.logo-text {
+  background: linear-gradient(to right, #60a5fa, #a78bfa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  #header h1 {
+    font-size: 2.5rem;
   }
-  
-  #header .btn {
-    margin-right: 10px; /* Adds space between the buttons */
+
+  #header p {
+    font-size: 1.2rem;
   }
-  
-  #header .btn:last-child {
-    margin-right: 0; /* Removes extra margin from the last button */
+
+  .submitButton {
+    font-size: 14px;
+    padding: 10px 20px;
   }
-  
-  .btn-primary, .btn-secondary {
-    padding: 12px 20px; /* Adds more padding to the buttons */
-  }
-  
-  .jumbotron {
-    padding-bottom: 50px; /* Adds more space at the bottom of the jumbotron */
-  }
-  
+}
